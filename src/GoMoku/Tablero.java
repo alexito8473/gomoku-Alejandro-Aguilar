@@ -15,7 +15,7 @@ public class Tablero {
 	public static boolean victoriaInclinadaArriba2;
 	public static boolean victoriaInclinadaAbajo2;
 	
-	private static boolean  win = false;
+	private static boolean  winsalida = false;
 	public static String españa[][] = {
 			{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 			{ "01", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -52,12 +52,12 @@ public class Tablero {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if (españa[i - 1][j + 1].equals(BLUE + "x" + WHITE)) {
+					if ((i<15&&j<15)&&españa[i - 1][j + 1].equals(BLUE + "x" + WHITE)) {
 						if (españa[i - 2][j + 2].equals(BLUE + "x" + WHITE)) {
 							if (españa[i - 3][j + 3].equals(BLUE + "x" + WHITE)) {
 								if (españa[i - 4][j + 4].equals(BLUE + "x" + WHITE)) {
 									victoriaInclinadaArriba1 = true;
-									win=false;
+									winsalida=false;
 								}
 							}
 						}
@@ -70,12 +70,12 @@ public class Tablero {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if (españa[i + 1][j - 1].equals(BLUE + "x" + WHITE)) {
-						if (españa[i + 2][j - 2].equals(BLUE + "x" + WHITE)) {
-							if (españa[i + 3][j - 3].equals(BLUE + "x" + WHITE)) {
-								if (españa[i + 4][j - 4].equals(BLUE + "x" + WHITE)) {
+					if ((i<15&&j<15)&&españa[i + 1][j - 1].equals(BLUE + "x" + WHITE)) {
+						if ((i<15&&j<15)&&españa[i + 2][j - 2].equals(BLUE + "x" + WHITE)) {
+							if ((i<15&&j<15)&&españa[i + 3][j - 3].equals(BLUE + "x" + WHITE)) {
+								if ((i<15&&j<15)&&españa[i + 4][j - 4].equals(BLUE + "x" + WHITE)) {
 									victoriaInclinadaAbajo1 = true;
-									win=false;
+									winsalida=false;
 								}
 							}
 						}
@@ -89,12 +89,12 @@ public class Tablero {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
-					if (españa[i - 1][j + 1].equals(YELLOW + "o" + WHITE)) {
-						if (españa[i - 2][j + 2].equals(YELLOW + "o" + WHITE)) {
-							if (españa[i - 3][j + 3].equals(YELLOW + "o" + WHITE)) {
-								if (españa[i - 4][j + 4].equals(YELLOW + "o" + WHITE)) {
+					if ((i<15&&j<15)&&españa[i - 1][j + 1].equals(YELLOW + "o" + WHITE)) {
+						if ((i<15&&j<15)&&españa[i - 2][j + 2].equals(YELLOW + "o" + WHITE)) {
+							if ((i<15&&j<15)&&españa[i - 3][j + 3].equals(YELLOW + "o" + WHITE)) {
+								if ((i<15&&j<15)&&españa[i - 4][j + 4].equals(YELLOW + "o" + WHITE)) {
 									victoriaInclinadaArriba2 = true;
-									win=false;
+									winsalida=false;
 								}
 							}
 						}
@@ -112,7 +112,7 @@ public class Tablero {
 							if (españa[i + 3][j - 3].equals(YELLOW + "o" + WHITE)) {
 								if (españa[i + 4][j - 4].equals(YELLOW + "o" + WHITE)) {
 									victoriaInclinadaAbajo2 = true;
-									win=false;
+									winsalida=false;
 								}
 							}
 						}
@@ -123,17 +123,17 @@ public class Tablero {
 	}
 	public static void derecha1() {
 
-		for (int i = 1; i < españa.length; i++) {
+		for (int i = 0; i < españa.length; i++) {
 
-			for (int j = 1; j < españa.length; j++) {
+			for (int j = 0; j < españa.length; j++) {
 
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if (españa[i][j + 1].equals(BLUE + "x" + WHITE)) {
+					if ((j<15)&&españa[i][j + 1].equals(BLUE + "x" + WHITE)) {
 						if (españa[i][j + 2].equals(BLUE + "x" + WHITE)) {
 							if (españa[i][j + 3].equals(BLUE + "x" + WHITE)) {
 								if (españa[i][j + 4].equals(BLUE + "x" + WHITE)) {
 									victoriaderecha = true;
-									win=false;
+									winsalida=false;
 								}
 							}
 						}
@@ -151,12 +151,12 @@ public class Tablero {
 
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
 
-					if (españa[i][j + 1].equals(YELLOW + "o" + WHITE)) {
+					if ((j<15)&&españa[i][j + 1].equals(YELLOW + "o" + WHITE)) {
 						if (españa[i][j + 2].equals(YELLOW + "o" + WHITE)) {
 							if (españa[i][j + 3].equals(YELLOW + "o" + WHITE)) {
 								if (españa[i][j + 4].equals(YELLOW + "o" + WHITE)) {
 									victoriaderecha2 = true;
-									win=false;
+									winsalida=false;
 								}
 
 							}
@@ -169,23 +169,24 @@ public class Tablero {
 
 	public static void arriba1() {
 
-		for (int i = 1; i < españa.length; i++) {
+		for (int i = 0; i < españa.length; i++) {
 
-			for (int j = 1; j < españa.length; j++) {
+			for (int j = 0; j < españa.length; j++) {
 
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-
-					if (españa[i + 1][j].equals(BLUE + "x" + WHITE)) {
+					if ((i<15) && españa[i + 1][j].equals(BLUE + "x" + WHITE)) {
 						if (españa[i + 2][j].equals(BLUE + "x" + WHITE)) {
 							if (españa[i + 3][j].equals(BLUE + "x" + WHITE)) {
 								if (españa[i + 4][j].equals(BLUE + "x" + WHITE)) {
 									victoriaarriba = true;
-									win=false;
+									winsalida=false;
 								}
 
 							}
 						}
 					}
+				}else {
+					
 				}
 			}
 		}
@@ -204,7 +205,7 @@ public class Tablero {
 							if (españa[i + 3][j].equals(YELLOW + "o" + WHITE)) {
 								if (españa[i + 4][j].equals(YELLOW + "o" + WHITE)) {
 									victoriaarriba2 = true;
-									win=false;
+									winsalida=false;
 								}
 							}
 						}
@@ -227,10 +228,10 @@ public class Tablero {
 		if (ficha.equals(GoMoku.ficha.x)) {
 			if (victoriaderecha == true || victoriaarriba == true || victoriaInclinadaAbajo1==true|| victoriaInclinadaArriba1==true) {
 				españa[numero1][numero2] = GREEN + "x" + WHITE;
-				win=true;
+				winsalida=true;
 			} else {
 				españa[numero1][numero2] = BLUE + "x" + WHITE;
-				win=true;
+				winsalida=true;
 				derecha1();
 				arriba1();
 				inclinacionArriba1();
@@ -239,11 +240,11 @@ public class Tablero {
 		} else if (ficha.equals(GoMoku.ficha.o)) {
 			if (victoriaderecha2 == true || victoriaarriba2 == true || victoriaInclinadaAbajo2==true|| victoriaInclinadaArriba2==true) {
 				españa[numero1][numero2] = GREEN + "o" + WHITE;
-				win=true;
+				winsalida=true;
 				
 			} else {
 				españa[numero1][numero2] = YELLOW + "o" + WHITE;
-				win=true;
+				winsalida=true;
 				derecha2();
 				arriba2();
 				inclinacionArriba2();
@@ -251,15 +252,14 @@ public class Tablero {
 			}
 
 		}
-		}while(win==false);
+		}while(winsalida==false);
+	}
+	public static boolean ganar() {
+		if(victoriaderecha2 == true || victoriaarriba2 == true || victoriaInclinadaAbajo2==true|| victoriaInclinadaArriba2==true||victoriaderecha == true || victoriaarriba == true || victoriaInclinadaAbajo1==true|| victoriaInclinadaArriba1==true) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
-	public static void main(String[] args) {
-		modificarTablero(5, 3, ficha.o);
-		modificarTablero(4, 4, ficha.o);
-		modificarTablero(3, 5, ficha.o);
-		modificarTablero(6, 2, ficha.o);
-		modificarTablero(2, 6, ficha.o);
-		mostrarTablero();
-	}
 }

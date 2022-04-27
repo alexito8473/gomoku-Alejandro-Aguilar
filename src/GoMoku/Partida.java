@@ -11,9 +11,35 @@ public class Partida {
 	static String nombre;
 	static String nombre2;
 	static int resultado;
+	static String transformare;
+	static int numero;
+	static boolean scape=false;
+	static boolean ganar=false;
+	private static void letra() {
+		do {		
+			System.out.println("Introduca la poscion del 'a' hasta la 'o'");
+			transformare = sc.next();
+			sc.nextLine();
+			
+		}while(!(transformare.equals("a")||transformare.equals("b")||transformare.equals("c")||transformare.equals("d")||transformare.equals("e")||transformare.equals("g")||transformare.equals("f")||transformare.equals("h")||transformare.equals("i")||transformare.equals("j")||transformare.equals("k")||transformare.equals("l")||transformare.equals("m")||transformare.equals("n")||transformare.equals("o")));
+		 transformar(transformare);
+	}
+	private static void numero() {
+		do {
+//almeria
+			try {
+				numero = 0;
+				System.out.println("Introduca la poscion del 1 al 15");
+				numero = sc.nextInt();
+				if (numero > 0 && numero <= 15) {
+					scape = true;
+				}
+			} catch (Exception InputMismatchException) {
+				scape = false;
+				sc.nextLine();
+			}
 
-	private static void separar() {
-
+		} while (scape == false);
 	}
 
 	public static void transformar(String posicion) {
@@ -117,26 +143,32 @@ public class Partida {
 			}
 			// ---------------------------------------------------
 			do {
-				int x, y;
-				String arreglo;
 				System.out.println(nombre + " Le toca");
 				tabla.mostrarTablero();
-				System.out.println("Introduca la poscion del a hasta la o");
-				arreglo = sc.next();
-				y = transformar(arreglo);
-				System.out.println("Introduca la poscion del 1 al 15");
-				x = sc.nextInt();
-				Tablero.modificarTablero(x, y, ficha.x);
+				do {
+				letra();
+				numero();
+				if(Tablero.revision(numero,resultado)==true) {
+					System.out.println("Introducelo en otra ubicación \n");
+				}
+				}while(Tablero.revision(numero,resultado)==true);
+				Tablero.modificarTablero(numero, resultado, ficha.x);
 				tabla.mostrarTablero();
+				ganar = tabla.ganar();
+				if(ganar==true) {
+					break;
+				}
 				System.out.println(nombre2 + " Le toca");
-				System.out.println("Introduca la poscion del a hasta la o");
-				arreglo = sc.next();
-				y = transformar(arreglo);
-				System.out.println("Introduca la poscion del 1 al 15");
-				x = sc.nextInt();
-				Tablero.modificarTablero(x, y, ficha.o);
-				comienzo = tabla.win();
-			} while (comienzo == false);
+				do {
+				letra();
+				numero();
+				if(Tablero.revision(numero,resultado)==true) {
+					System.out.println("Introducelo en otra ubicación \n");
+				}
+				}while(Tablero.revision(numero,resultado)==true);
+				Tablero.modificarTablero(numero, resultado, ficha.o);
+				ganar = tabla.ganar();
+			} while (ganar == false);
 		} while (comienzo != false);
 	}
 
