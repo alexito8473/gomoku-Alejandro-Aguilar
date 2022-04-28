@@ -1,5 +1,7 @@
 package GoMoku;
 
+
+
 public class Tablero {
 	public static final String BLUE = "\u001B[34m";
 	public static final String WHITE = "\u001B[37m";
@@ -48,14 +50,14 @@ public class Tablero {
 		System.out.println(" ");
 	}
 
-	public static void inclinacionArriba1() {
+	public static void inclinacionAbajo1() {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if ((i<15&&j<15)&&españa[i - 1][j + 1].equals(BLUE + "x" + WHITE)) {
-						if (españa[i - 2][j + 2].equals(BLUE + "x" + WHITE)) {
-							if (españa[i - 3][j + 3].equals(BLUE + "x" + WHITE)) {
-								if (españa[i - 4][j + 4].equals(BLUE + "x" + WHITE)) {
+					if (((i+3<16)&&(j+3<16))&&españa[i + 1][j + 1].equals(BLUE + "x" + WHITE)) {
+						if (((i+3<16)&&(j+3<16))&&españa[i + 2][j + 2].equals(BLUE + "x" + WHITE)) {
+							if (((i+3<16)&&(j+3<16))&&españa[i + 3][j + 3].equals(BLUE + "x" + WHITE)) {
+								if (((i+4<16)&&(j+4<16))&&españa[i + 4][j + 4].equals(BLUE + "x" + WHITE)) {
 									victoriaInclinadaArriba1 = true;
 									winsalida=false;
 								}
@@ -66,14 +68,14 @@ public class Tablero {
 			}
 		}
 	}
-	public static void inclinacionAbajo1() {
+	public static void inclinacionArriba1() {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if ((i<15&&j<15)&&españa[i + 1][j - 1].equals(BLUE + "x" + WHITE)) {
-						if ((i<15&&j<15)&&españa[i + 2][j - 2].equals(BLUE + "x" + WHITE)) {
-							if ((i<15&&j<15)&&españa[i + 3][j - 3].equals(BLUE + "x" + WHITE)) {
-								if ((i<15&&j<15)&&españa[i + 4][j - 4].equals(BLUE + "x" + WHITE)) {
+					if ((i+1<16&&j-1<16)&&españa[i + 1][j - 1].equals(BLUE + "x" + WHITE)) {
+						if ((i+2<16&&j-2<16)&&españa[i + 2][j - 2].equals(BLUE + "x" + WHITE)) {
+							if ((i+3<16&&j-3<16)&&españa[i + 3][j - 3].equals(BLUE + "x" + WHITE)) {
+								if ((i+4<16&&j-4<16)&&españa[i + 4][j - 4].equals(BLUE + "x" + WHITE)) {
 									victoriaInclinadaAbajo1 = true;
 									winsalida=false;
 								}
@@ -89,10 +91,10 @@ public class Tablero {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
-					if ((i<15&&j<15)&&españa[i - 1][j + 1].equals(YELLOW + "o" + WHITE)) {
-						if ((i<15&&j<15)&&españa[i - 2][j + 2].equals(YELLOW + "o" + WHITE)) {
-							if ((i<15&&j<15)&&españa[i - 3][j + 3].equals(YELLOW + "o" + WHITE)) {
-								if ((i<15&&j<15)&&españa[i - 4][j + 4].equals(YELLOW + "o" + WHITE)) {
+					if (((i+1<16)&&(j+1<16))&&españa[i + 1][j + 1].equals(YELLOW + "o" + WHITE)) {
+						if (((i+2<16)&&(j+2<16))&&españa[i + 2][j + 2].equals(YELLOW + "o" + WHITE)) {
+							if (((i+3<16)&&(j+3<16))&&españa[i + 3][j + 3].equals(YELLOW + "o" + WHITE)) {
+								if (((i+4<16)&&(j+4<16))&&españa[i + 4][j + 4].equals(YELLOW + "o" + WHITE)) {
 									victoriaInclinadaArriba2 = true;
 									winsalida=false;
 								}
@@ -107,10 +109,10 @@ public class Tablero {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
-					if (españa[i + 1][j - 1].equals(YELLOW + "o" + WHITE)) {
-						if (españa[i + 2][j - 2].equals(YELLOW + "o" + WHITE)) {
-							if (españa[i + 3][j - 3].equals(YELLOW + "o" + WHITE)) {
-								if (españa[i + 4][j - 4].equals(YELLOW + "o" + WHITE)) {
+					if ((i+1<16&&j-1>0)&&españa[i + 1][j - 1].equals(YELLOW + "o" + WHITE)) {
+						if ((i+2<16&&j-2>0)&&españa[i + 2][j - 2].equals(YELLOW + "o" + WHITE)) {
+							if ((i+3<16&&j-3>0)&&españa[i + 3][j - 3].equals(YELLOW + "o" + WHITE)) {
+								if ((i+4<16&&j-4>0)&&españa[i + 4][j - 4].equals(YELLOW + "o" + WHITE)) {
 									victoriaInclinadaAbajo2 = true;
 									winsalida=false;
 								}
@@ -128,10 +130,10 @@ public class Tablero {
 			for (int j = 0; j < españa.length; j++) {
 
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if ((j<15)&&españa[i][j + 1].equals(BLUE + "x" + WHITE)) {
-						if (españa[i][j + 2].equals(BLUE + "x" + WHITE)) {
-							if (españa[i][j + 3].equals(BLUE + "x" + WHITE)) {
-								if (españa[i][j + 4].equals(BLUE + "x" + WHITE)) {
+					if ((j+1<16)&&españa[i][j + 1].equals(BLUE + "x" + WHITE)) {
+						if ((j+2<16)&&españa[i][j + 2].equals(BLUE + "x" + WHITE)) {
+							if ((j+3<16)&&españa[i][j + 3].equals(BLUE + "x" + WHITE)) {
+								if ((j+4<16)&&españa[i][j + 4].equals(BLUE + "x" + WHITE)) {
 									victoriaderecha = true;
 									winsalida=false;
 								}
@@ -151,10 +153,10 @@ public class Tablero {
 
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
 
-					if ((j<15)&&españa[i][j + 1].equals(YELLOW + "o" + WHITE)) {
-						if (españa[i][j + 2].equals(YELLOW + "o" + WHITE)) {
-							if (españa[i][j + 3].equals(YELLOW + "o" + WHITE)) {
-								if (españa[i][j + 4].equals(YELLOW + "o" + WHITE)) {
+					if ((j+1<16)&&españa[i][j + 1].equals(YELLOW + "o" + WHITE)) {
+						if ((j+2<16)&&españa[i][j + 2].equals(YELLOW + "o" + WHITE)) {
+							if ((j+3<16)&&españa[i][j + 3].equals(YELLOW + "o" + WHITE)) {
+								if ((j+4<16)&&españa[i][j + 4].equals(YELLOW + "o" + WHITE)) {
 									victoriaderecha2 = true;
 									winsalida=false;
 								}
@@ -174,10 +176,10 @@ public class Tablero {
 			for (int j = 0; j < españa.length; j++) {
 
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if ((i<15) && españa[i + 1][j].equals(BLUE + "x" + WHITE)) {
-						if (españa[i + 2][j].equals(BLUE + "x" + WHITE)) {
-							if (españa[i + 3][j].equals(BLUE + "x" + WHITE)) {
-								if (españa[i + 4][j].equals(BLUE + "x" + WHITE)) {
+					if ((i+1<16) && españa[i + 1][j].equals(BLUE + "x" + WHITE)) {
+						if ((i+2<16)&&españa[i + 2][j].equals(BLUE + "x" + WHITE)) {
+							if ((i+3<16)&&españa[i + 3][j].equals(BLUE + "x" + WHITE)) {
+								if ((i+4<16)&&españa[i + 4][j].equals(BLUE + "x" + WHITE)) {
 									victoriaarriba = true;
 									winsalida=false;
 								}
@@ -200,10 +202,10 @@ public class Tablero {
 
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
 
-					if (españa[i + 1][j].equals(YELLOW + "o" + WHITE)) {
-						if (españa[i + 2][j].equals(YELLOW + "o" + WHITE)) {
-							if (españa[i + 3][j].equals(YELLOW + "o" + WHITE)) {
-								if (españa[i + 4][j].equals(YELLOW + "o" + WHITE)) {
+					if ((i+1<16)&&españa[i + 1][j].equals(YELLOW + "o" + WHITE)) {
+						if ((i+2<16)&&españa[i + 2][j].equals(YELLOW + "o" + WHITE)) {
+							if ((i+3<16)&&españa[i + 3][j].equals(YELLOW + "o" + WHITE)) {
+								if ((i+4<16)&&españa[i + 4][j].equals(YELLOW + "o" + WHITE)) {
 									victoriaarriba2 = true;
 									winsalida=false;
 								}
@@ -238,13 +240,14 @@ public class Tablero {
 				inclinacionAbajo1();
 			}
 		} else if (ficha.equals(GoMoku.ficha.o)) {
-			if (victoriaderecha2 == true || victoriaarriba2 == true || victoriaInclinadaAbajo2==true|| victoriaInclinadaArriba2==true) {
+			if (victoriaderecha2 == true || victoriaarriba2 == true || victoriaInclinadaAbajo2==true|| victoriaInclinadaArriba2 == true) {
 				españa[numero1][numero2] = GREEN + "o" + WHITE;
 				winsalida=true;
 				
 			} else {
 				españa[numero1][numero2] = YELLOW + "o" + WHITE;
 				winsalida=true;
+				
 				derecha2();
 				arriba2();
 				inclinacionArriba2();
@@ -261,5 +264,6 @@ public class Tablero {
 			return false;
 		}
 	}
+
 
 }

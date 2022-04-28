@@ -1,24 +1,27 @@
 package GoMoku;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class ia extends Jugador{
-	 static String resultado;
+	public static String resultado;
+	static Random ran=new Random();
+	static int number=ran.nextInt(9);
+	static int number2=ran.nextInt(9);
 	public ia(ficha ficha) {
 		super(ficha);
-		// TODO Auto-generated constructor stub
 	}
 	  Scanner src = new Scanner(System.in);
-	private static String nombres[]= {"Pepe","Jorge","España","Lisbania","Me gustaria","Francia caca"," Copenage","Mordekaiser","ElNen"};
-	 static int ganador = (int) (Math.random()*9);
+	private static  String nombres[]= {"Pepe","Jorge","España","Lisbania","Me gustaria","Francia caca","Copenage","Mordekaiser","ElNen"};
 	 
-	 private static String nombre() {
-
-		return resultado=nombres[ganador];
+	 public static String nombre(ficha ficha) {
+		 if(ficha==ficha.x) {
+			 return resultado=nombres[number];
+		 }else {
+			 return resultado=nombres[number2];
+		 }
 		 
-	 }
-	
-	 public static void main(String[] args) {
-			System.out.println(nombre());
+		
+		 
 	 }
 }

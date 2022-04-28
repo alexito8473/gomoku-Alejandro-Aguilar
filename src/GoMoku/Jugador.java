@@ -7,8 +7,10 @@ public class Jugador {
 	public Jugador(ficha ficha) {
 		 this.ficha=ficha;
 	}
-	
 
+	public String tostring() {
+		return null;
+	}
 
 	
 }
