@@ -15,20 +15,51 @@ public class Partida {
 	public static final String YELLOW = "\u001B[33m";
 
 	static Tablero tabla;
+
 	static Jugador jugador1;
 	static Jugador jugador2;
 
 	static Scanner sc = new Scanner(System.in);
 	static Random ram = new Random();
+
 	static boolean comienzo = false;
+	static boolean ganar = false;
+
 	static String nombre;
 	static String nombre2;
-	static int resultado;
 	static String transformare;
+
+	static int resultado;
 	static int numero;
-	static boolean scape = false;
-	static boolean ganar = false;
 	static int tipoNumerico = 0;
+
+	private static void reinicio() {
+		int number;
+		boolean escape = false;
+		do {
+
+			try {
+
+				do {
+					System.out.println("\n 1- Seguir \n 2- Parar\n ");
+					number = sc.nextInt();
+				} while (!(number < 0) && !(number <= 2));
+
+				if (number == 1) {
+					escape = true;
+					comienzo = true;
+				} else {
+					escape = true;
+					comienzo = false;
+				}
+			} catch (Exception InputMismatchException) {
+				System.out.println("\n Introduce un numero del 1 al 2 \n ");
+				escape = false;
+				sc.nextLine();
+			}
+
+		} while (!escape);
+	}
 
 	private static void timeOut() {
 		try {
@@ -37,6 +68,7 @@ public class Partida {
 			e.printStackTrace();
 		}
 	}
+
 	private static void verificación() {
 		do {
 			letra();
@@ -87,6 +119,7 @@ public class Partida {
 	}
 
 	private static void numero() {
+		boolean escape = false;
 		do {
 //almeria
 			try {
@@ -97,14 +130,14 @@ public class Partida {
 				} while (!(numero < 0) && !(numero <= 15));
 
 				if (numero > 0 && numero <= 15) {
-					scape = true;
+					escape = true;
 				}
 			} catch (Exception InputMismatchException) {
-				scape = false;
+				escape = false;
 				sc.nextLine();
 			}
 
-		} while (scape == false);
+		} while (!escape);
 	}
 
 	public static void transformar(String posicion) {
@@ -157,12 +190,12 @@ public class Partida {
 		}
 	}
 
-	public static void Comenzar() {
+	@SuppressWarnings("static-access")
+	public void Comenzar() {
 		System.out.println("Gomoku");
 		boolean salida = false;
-		boolean finalidad = false;
 		do {
-
+			tabla = new Tablero();
 			do {
 
 				try {
@@ -181,7 +214,7 @@ public class Partida {
 					sc.nextLine();
 				}
 
-			} while (salida == false);
+			} while (!salida);
 
 			nombre = sc.nextLine();
 
@@ -191,23 +224,26 @@ public class Partida {
 			// ---------------------------------------------------
 			if (tipoNumerico == 3) {
 				do {
-					System.out.printf("\n---------------------------------------------\n   " + BLUE + nombre + WHITE
+					System.out.printf("\n---------------------------------------------\n   " + BLUE
+							+ ((real) jugador1).getNombre() + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
 					tabla.mostrarTablero();
 					verificación();
-					Tablero.modificarTablero(numero, resultado, ficha.x);
+					tabla.mostrarTablero();
+					tabla.modificarTablero(numero, resultado, ficha.x);
 					tabla.mostrarTablero();
 					ganar = tabla.ganar();
 					if (!ganar) {
-						System.out.printf("\n---------------------------------------------\n   " + YELLOW + nombre2
-								+ WHITE + " le toca \n---------------------------------------------\n \n");
+						System.out.printf("\n---------------------------------------------\n   " + YELLOW
+								+ ((real) jugador2).getNombre() + WHITE
+								+ " le toca \n---------------------------------------------\n \n");
 						verificación();
-						Tablero.modificarTablero(numero, resultado, ficha.o);
+						tabla.modificarTablero(numero, resultado, ficha.o);
 						tabla.mostrarTablero();
 						ganar = tabla.ganar();
 					}
 
-				} while (ganar == false);
+				} while (!ganar);
 			} else if (tipoNumerico == 1) {
 
 				do {
@@ -216,17 +252,14 @@ public class Partida {
 							+ " le toca \n---------------------------------------------\n\n");
 
 					do {
-						numero = 0;
-						resultado = 0;
-						numero = (int) (Math.random() * 15 + 1);
-						;
-						resultado = (int) (Math.random() * 15 + 1);
-						;
-					} while (Tablero.revision(numero, resultado) == true);
+						((ia) jugador1).jugada1(tabla.gettablero());
 
-					Tablero.modificarTablero(numero, resultado, ficha.x);
-					tabla.mostrarTablero();
+						resultado = ((ia) jugador1).getPosoción1();
+						numero = ((ia) jugador1).getPosoción2();
+					} while (tabla.revision(numero, resultado));
+					tabla.modificarTablero(numero, resultado, ficha.x);
 					ganar = tabla.ganar();
+					tabla.mostrarTablero();
 					timeOut();
 					if (!ganar) {
 						System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
@@ -234,25 +267,55 @@ public class Partida {
 								+ " le toca \n---------------------------------------------\n\n");
 
 						do {
-							numero = 0;
-							resultado = 0;
-							numero = (int) (Math.random() * 15 + 1);
-							;
-							resultado = (int) (Math.random() * 15 + 1);
-							;
-						} while (Tablero.revision(numero, resultado) == true);
-						Tablero.modificarTablero(numero, resultado, ficha.o);
+							((ia) jugador2).jugada2(tabla.gettablero());
+
+							resultado = ((ia) jugador2).getPosoción1();
+							numero = ((ia) jugador2).getPosoción2();
+						} while (Tablero.revision(numero, resultado));
+
+						tabla.modificarTablero(numero, resultado, ficha.o);
 
 						tabla.mostrarTablero();
 						ganar = tabla.ganar();
 						timeOut();
 					}
-				} while (ganar == false);
+				} while (!ganar);
+			} else if (tipoNumerico == 2) {
+
+				do {
+					System.out.printf("\n---------------------------------------------\n   " + BLUE + nombre + WHITE
+							+ " le toca \n---------------------------------------------\n\n");
+					tabla.mostrarTablero();
+					verificación();
+					Tablero.modificarTablero(numero, resultado, ficha.x);
+					tabla.mostrarTablero();
+					ganar = tabla.ganar();
+					if (!ganar) {
+						System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+								+ YELLOW + ((ia) jugador2).nombre(ficha.o) + WHITE
+								+ " le toca \n---------------------------------------------\n\n");
+
+						do {
+							((ia) jugador2).jugada2(tabla.gettablero());
+
+							resultado = ((ia) jugador2).getPosoción1();
+							numero = ((ia) jugador2).getPosoción2();
+						} while (Tablero.revision(numero, resultado));
+
+						tabla.modificarTablero(numero, resultado, ficha.o);
+
+						tabla.mostrarTablero();
+						ganar = tabla.ganar();
+						timeOut();
+					}
+				} while (!ganar);
 			}
 			System.out.println(RED + " \n BUENA PARTIDA <3 \n" + WHITE);
 			System.out.println(RED + " \n ¿Desea jugar otra partida? \n" + WHITE);
+			reinicio();
 
-		} while (comienzo != false);
+		} while (comienzo);
+		System.out.println(RED + " \n Espero que lo haya disfrutado \n" + WHITE);
 	}
 
 }

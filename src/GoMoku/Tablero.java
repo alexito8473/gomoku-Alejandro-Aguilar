@@ -18,7 +18,7 @@ public class Tablero {
 	public static boolean victoriaInclinadaAbajo2;
 	
 	private static boolean  winsalida = false;
-	public static String españa[][] = {
+	private static String españa[][] = {
 			{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 			{ "01", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ "02", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -36,6 +36,9 @@ public class Tablero {
 			{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
+	public static String[][] gettablero(){
+		return españa;
+	}
 	public static void mostrarTablero() {
 		for (int i = 0; i < españa.length; i++) {
 
@@ -50,12 +53,12 @@ public class Tablero {
 		System.out.println(" ");
 	}
 
-	public static void inclinacionAbajo1() {
+	private static void inclinacionAbajo1() {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
-					if (((i+3<16)&&(j+3<16))&&españa[i + 1][j + 1].equals(BLUE + "x" + WHITE)) {
-						if (((i+3<16)&&(j+3<16))&&españa[i + 2][j + 2].equals(BLUE + "x" + WHITE)) {
+					if (((i+1<16)&&(j+1<16))&&españa[i + 1][j + 1].equals(BLUE + "x" + WHITE)) {
+						if (((i+2<16)&&(j+2<16))&&españa[i + 2][j + 2].equals(BLUE + "x" + WHITE)) {
 							if (((i+3<16)&&(j+3<16))&&españa[i + 3][j + 3].equals(BLUE + "x" + WHITE)) {
 								if (((i+4<16)&&(j+4<16))&&españa[i + 4][j + 4].equals(BLUE + "x" + WHITE)) {
 									victoriaInclinadaArriba1 = true;
@@ -68,7 +71,7 @@ public class Tablero {
 			}
 		}
 	}
-	public static void inclinacionArriba1() {
+	private static void inclinacionArriba1() {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(BLUE + "x" + WHITE)) {
@@ -87,7 +90,7 @@ public class Tablero {
 		}
 	}
 	
-	public static void inclinacionArriba2() {
+	private static void inclinacionArriba2() {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
@@ -105,7 +108,7 @@ public class Tablero {
 			}
 		}
 	}
-	public static void inclinacionAbajo2() {
+	private static void inclinacionAbajo2() {
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
 				if (españa[i][j].equals(YELLOW + "o" + WHITE)) {
@@ -123,7 +126,7 @@ public class Tablero {
 			}
 		}
 	}
-	public static void derecha1() {
+	private static void derecha1() {
 
 		for (int i = 0; i < españa.length; i++) {
 
@@ -145,7 +148,7 @@ public class Tablero {
 		}
 	}
 
-	public static void derecha2() {
+	private static void derecha2() {
 
 		for (int i = 1; i < españa.length; i++) {
 
@@ -169,7 +172,7 @@ public class Tablero {
 		}
 	}
 
-	public static void arriba1() {
+	private static void arriba1() {
 
 		for (int i = 0; i < españa.length; i++) {
 
@@ -187,14 +190,12 @@ public class Tablero {
 							}
 						}
 					}
-				}else {
-					
 				}
 			}
 		}
 	}
 
-	public static void arriba2() {
+	private static void arriba2() {
 
 		for (int i = 1; i < españa.length; i++) {
 
@@ -255,7 +256,7 @@ public class Tablero {
 			}
 
 		}
-		}while(winsalida==false);
+		}while(!winsalida);
 	}
 	public static boolean ganar() {
 		if(victoriaderecha2 == true || victoriaarriba2 == true || victoriaInclinadaAbajo2==true|| victoriaInclinadaArriba2==true||victoriaderecha == true || victoriaarriba == true || victoriaInclinadaAbajo1==true|| victoriaInclinadaArriba1==true) {
