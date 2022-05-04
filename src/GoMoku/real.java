@@ -12,7 +12,6 @@ public class real extends Jugador {
 	
 
 	public String getNombre() {
-		// TODO Auto-generated method stub
 		return nombre;
 	}
 }

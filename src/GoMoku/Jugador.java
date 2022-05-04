@@ -2,7 +2,7 @@ package GoMoku;
 
 public class Jugador {
 	private String nombre;
-	private ficha ficha;
+	protected static ficha ficha;
 	
 	public Jugador(ficha ficha) {
 		 this.ficha=ficha;

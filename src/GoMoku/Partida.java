@@ -252,7 +252,7 @@ public class Partida {
 							+ " le toca \n---------------------------------------------\n\n");
 
 					do {
-						((ia) jugador1).jugada1(tabla.gettablero());
+						((ia) jugador1).jugada1(tabla.gettablero(),ficha.o);
 
 						resultado = ((ia) jugador1).getPosoción1();
 						numero = ((ia) jugador1).getPosoción2();
@@ -267,7 +267,7 @@ public class Partida {
 								+ " le toca \n---------------------------------------------\n\n");
 
 						do {
-							((ia) jugador2).jugada2(tabla.gettablero());
+							((ia) jugador2).jugada1(tabla.gettablero(), ficha.o);
 
 							resultado = ((ia) jugador2).getPosoción1();
 							numero = ((ia) jugador2).getPosoción2();
@@ -281,7 +281,7 @@ public class Partida {
 					}
 				} while (!ganar);
 			} else if (tipoNumerico == 2) {
-
+				
 				do {
 					System.out.printf("\n---------------------------------------------\n   " + BLUE + nombre + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
@@ -296,7 +296,7 @@ public class Partida {
 								+ " le toca \n---------------------------------------------\n\n");
 
 						do {
-							((ia) jugador2).jugada2(tabla.gettablero());
+							((ia) jugador2).jugada1(tabla.gettablero(),ficha.o);
 
 							resultado = ((ia) jugador2).getPosoción1();
 							numero = ((ia) jugador2).getPosoción2();
