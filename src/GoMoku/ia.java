@@ -21,9 +21,13 @@ public class ia extends Jugador {
 	private static boolean defensaVertical = false;
 	private static boolean defensaInclinada = false;
 	private static boolean defensaInclinada1 = false;
-
-	static int x;
-	static int y;
+	private static boolean ataque = false;
+	private static boolean ataqueHorizontal = false;
+	private static boolean ataqueVertical = false;
+	private static boolean ataqueInclinado = false;
+	private static boolean ataqueInclinado1 = false;
+	static int x = 0;
+	static int y = 0;
 
 	static Random ran = new Random();
 
@@ -41,7 +45,7 @@ public class ia extends Jugador {
 			"Copenage", "Mordekaiser", "ElNen" };
 
 	public static String nombre(ficha ficha) {
-		if (ficha == ficha.x) {
+		if (ficha.equals(GoMoku.ficha.x)) {
 			return resultado = nombres[number];
 		} else {
 			return resultado = nombres[number2];
@@ -56,14 +60,20 @@ public class ia extends Jugador {
 		defensaVertical = false;
 		defensaInclinada = false;
 		defensaInclinada = false;
+
+		ataque = false;
+		ataqueHorizontal = false;
+		ataqueVertical = false;
+		ataqueInclinado = false;
+		ataqueInclinado1 = false;
 	}
 
 	private static void defensaHorizontal(String[][] array, GoMoku.ficha fichas) {
-		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true;
-
+		boolean continuar = true, continuar1 = true;
+		int aumentar = 1;
 		String eleccion;
 
-		if (fichas == fichas.x) {
+		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -74,20 +84,27 @@ public class ia extends Jugador {
 			for (int j = 0; j < array.length; j++) {
 				if ((j < 16) && array[i][j].equals(eleccion)) {
 					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
-							if ((j + 3 < 16) && array[i][j + 3].equals(".")) {
-								defensaHorizontal = true;
-								defensa = true;
-								y = i;
-								x = j + 3;
-								continuar = false;
-								continuar1 = false;
+						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									defensaHorizontal = true;
+									defensa = true;
+									if (aumentar == 1) {
+										y = i;
+										x = j + 2;
+									}
+									aumentar += 1;
+									continuar = false;
+									continuar1 = false;
+
+								}
 							}
 						}
 					}
 				}
 			}
 		}
+
 		if (continuar) {
 			for (int i = 0; i < array.length; i++) {
 				for (int j = 0; j < array.length; j++) {
@@ -97,8 +114,11 @@ public class ia extends Jugador {
 								if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
 									defensaHorizontal = true;
 									defensa = true;
-									y = i;
-									x = j;
+									if (aumentar == 1) {
+										y = i;
+										x = j;
+									}
+									aumentar += 1;
 									continuar1 = false;
 								}
 							}
@@ -112,14 +132,15 @@ public class ia extends Jugador {
 				for (int j = 0; j < array.length; j++) {
 					if ((j < 16) && array[i][j].equals(eleccion)) {
 						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
-								if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
-									if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
-										defensaHorizontal = true;
-										defensa = true;
+							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+								if ((j + 3 < 16) && array[i][j + 3].equals(".")) {
+									defensaHorizontal = true;
+									defensa = true;
+									if (aumentar == 1) {
 										y = i;
-										x = j + 2;
+										x = j + 3;
 									}
+									aumentar += 1;
 								}
 							}
 						}
@@ -136,7 +157,7 @@ public class ia extends Jugador {
 
 		String eleccion;
 
-		if (fichas == fichas.x) {
+		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -149,7 +170,6 @@ public class ia extends Jugador {
 					if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
 						if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
 							if ((i + 4 < 16) && array[i + 4][j].equals(".")) {
-
 								defensa = true;
 								defensaVertical = true;
 								y = i + 4;
@@ -190,7 +210,6 @@ public class ia extends Jugador {
 							if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
 								if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
 									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
-
 										defensa = true;
 										defensaVertical = true;
 										y = i + 2;
@@ -212,7 +231,7 @@ public class ia extends Jugador {
 		boolean continuar3 = true;
 		String eleccion;
 
-		if (fichas == fichas.x) {
+		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -287,7 +306,7 @@ public class ia extends Jugador {
 		boolean continuar1 = true;
 		String eleccion;
 
-		if (fichas == fichas.x) {
+		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -360,7 +379,7 @@ public class ia extends Jugador {
 	private static void ganarHorizontal(String[][] array, ficha fichas) {
 		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true;
 		String eleccion;
-		if (fichas == fichas.x) {
+		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -429,6 +448,7 @@ public class ia extends Jugador {
 										x = j + 1;
 										continuar2 = false;
 										continuar3 = false;
+										break;
 									}
 								}
 							}
@@ -489,7 +509,7 @@ public class ia extends Jugador {
 		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true;
 		String eleccion;
 
-		if (fichas == fichas.x) {
+		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -519,7 +539,6 @@ public class ia extends Jugador {
 		}
 		if (continuar) {
 			for (int i = 0; i < array.length; i++) {
-
 				for (int j = 0; j < array.length; j++) {
 					if ((i < 16) && array[i][j].equals(".")) {
 						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
@@ -528,7 +547,6 @@ public class ia extends Jugador {
 									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
 										ganar = true;
 										ganarVertical = true;
-
 										y = i;
 										x = j;
 										continuar1 = false;
@@ -618,7 +636,7 @@ public class ia extends Jugador {
 		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true, continuar4 = true,
 				continuar5 = true, continuar6 = true, continuar7 = true, continuar8 = true;
 		String eleccion;
-		if (fichas == fichas.x) {
+		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -875,45 +893,288 @@ public class ia extends Jugador {
 		}
 	}
 
+	private static void ataqueVertical(String[][] array, ficha fichas) {
+		boolean continuar = true;
+		int aumentar = 1;
+		String eleccion;
+		if (fichas.equals(GoMoku.ficha.x)) {
+			eleccion = BLUE + "x" + WHITE;
+		} else {
+			eleccion = YELLOW + "o" + WHITE;
+		}
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array.length; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
+							ataqueVertical = true;
+							ataque = true;
+							if (aumentar == 1) {
+								y = i + 2;
+								x = j;
+							}
+							aumentar += 1;
+							continuar = false;
+						}
+					}
+				}
+			}
+		}
+
+		if (continuar) {
+			for (int i = 0; i < array.length; i++) {
+				for (int j = 0; j < array.length; j++) {
+					if ((i < 16) && array[i][j].equals(".")) {
+						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+							if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+								ataqueVertical = true;
+								ataque = true;
+								if (aumentar == 1) {
+									y = i;
+									x = j;
+								}
+								aumentar += 1;
+
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private static void ataqueInclinado(String[][] array, ficha fichas) {
+		boolean continuar = true;
+		boolean continuar3 = true;
+		int aumentar = 1;
+		String eleccion;
+
+		if (fichas.equals(GoMoku.ficha.x)) {
+			eleccion = BLUE + "x" + WHITE;
+
+		} else {
+			eleccion = YELLOW + "o" + WHITE;
+		}
+
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array.length; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
+							ataque = true;
+							ataqueInclinado = true;
+							if (aumentar == 1) {
+								y = i + 2;
+								x = j + 2;
+							}
+							aumentar += 1;
+							continuar = false;
+						}
+					}
+				}
+			}
+		}
+		if (continuar) {
+			for (int i = 0; i < array.length; i++) {
+				for (int j = 0; j < array.length; j++) {
+					if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
+						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+								ataque = true;
+								ataqueInclinado = true;
+								if (aumentar == 1) {
+									y = i;
+									x = j;
+								}
+								aumentar += 1;
+								continuar3 = false;
+
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	private static void ataqueInclinado1(String[][] array, ficha fichas) {
+		boolean continuar = true;
+		int aumentar = 1;
+		String eleccion;
+
+		if (fichas.equals(GoMoku.ficha.x)) {
+			eleccion = BLUE + "x" + WHITE;
+
+		} else {
+			eleccion = YELLOW + "o" + WHITE;
+		}
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array.length; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j - 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j - 2].equals(".")) {
+							ataque = true;
+							ataqueInclinado1 = true;
+							if (aumentar == 1) {
+								y = i + 2;
+								x = j - 2;
+							}
+							aumentar += 1;
+
+							continuar = false;
+						}
+					}
+				}
+			}
+		}
+		if (continuar) {
+			for (int i = 0; i < array.length; i++) {
+				for (int j = 0; j < array.length; j++) {
+					if (((i < 16) && (j > 0)) && array[i][j].equals(".")) {
+						if (((i + 1 < 16) && (j - 1 > 0)) && array[i + 1][j - 1].equals(eleccion)) {
+							if (((i + 2 < 16) && (j - 2 > 0)) && array[i + 2][j - 2].equals(eleccion)) {
+								ataque = true;
+								ataqueInclinado1 = true;
+								if (aumentar == 1) {
+									y = i;
+									x = j;
+								}
+								aumentar += 1;
+
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	private static void ataqueHorizontal(String[][] array, ficha fichas) {
+		boolean continuar = true;
+		String eleccion;
+		int aumentar = 1;
+		if (fichas.equals(GoMoku.ficha.x)) {
+			eleccion = BLUE + "x" + WHITE;
+		} else {
+			eleccion = YELLOW + "o" + WHITE;
+		}
+
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array.length; j++) {
+				if ((j < 16) && array[i][j].equals(".")) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							ataqueHorizontal = true;
+							ataque = true;
+							if (aumentar == 1) {
+								y = i;
+								x = j;
+							}
+							aumentar += 1;
+							continuar = false;
+
+						}
+					}
+				}
+			}
+		}
+		if (continuar) {
+			for (int i = 0; i < array.length; i++) {
+				for (int j = 0; j < array.length; j++) {
+					if ((j < 16) && array[i][j].equals(eleccion)) {
+						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+							if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
+								ataqueHorizontal = true;
+								ataque = true;
+								if (aumentar == 1) {
+									y = i;
+									x = j + 2;
+								}
+								aumentar += 1;
+							}
+						}
+					}
+				}
+			}
+
+		}
+	}
+
 	public static void jugada1(String[][] array, ficha fichas) {
 		retornar();
 		ganarHorizontal(array, fichas);
 		ganarInclinado(array, fichas);
 		ganarVertical(array, fichas);
-		defensaInclinado(array, fichas);
-		defensaInclinado1(array, fichas);
-		defensaHorizontal(array, fichas);
-		defensavertical(array, fichas);
+
 		if (ganar) {
 			if (ganarHorizontal) {
 				numeros[0] = x;
 				numeros[1] = y;
+				retornar();
 			} else if (ganarVertical) {
 				numeros[0] = x;
 				numeros[1] = y;
+				retornar();
 			} else if (ganarInclinado) {
 				numeros[0] = x;
 				numeros[1] = y;
-			}
-		} else if (defensa) {
-			if (defensaHorizontal) {
-				numeros[0] = x;
-				numeros[1] = y;
-			} else if (defensaVertical) {
-				numeros[0] = x;
-				numeros[1] = y;
-			} else if (defensaInclinada) {
-				numeros[0] = x;
-				numeros[1] = y;
-
-			} else if (defensaInclinada1) {
-				numeros[0] = x;
-				numeros[1] = y;
-
+				retornar();
 			}
 		} else {
-			numeros[0] = ran.nextInt(15) + 1;
-			numeros[1] = ran.nextInt(15) + 1;
+			retornar();
+			defensaInclinado(array, fichas);
+			defensaInclinado1(array, fichas);
+			defensaHorizontal(array, fichas);
+			defensavertical(array, fichas);
+			if (defensa) {
+				if (defensaHorizontal) {
+					numeros[0] = x;
+					numeros[1] = y;
+					retornar();
+				} else if (defensaVertical) {
+					numeros[0] = x;
+					numeros[1] = y;
+					retornar();
+				} else if (defensaInclinada) {
+					numeros[0] = x;
+					numeros[1] = y;
+					retornar();
+				} else if (defensaInclinada1) {
+					numeros[0] = x;
+					numeros[1] = y;
+					retornar();
+				}
+			} else {
+				retornar();
+				ataqueHorizontal(array, fichas);
+				ataqueVertical(array, fichas);
+				ataqueInclinado(array, fichas);
+				ataqueInclinado1(array, fichas);
+				if (ataque) {
+					if (ataqueHorizontal) {
+						numeros[0] = x;
+						numeros[1] = y;
+						retornar();
+					} else if (ataqueVertical) {
+						numeros[0] = x;
+						numeros[1] = y;
+						retornar();
+					} else if (ataqueInclinado) {
+						numeros[0] = x;
+						numeros[1] = y;
+						retornar();
+					} else if (ataqueInclinado1) {
+						numeros[0] = x;
+						numeros[1] = y;
+						retornar();
+					}
+				} else {
+					numeros[0] = ran.nextInt(15) + 1;
+					numeros[1] = ran.nextInt(15) + 1;
+				}
+			}
 		}
 	}
 

@@ -195,7 +195,7 @@ public class Partida {
 		System.out.println("Gomoku");
 		boolean salida = false;
 		do {
-			tabla = new Tablero();
+
 			do {
 
 				try {
@@ -223,6 +223,7 @@ public class Partida {
 			crear();
 			// ---------------------------------------------------
 			if (tipoNumerico == 3) {
+				tabla = new Tablero();
 				do {
 					System.out.printf("\n---------------------------------------------\n   " + BLUE
 							+ ((real) jugador1).getNombre() + WHITE
@@ -245,14 +246,14 @@ public class Partida {
 
 				} while (!ganar);
 			} else if (tipoNumerico == 1) {
-
+				tabla = new Tablero();
 				do {
 					System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n" + BLUE
 							+ ((ia) jugador1).nombre(ficha.x) + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
 
 					do {
-						((ia) jugador1).jugada1(tabla.gettablero(),ficha.o);
+						((ia) jugador1).jugada1(tabla.gettablero(), ficha.x);
 
 						resultado = ((ia) jugador1).getPosoción1();
 						numero = ((ia) jugador1).getPosoción2();
@@ -260,7 +261,7 @@ public class Partida {
 					tabla.modificarTablero(numero, resultado, ficha.x);
 					ganar = tabla.ganar();
 					tabla.mostrarTablero();
-					timeOut();
+					// timeOut();
 					if (!ganar) {
 						System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
 								+ YELLOW + ((ia) jugador2).nombre(ficha.o) + WHITE
@@ -277,11 +278,12 @@ public class Partida {
 
 						tabla.mostrarTablero();
 						ganar = tabla.ganar();
-						timeOut();
+						// timeOut();
 					}
 				} while (!ganar);
 			} else if (tipoNumerico == 2) {
-				
+				tabla = new Tablero();
+
 				do {
 					System.out.printf("\n---------------------------------------------\n   " + BLUE + nombre + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
@@ -296,7 +298,7 @@ public class Partida {
 								+ " le toca \n---------------------------------------------\n\n");
 
 						do {
-							((ia) jugador2).jugada1(tabla.gettablero(),ficha.o);
+							((ia) jugador2).jugada1(tabla.gettablero(), ficha.o);
 
 							resultado = ((ia) jugador2).getPosoción1();
 							numero = ((ia) jugador2).getPosoción2();

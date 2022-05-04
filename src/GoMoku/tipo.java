@@ -1,5 +1,5 @@
 package GoMoku;
 
 public enum tipo {
-	iaVSia,jugadorVsjugador,iaVsjugador
+	iaVSia, jugadorVsjugador, iaVsjugador
 }
