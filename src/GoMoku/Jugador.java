@@ -1,15 +1,15 @@
 package GoMoku;
 
 public class Jugador {
-	private String nombre;
-	protected static ficha ficha;
+	protected String nombre;
+	protected static  ficha ficha;
 
 	public Jugador(ficha ficha) {
-		this.ficha = ficha;
+		Jugador.ficha = ficha;
 	}
 
-	public String tostring() {
-		return null;
+	public static ficha getFicha() {
+		return ficha;
 	}
 
 }

@@ -14,10 +14,10 @@ public class Partida {
 	public static final String GREEN = "\u001B[32m";
 	public static final String YELLOW = "\u001B[33m";
 
-	static Tablero tabla;
+	 Tablero tabla;
 
-	static Jugador jugador1;
-	static Jugador jugador2;
+	  Jugador jugador1;
+	  Jugador jugador2;
 
 	static Scanner sc = new Scanner(System.in);
 	static Random ram = new Random();
@@ -91,18 +91,6 @@ public class Partida {
 		}
 	}
 
-	private static void crear() {
-		if (1 == tipoNumerico) {
-			jugador1 = new ia(ficha.x);
-			jugador2 = new ia(ficha.o);
-		} else if (2 == tipoNumerico) {
-			jugador1 = new real(nombre, ficha.x);
-			jugador2 = new ia(ficha.o);
-		} else if (3 == tipoNumerico) {
-			jugador1 = new real(nombre, ficha.x);
-			jugador2 = new real(nombre2, ficha.o);
-		}
-	}
 
 	private static void letra() {
 		do {
@@ -194,6 +182,7 @@ public class Partida {
 	public void Comenzar() {
 		System.out.println("Gomoku");
 		boolean salida = false;
+
 		do {
 
 			do {
@@ -220,20 +209,22 @@ public class Partida {
 
 			// --------------------------------------------------
 			nombres();
-			crear();
+
 			// ---------------------------------------------------
 			if (tipoNumerico == 3) {
+				jugador1 = new real(nombre, ficha.x);
+				jugador2 = new real(nombre2, ficha.o);
 				tabla = new Tablero();
+				tabla.mostrarTablero();
 				do {
 					System.out.printf("\n---------------------------------------------\n   " + BLUE
 							+ ((real) jugador1).getNombre() + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
-					tabla.mostrarTablero();
 					verificación();
-					tabla.mostrarTablero();
 					tabla.modificarTablero(numero, resultado, ficha.x);
 					tabla.mostrarTablero();
-					ganar = tabla.ganar();
+					tabla.modificarficha(numero, resultado,  ficha.x);
+					ganar = tabla.ganar(ficha.x);
 					if (!ganar) {
 						System.out.printf("\n---------------------------------------------\n   " + YELLOW
 								+ ((real) jugador2).getNombre() + WHITE
@@ -241,12 +232,15 @@ public class Partida {
 						verificación();
 						tabla.modificarTablero(numero, resultado, ficha.o);
 						tabla.mostrarTablero();
-						ganar = tabla.ganar();
+						tabla.modificarficha(numero, resultado,  ficha.o);
+						ganar = tabla.ganar(ficha.o);
 					}
 
 				} while (!ganar);
 			} else if (tipoNumerico == 1) {
 				tabla = new Tablero();
+				jugador1 = new ia(ficha.x);
+				jugador2 = new ia(ficha.o);
 				do {
 					System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n" + BLUE
 							+ ((ia) jugador1).nombre(ficha.x) + WHITE
@@ -259,9 +253,10 @@ public class Partida {
 						numero = ((ia) jugador1).getPosoción2();
 					} while (tabla.revision(numero, resultado));
 					tabla.modificarTablero(numero, resultado, ficha.x);
-					ganar = tabla.ganar();
 					tabla.mostrarTablero();
-					// timeOut();
+					tabla.modificarficha(numero, resultado,  ficha.x);
+					ganar = tabla.ganar(ficha.x);
+					 timeOut();
 					if (!ganar) {
 						System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
 								+ YELLOW + ((ia) jugador2).nombre(ficha.o) + WHITE
@@ -275,23 +270,28 @@ public class Partida {
 						} while (Tablero.revision(numero, resultado));
 
 						tabla.modificarTablero(numero, resultado, ficha.o);
-
 						tabla.mostrarTablero();
-						ganar = tabla.ganar();
-						// timeOut();
+						tabla.modificarficha(numero, resultado,  ficha.o);
+						ganar = tabla.ganar(ficha.o);
+					 timeOut();
 					}
 				} while (!ganar);
 			} else if (tipoNumerico == 2) {
 				tabla = new Tablero();
-
+				tabla.mostrarTablero();
+				jugador1 = new real(nombre, ficha.x);
+				jugador2 = new ia(ficha.o);
 				do {
+					
 					System.out.printf("\n---------------------------------------------\n   " + BLUE + nombre + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
-					tabla.mostrarTablero();
 					verificación();
-					Tablero.modificarTablero(numero, resultado, ficha.x);
+					
+					tabla.modificarTablero(numero, resultado, ficha.x);
 					tabla.mostrarTablero();
-					ganar = tabla.ganar();
+					tabla.modificarficha(numero, resultado,  ficha.x);
+					ganar = tabla.ganar(ficha.x);
+					timeOut();
 					if (!ganar) {
 						System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
 								+ YELLOW + ((ia) jugador2).nombre(ficha.o) + WHITE
@@ -305,10 +305,10 @@ public class Partida {
 						} while (Tablero.revision(numero, resultado));
 
 						tabla.modificarTablero(numero, resultado, ficha.o);
-
 						tabla.mostrarTablero();
-						ganar = tabla.ganar();
-						timeOut();
+						tabla.modificarficha(numero, resultado,  ficha.o);
+						ganar = tabla.ganar(ficha.o);
+						
 					}
 				} while (!ganar);
 			}

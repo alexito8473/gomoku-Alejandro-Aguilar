@@ -4,13 +4,16 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ia extends Jugador {
+	
+	public ia(ficha ficha) {
+		super(ficha);
+	}
+	
+	private static final String WHITE = "\u001B[37m";
+	private static final String BLUE = "\u001B[34m";
+	private static final String YELLOW = "\u001B[33m";
 
-	public static final String WHITE = "\u001B[37m";
-	public static final String BLUE = "\u001B[34m";
-	public static final String GREEN = "\u001B[32m";
-	public static final String YELLOW = "\u001B[33m";
-
-	public static String resultado;
+	protected static String resultado;
 
 	public static boolean ganar = false;
 	private static boolean ganarHorizontal = false;
@@ -26,6 +29,7 @@ public class ia extends Jugador {
 	private static boolean ataqueVertical = false;
 	private static boolean ataqueInclinado = false;
 	private static boolean ataqueInclinado1 = false;
+	
 	static int x = 0;
 	static int y = 0;
 
@@ -36,21 +40,20 @@ public class ia extends Jugador {
 
 	static int[] numeros = new int[2];
 
-	public ia(ficha ficha) {
-		super(ficha);
-	}
+
 
 	Scanner src = new Scanner(System.in);
 	private static String nombres[] = { "Pepe", "Jorge", "España", "Lisbania", "Me gustaria", "Francia caca",
 			"Copenage", "Mordekaiser", "ElNen" };
 
 	public static String nombre(ficha ficha) {
+		
 		if (ficha.equals(GoMoku.ficha.x)) {
 			return resultado = nombres[number];
 		} else {
 			return resultado = nombres[number2];
 		}
-	}
+ 	}
 
 	private static void retornar() {
 		ganar = false;
@@ -508,7 +511,7 @@ public class ia extends Jugador {
 	private static void ganarVertical(String[][] array, ficha fichas) {
 		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true;
 		String eleccion;
-
+		int aumentar=1;
 		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
@@ -617,9 +620,12 @@ public class ia extends Jugador {
 									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
 										ganar = true;
 										ganarVertical = true;
-
-										y = i + 3;
-										x = j;
+										if (aumentar == 1) {
+											y = i + 3;
+											x = j;
+										}
+										aumentar += 1;
+										
 									}
 								}
 							}
@@ -650,7 +656,6 @@ public class ia extends Jugador {
 								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(".")) {
 									ganar = true;
 									ganarInclinado = true;
-
 									y = i + 4;
 									x = j + 4;
 									continuar = false;
@@ -708,7 +713,6 @@ public class ia extends Jugador {
 									if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
 										ganar = true;
 										ganarInclinado = true;
-
 										y = i + 2;
 										x = j + 2;
 										continuar2 = false;
@@ -763,7 +767,6 @@ public class ia extends Jugador {
 									if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
 										ganar = true;
 										ganarInclinado = true;
-
 										y = i;
 										x = j;
 										continuar4 = false;
@@ -789,7 +792,6 @@ public class ia extends Jugador {
 									if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
 										ganar = true;
 										ganarInclinado = true;
-
 										y = i;
 										x = j;
 										continuar5 = false;
@@ -945,7 +947,6 @@ public class ia extends Jugador {
 
 	private static void ataqueInclinado(String[][] array, ficha fichas) {
 		boolean continuar = true;
-		boolean continuar3 = true;
 		int aumentar = 1;
 		String eleccion;
 
@@ -987,7 +988,6 @@ public class ia extends Jugador {
 									x = j;
 								}
 								aumentar += 1;
-								continuar3 = false;
 
 							}
 						}
@@ -1041,7 +1041,6 @@ public class ia extends Jugador {
 									x = j;
 								}
 								aumentar += 1;
-
 							}
 						}
 					}
