@@ -26,23 +26,6 @@ public class Tablero {
 			{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
-	private static String españa2[][] = {
-			{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
-			{ "01", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "02", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "03", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "04", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "05", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "06", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "07", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "08", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "09", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "10", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "11", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "12", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
-			{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 	public static String[][] gettablero() {
 		return españa;
 	}
@@ -50,7 +33,7 @@ public class Tablero {
 	public static void mostrarTablero() {
 		String a;
 		for (int i = 0; i < españa.length; i++) {
-			
+
 			for (int j = 0; j < españa.length; j++) {
 				a = españa[i][j];
 				System.out.print(a + " ");
@@ -64,9 +47,9 @@ public class Tablero {
 	private static void inclinacion1(ficha ficha) {
 		String letra;
 		if (ficha.equals(GoMoku.ficha.x)) {
-			 letra = BLUE + "x" + WHITE;
-		} else  {
-			 letra = YELLOW + "o" + WHITE;
+			letra = BLUE + "x" + WHITE;
+		} else {
+			letra = YELLOW + "o" + WHITE;
 		}
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
@@ -75,7 +58,7 @@ public class Tablero {
 						if (((i + 2 < 16) && (j + 2 < 16)) && españa[i + 2][j + 2].equals(letra)) {
 							if (((i + 3 < 16) && (j + 3 < 16)) && españa[i + 3][j + 3].equals(letra)) {
 								if (((i + 4 < 16) && (j + 4 < 16)) && españa[i + 4][j + 4].equals(letra)) {
-									victoria=true;
+									victoria = true;
 								}
 							}
 						}
@@ -88,9 +71,9 @@ public class Tablero {
 	private static void inclinacion2(ficha ficha) {
 		String letra;
 		if (ficha.equals(GoMoku.ficha.x)) {
-			 letra = BLUE + "x" + WHITE;
-		} else  {
-			 letra = YELLOW + "o" + WHITE;
+			letra = BLUE + "x" + WHITE;
+		} else {
+			letra = YELLOW + "o" + WHITE;
 		}
 		for (int i = 1; i < españa.length; i++) {
 			for (int j = 1; j < españa.length; j++) {
@@ -99,8 +82,8 @@ public class Tablero {
 						if ((i + 2 < 16 && j - 2 < 16) && españa[i + 2][j - 2].equals(letra)) {
 							if ((i + 3 < 16 && j - 3 < 16) && españa[i + 3][j - 3].equals(letra)) {
 								if ((i + 4 < 16 && j - 4 < 16) && españa[i + 4][j - 4].equals(letra)) {
-									victoria=true;
-								
+									victoria = true;
+
 								}
 							}
 						}
@@ -113,9 +96,9 @@ public class Tablero {
 	private static void derecha(ficha ficha) {
 		String letra;
 		if (ficha.equals(GoMoku.ficha.x)) {
-			 letra = BLUE + "x" + WHITE;
-		} else  {
-			 letra = YELLOW + "o" + WHITE;
+			letra = BLUE + "x" + WHITE;
+		} else {
+			letra = YELLOW + "o" + WHITE;
 		}
 		for (int i = 0; i < españa.length; i++) {
 			for (int j = 0; j < españa.length; j++) {
@@ -124,8 +107,8 @@ public class Tablero {
 						if ((j + 2 < 16) && españa[i][j + 2].equals(letra)) {
 							if ((j + 3 < 16) && españa[i][j + 3].equals(letra)) {
 								if ((j + 4 < 16) && españa[i][j + 4].equals(letra)) {
-									victoria=true;
-						
+									victoria = true;
+
 								}
 							}
 						}
@@ -138,9 +121,9 @@ public class Tablero {
 	private static void arriba(ficha ficha) {
 		String letra;
 		if (ficha.equals(GoMoku.ficha.x)) {
-			 letra = BLUE + "x" + WHITE;
-		} else  {
-			 letra = YELLOW + "o" + WHITE;
+			letra = BLUE + "x" + WHITE;
+		} else {
+			letra = YELLOW + "o" + WHITE;
 		}
 		for (int i = 0; i < españa.length; i++) {
 
@@ -151,7 +134,7 @@ public class Tablero {
 						if ((i + 2 < 16) && españa[i + 2][j].equals(letra)) {
 							if ((i + 3 < 16) && españa[i + 3][j].equals(letra)) {
 								if ((i + 4 < 16) && españa[i + 4][j].equals(letra)) {
-									victoria=true;				
+									victoria = true;
 								}
 							}
 						}
@@ -160,6 +143,9 @@ public class Tablero {
 			}
 		}
 	}
+
+
+
 
 	public static boolean revision(int numero1, int numero2) {
 		if ((españa[numero1][numero2] == GREEN + "o" + WHITE) || (españa[numero1][numero2] == BLUE + "x" + WHITE)
@@ -198,10 +184,113 @@ public class Tablero {
 			return false;
 		}
 	}
-
-	public static void volver() {
-		españa=españa2;
-		
+	
+//------------------------------------------------------------------------------------------------------
+	static boolean derechaText(ficha ficha,String[][] array) {
+		boolean victory=false;
+		String letra;
+		if (ficha.equals(GoMoku.ficha.x)) {
+			 letra =  "x" ;
+		} else  {
+			 letra =  "o" ;
+		}
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array.length; j++) {
+				if (array[i][j].equals(letra)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(letra)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(letra)) {
+							if ((j + 3 < 16) &&array[i][j + 3].equals(letra)) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(letra)) {
+									 victory=true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return victory;
 	}
+	//------------------------------------------------------------------------------------------------------
+	static boolean arribaText(ficha ficha, String[][] array) {
+		boolean victory=false;
+		String letra;
+		if (ficha.equals(GoMoku.ficha.x)) {
+			 letra =  "x" ;
+		} else  {
+			 letra =  "o" ;
+		}
+		for (int i = 0; i <  array.length; i++) {
 
+			for (int j = 0; j <  array.length; j++) {
+
+				if ( array[i][j].equals(letra)) {
+					if ((i + 1 < 16) &&  array[i + 1][j].equals(letra)) {
+						if ((i + 2 < 16) &&  array[i + 2][j].equals(letra)) {
+							if ((i + 3 < 16) &&  array[i + 3][j].equals(letra)) {
+								if ((i + 4 < 16) &&  array[i + 4][j].equals(letra)) {
+									victory=true;				
+								}
+							}
+						}
+					}
+				}
+			
+			}
+		}
+		return victory;
+	}
+	//------------------------------------------------------------------------------------------------------
+	 static boolean inclinacionAbajoText(ficha ficha, String[][] array) {
+			boolean victory=false;
+		String letra;
+		if (ficha.equals(GoMoku.ficha.x)) {
+			letra = "x" ;
+		} else {
+			letra = "o" ;
+		}
+		for (int i = 1; i < array.length; i++) {
+			for (int j = 1; j < array.length; j++) {
+				if (array[i][j].equals(letra)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(letra)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(letra)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(letra)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(letra)) {
+									victory=true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return victory;
+	}
+	//------------------------------------------------------------------------------------------------------
+		 static boolean inclinacionArribaText(ficha ficha, String[][] array) {
+				boolean victory=false;
+			String letra;
+			if (ficha.equals(GoMoku.ficha.x)) {
+				letra = "x" ;
+			} else {
+				letra = "o" ;
+			}
+			for (int i = 1; i < array.length; i++) {
+				for (int j = 1; j < array.length; j++) {
+					if (array[i][j].equals(letra)) {
+						if ((i + 1 < 16 && j - 1 < 16) && array[i + 1][j - 1].equals(letra)) {
+							if ((i + 2 < 16 && j - 2 < 16) && array[i + 2][j - 2].equals(letra)) {
+								if ((i + 3 < 16 && j - 3 < 16) && array[i + 3][j - 3].equals(letra)) {
+									if ((i + 4 < 16 && j - 4 < 16) && array[i + 4][j - 4].equals(letra)) {
+										 victory=true;
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			return victory;
+		}
 }

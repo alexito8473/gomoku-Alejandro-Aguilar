@@ -526,9 +526,11 @@ public class ia extends Jugador {
 								if ((i + 4 < 16) && array[i + 4][j].equals(".")) {
 									ganar = true;
 									ganarVertical = true;
-
-									y = i + 4;
-									x = j;
+									if (aumentar == 1) {
+										y = i + 4;
+										x = j;
+									}
+									aumentar += 1;
 									continuar = false;
 									continuar1 = false;
 									continuar2 = false;
@@ -550,8 +552,11 @@ public class ia extends Jugador {
 									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
 										ganar = true;
 										ganarVertical = true;
-										y = i;
-										x = j;
+										if (aumentar == 1) {
+											y = i;
+											x = j;
+										}
+										aumentar += 1;
 										continuar1 = false;
 										continuar2 = false;
 										continuar3 = false;
@@ -575,9 +580,11 @@ public class ia extends Jugador {
 									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
 										ganar = true;
 										ganarVertical = true;
-
-										y = i + 2;
-										x = j;
+										if (aumentar == 1) {
+											y = i + 1;
+											x = j;
+										}
+										aumentar += 1;	
 										continuar2 = false;
 										continuar3 = false;
 									}
@@ -598,9 +605,11 @@ public class ia extends Jugador {
 									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
 										ganar = true;
 										ganarVertical = true;
-
-										y = i + 2;
-										x = j;
+										if (aumentar == 1) {
+											y = i + 2;
+											x = j;
+										}
+										aumentar += 1;
 										continuar3 = false;
 									}
 								}
