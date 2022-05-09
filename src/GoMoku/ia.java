@@ -4,11 +4,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class ia extends Jugador {
-	
+
 	public ia(ficha ficha) {
 		super(ficha);
 	}
-	
+
 	private static final String WHITE = "\u001B[37m";
 	private static final String BLUE = "\u001B[34m";
 	private static final String YELLOW = "\u001B[33m";
@@ -29,7 +29,7 @@ public class ia extends Jugador {
 	private static boolean ataqueVertical = false;
 	private static boolean ataqueInclinado = false;
 	private static boolean ataqueInclinado1 = false;
-	
+
 	static int x = 0;
 	static int y = 0;
 
@@ -40,22 +40,20 @@ public class ia extends Jugador {
 
 	static int[] numeros = new int[2];
 
-
-
 	Scanner src = new Scanner(System.in);
 	private static String nombres[] = { "Pepe", "Jorge", "España", "Lisbania", "Me gustaria", "Francia caca",
 			"Copenage", "Mordekaiser", "ElNen" };
 
-	public static String nombre(ficha ficha) {
-		
+	public String nombre(ficha ficha) {
+
 		if (ficha.equals(GoMoku.ficha.x)) {
 			return resultado = nombres[number];
 		} else {
 			return resultado = nombres[number2];
 		}
- 	}
+	}
 
-	private static void retornar() {
+	public void retornar() {
 		ganar = false;
 		ganarHorizontal = false;
 		defensa = false;
@@ -511,7 +509,7 @@ public class ia extends Jugador {
 	private static void ganarVertical(String[][] array, ficha fichas) {
 		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true;
 		String eleccion;
-		int aumentar=1;
+		int aumentar = 1;
 		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
@@ -584,7 +582,7 @@ public class ia extends Jugador {
 											y = i + 1;
 											x = j;
 										}
-										aumentar += 1;	
+										aumentar += 1;
 										continuar2 = false;
 										continuar3 = false;
 									}
@@ -634,7 +632,7 @@ public class ia extends Jugador {
 											x = j;
 										}
 										aumentar += 1;
-										
+
 									}
 								}
 							}
@@ -1110,7 +1108,7 @@ public class ia extends Jugador {
 		}
 	}
 
-	public static void jugada1(String[][] array, ficha fichas) {
+	public void jugada1(String[][] array, ficha fichas) {
 		retornar();
 		ganarHorizontal(array, fichas);
 		ganarInclinado(array, fichas);
@@ -1189,11 +1187,11 @@ public class ia extends Jugador {
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-	public static int getPosoción1() {
+	public int getPosoción1() {
 		return numeros[0];
 	}
 
-	public static int getPosoción2() {
+	public int getPosoción2() {
 		return numeros[1];
 	}
 

@@ -7,7 +7,7 @@ public class real extends Jugador {
 		this.nombre = nombre;
 	}
 
-	 String nombre;
+	String nombre;
 
 	public String getNombre() {
 		return nombre;

@@ -7,8 +7,7 @@ class TableroTestInclinacionArriba {
 
 	@Test
 	void inclinaciónFichaX() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -24,14 +23,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.x, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.x, comprobar);
 		Assert.assertTrue(resultado);
-		
+
 	}
+
 	@Test
 	void inclinaciónFichaO() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -47,14 +46,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.o, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.o, comprobar);
 		Assert.assertTrue(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación1FichaX() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -70,14 +69,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.x, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.x, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación1FichaO() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -93,14 +92,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.o, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.o, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación2FichaX() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -116,14 +115,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.x, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.x, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación2FichaO() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -139,14 +138,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.o, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.o, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación3FichaX() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -162,14 +161,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.x, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.x, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación3FichaO() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -185,14 +184,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.o, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.o, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación4FichaX() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -208,14 +207,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.x, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.x, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación4FichaO() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -231,14 +230,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.o, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.o, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación5FichaX() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -254,14 +253,14 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.x, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.x, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
+
 	@Test
 	void inclinación5FichaO() {
-		String[][] comprobar = {
-				{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
+		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "03", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -277,8 +276,8 @@ class TableroTestInclinacionArriba {
 				{ "13", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "14", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
-		boolean resultado=Tablero.inclinacionArribaText(ficha.o, comprobar);
+		boolean resultado = Tablero.inclinacionArribaText(ficha.o, comprobar);
 		Assert.assertFalse(resultado);
-		
+
 	}
 }
