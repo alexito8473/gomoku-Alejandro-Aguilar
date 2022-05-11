@@ -4,41 +4,100 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Clase donde se realiza la partida, usando parte de la clase Jugador y la
+ * clase Tablero, donde se genera la partida, y se utiliza los métodos
+ * pertinentes para la captación de datos.
+ * 
+ * @author Alejandro Aguilar Alba
+ * @version 1.0
+ * @since 1.0
+ * 
+ */
 public class Partida {
 
-	// Colores para usar en el tablero
-	public static final String RED = "\u001B[31m";
-	public static final String WHITE = "\u001B[37m";
-	public static final String CYAN = "\u001B[36m";
-	public static final String PURPLE = "\u001B[35m";
-	public static final String BLUE = "\u001B[34m";
-	public static final String GREEN = "\u001B[32m";
-	public static final String YELLOW = "\u001B[33m";
+	/**
+	 * El color rojo, se utiliza para cambiar el color a las letras en la consola.
+	 */
+	private static final String RED = "\u001B[31m";
+	/**
+	 * El color blanco, se utiliza para cambiar el color a las letras en la consola.
+	 */
+	private static final String WHITE = "\u001B[37m";
+	/**
+	 * El color cian, se utiliza para cambiar el color a las letras en la consola.
+	 */
+	private static final String CYAN = "\u001B[36m";
+	/**
+	 * El color azul, se utiliza para cambiar el color a las letras en la consola.
+	 */
+	private static final String BLUE = "\u001B[34m";
+	/**
+	 * El color azul, se utiliza para cambiar el color a las letras en la consola.
+	 */
+	private static final String YELLOW = "\u001B[33m";
+	/**
+	 * La clase Tablero, pero sin declarar.
+	 */
+	private static Tablero tabla;
+	/**
+	 * La clase Jugador, pero sin declarar.
+	 */
+	private static Jugador jugador1;
+	/**
+	 * La clase Jugador, pero sin declarar.
+	 */
+	private static Jugador jugador2;
 
-	static Jugador jugador1;
-	static Jugador jugador2;
+	/**
+	 * La clase Scanner.
+	 */
+	private static Scanner sc = new Scanner(System.in);
+	/**
+	 * La clase Random.
+	 */
+	private static Random ram = new Random();
 
-	// Llamadas al Scanner y al Random
-	static Scanner sc = new Scanner(System.in);
-	static Random ram = new Random();
+	/**
+	 * variable booleana donde se sale del bucle do.while del juego.
+	 */
+	private static boolean exit = false;
+	/**
+	 * variable booleana para salir del bucle do.while de la partida.
+	 */
+	private static boolean ganar = false;
 
-	// Los booleanos
-	static boolean comienzo = false;
-	static boolean comienzo1 = false;
-	static boolean ganar = false;
+	/**
+	 * variable String donde se capta el nombre del jugador.
+	 */
+	private static String nombre;
+	/**
+	 * variable String donde se capta el nombre del jugador2.
+	 */
+	private static String nombre2;
+	/**
+	 * variable String donde se capta el la posicion alfabetica determina, para
+	 * después retornarla a un int.
+	 */
+	private static String transformare;
 
-	// Los String
-	static String nombre;
-	static String nombre2;
-	static String transformare;
-
-	// Los Int
-	static int resultado;
-	static int numero;
-	static int tipoNumerico = 0;
+	/**
+	 * variable int para captar una posición para el array.
+	 */
+	private static int posicion1;
+	/**
+	 * variable int para captar una posición para el array.
+	 */
+	private static int posicion2;
+	/**
+	 * variable int para captar el tipo de juego que se desea jugar.
+	 */
+	private static int tipoNumerico = 0;
 
 	// ---------------------------------------------------------------------------------------------------------------
-	// Metodo para pausar la partida, o continuarla
+	/**
+	 * Metodo para pausar la partida, o continuarla.
+	 */
 	private static void reinicio() {
 		int number;
 		boolean escape = false;
@@ -53,12 +112,10 @@ public class Partida {
 
 				if (number == 1) {
 					escape = true;
-					comienzo = true;
-					comienzo1 = true;
+					exit = true;
 				} else {
 					escape = true;
-					comienzo = false;
-					comienzo1 = false;
+					exit = false;
 				}
 			} catch (Exception InputMismatchException) {
 				System.out.println("\n Introduce un numero del 1 al 2 \n ");
@@ -70,7 +127,9 @@ public class Partida {
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------
-	// Método para pausar la consola
+	/**
+	 * Método para pausar la consola
+	 */
 	private static void timeOut() {
 		try {
 			TimeUnit.SECONDS.sleep(1);
@@ -78,10 +137,14 @@ public class Partida {
 			e.printStackTrace();
 		}
 	}
-	// ---------------------------------------------------------------------------------------------------------------
-	// Método para transformar para captar y transformas las posicines que se
-	// optienen por letras, y forzar que solo se recibe un margen de letras
 
+	// ---------------------------------------------------------------------------------------------------------------
+	/**
+	 * Método para transformar para captar y transformas las posicines que se
+	 * optienen por letras, y forzar que solo se recibe un margen de letras
+	 * 
+	 * @see #transformar(String)
+	 */
 	private static void letra() {
 		do {
 			System.out.println("Introduca la poscion del 'a' hasta la 'o'");
@@ -96,61 +159,68 @@ public class Partida {
 		transformar(transformare);
 	}
 
+	/**
+	 * Método donde capta un String determinado y lo transforma en un número.
+	 * 
+	 * @param posicion, las letras determinadas que entraran para se transdormada en
+	 *                  numero.
+	 */
 	public static void transformar(String posicion) {
 		switch (posicion.toLowerCase()) {
 		case "a":
-			resultado = 1;
+			posicion1 = 1;
 			break;
 		case "b":
-			resultado = 2;
+			posicion1 = 2;
 			break;
 		case "c":
-			resultado = 3;
+			posicion1 = 3;
 			break;
 		case "d":
-			resultado = 4;
+			posicion1 = 4;
 			break;
 		case "e":
-			resultado = 5;
+			posicion1 = 5;
 			break;
 		case "f":
-			resultado = 6;
+			posicion1 = 6;
 			break;
 		case "g":
-			resultado = 7;
+			posicion1 = 7;
 			break;
 		case "h":
-			resultado = 8;
+			posicion1 = 8;
 			break;
 		case "i":
-			resultado = 9;
+			posicion1 = 9;
 			break;
 		case "j":
-			resultado = 10;
+			posicion1 = 10;
 			break;
 		case "k":
-			resultado = 11;
+			posicion1 = 11;
 			break;
 		case "l":
-			resultado = 12;
+			posicion1 = 12;
 			break;
 		case "m":
-			resultado = 13;
+			posicion1 = 13;
 			break;
 		case "n":
-			resultado = 14;
+			posicion1 = 14;
 			break;
 		case "o":
-			resultado = 15;
+			posicion1 = 15;
 			break;
 		}
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------
-	// Método para captar la posicion por numeros, donde solo
-	// se puede obtener una margen de numeros del 1 al 15, y rechaza cualquier otro
-	// carapteres.
-
+	/**
+	 * Método para captar la posicion por numeros, donde solo se puede obtener una
+	 * margen de numeros del 1 al 15, y rechaza cualquier otro carapteres.
+	 *
+	 */
 	private static void numero() {
 		boolean escape = false;
 		do {
@@ -159,10 +229,10 @@ public class Partida {
 
 				do {
 					System.out.println("Introduca la poscion del 1 al 15");
-					numero = sc.nextInt();
-				} while (!(numero < 0) && !(numero <= 15));
+					posicion2 = sc.nextInt();
+				} while (!(posicion2 < 0) && !(posicion2 <= 15));
 
-				if (numero > 0 && numero <= 15) {
+				if (posicion2 > 0 && posicion2 <= 15) {
 					escape = true;
 				}
 			} catch (Exception InputMismatchException) {
@@ -172,10 +242,12 @@ public class Partida {
 
 		} while (!escape);
 	}
-	// ---------------------------------------------------------------------------------------------------------------
 
 	// ---------------------------------------------------------------------------------------------------------------
-
+	/**
+	 * Método por la cual dependiendo de lo que se haya decidido del tipo del juego,
+	 * se pediera que decidas un nombre para un jugador o dos jugadores.
+	 */
 	private static void nombres() {
 		sc.nextLine();
 		if (2 == tipoNumerico) {
@@ -190,6 +262,10 @@ public class Partida {
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------
+	/**
+	 * Método por la cual se decid el tipo de juego que se va ha escoger, ia vs ia,
+	 * ia vs jugador, jugador vs jugador.
+	 */
 	private static void comienzos() {
 		boolean salida = false;
 		do {
@@ -212,23 +288,29 @@ public class Partida {
 
 		} while (!salida);
 	}
-	// ---------------------------------------------------------------------------------------------------------------
 
+	// ---------------------------------------------------------------------------------------------------------------
+	/**
+	 * Método por la cual se realiza el juego extrayendo las clases Tablero y
+	 * Jugador, y sus métodos.
+	 *
+	 * @see #comienzos()
+	 * @see #nombres()
+	 * @see #timeOut()
+	 * @see #letra()
+	 * @see #numero()
+	 * @see #reinicio()
+	 */
 	public static void Comenzar() {
 		System.out.println("Gomoku");
-		Tablero tabla;
-
 		do {
 			tabla = new Tablero();
-			// tabla.returnTablero();
-			// tabla.returnvictory();
 			comienzos();
 			nombres();
 			// ---------------------------------------------------
 			if (tipoNumerico == 3) {
 				jugador1 = new real(nombre, ficha.x);
 				jugador2 = new real(nombre2, ficha.o);
-
 				tabla.mostrarTablero();
 				do {
 					System.out.printf("\n---------------------------------------------\n   " + BLUE
@@ -238,14 +320,14 @@ public class Partida {
 					do {
 						letra();
 						numero();
-						if (tabla.revision(numero, resultado)) {
+						if (tabla.revision(posicion2, posicion1)) {
 							System.out.println(RED + " \n Introducelo en otra ubicación \n" + WHITE);
 						}
-					} while (tabla.revision(numero, resultado));
+					} while (tabla.revision(posicion2, posicion1));
 
-					tabla.modificarTablero(numero, resultado, ficha.x);
+					tabla.modificarTablero(posicion2, posicion1, ficha.x);
 					tabla.mostrarTablero();
-					tabla.modificarficha(numero, resultado, ficha.x);
+					tabla.modificarFicha(posicion2, posicion1, ficha.x);
 					ganar = tabla.ganar(ficha.x);
 					if (!ganar) {
 						System.out.printf("\n---------------------------------------------\n   " + YELLOW
@@ -254,14 +336,14 @@ public class Partida {
 						do {
 							letra();
 							numero();
-							if (tabla.revision(numero, resultado)) {
+							if (tabla.revision(posicion2, posicion1)) {
 								System.out.println(RED + " \n Introducelo en otra ubicación \n" + WHITE);
 							}
-						} while (tabla.revision(numero, resultado));
+						} while (tabla.revision(posicion2, posicion1));
 
-						tabla.modificarTablero(numero, resultado, ficha.o);
+						tabla.modificarTablero(posicion2, posicion1, ficha.o);
 						tabla.mostrarTablero();
-						tabla.modificarficha(numero, resultado, ficha.o);
+						tabla.modificarFicha(posicion2, posicion1, ficha.o);
 						ganar = tabla.ganar(ficha.o);
 					}
 
@@ -275,15 +357,15 @@ public class Partida {
 							+ " le toca \n---------------------------------------------\n\n");
 
 					do {
-						((ia) jugador1).jugada1(tabla.gettablero(), ficha.x);
+						((ia) jugador1).jugadas(tabla.getTablero(), ficha.x);
 
-						resultado = ((ia) jugador1).getPosoción1();
-						numero = ((ia) jugador1).getPosoción2();
-					} while (tabla.revision(numero, resultado));
+						posicion1 = ((ia) jugador1).getPosición1();
+						posicion2 = ((ia) jugador1).getPosición2();
+					} while (tabla.revision(posicion2, posicion1));
 
-					tabla.modificarTablero(numero, resultado, ficha.x);
+					tabla.modificarTablero(posicion2, posicion1, ficha.x);
 					tabla.mostrarTablero();
-					tabla.modificarficha(numero, resultado, ficha.x);
+					tabla.modificarFicha(posicion2, posicion1, ficha.x);
 					ganar = tabla.ganar(ficha.x);
 					timeOut();
 					if (!ganar) {
@@ -292,15 +374,15 @@ public class Partida {
 								+ " le toca \n---------------------------------------------\n\n");
 
 						do {
-							((ia) jugador2).jugada1(tabla.gettablero(), ficha.o);
+							((ia) jugador2).jugadas(tabla.getTablero(), ficha.o);
 
-							resultado = ((ia) jugador2).getPosoción1();
-							numero = ((ia) jugador2).getPosoción2();
-						} while (tabla.revision(numero, resultado));
+							posicion1 = ((ia) jugador2).getPosición1();
+							posicion2 = ((ia) jugador2).getPosición2();
+						} while (tabla.revision(posicion2, posicion1));
 
-						tabla.modificarTablero(numero, resultado, ficha.o);
+						tabla.modificarTablero(posicion2, posicion1, ficha.o);
 						tabla.mostrarTablero();
-						tabla.modificarficha(numero, resultado, ficha.o);
+						tabla.modificarFicha(posicion2, posicion1, ficha.o);
 						ganar = tabla.ganar(ficha.o);
 						timeOut();
 					}
@@ -316,14 +398,14 @@ public class Partida {
 					do {
 						letra();
 						numero();
-						if (tabla.revision(numero, resultado)) {
+						if (tabla.revision(posicion2, posicion1)) {
 							System.out.println(RED + " \n Introducelo en otra ubicación \n" + WHITE);
 						}
-					} while (tabla.revision(numero, resultado));
+					} while (tabla.revision(posicion2, posicion1));
 
-					tabla.modificarTablero(numero, resultado, ficha.x);
+					tabla.modificarTablero(posicion2, posicion1, ficha.x);
 					tabla.mostrarTablero();
-					tabla.modificarficha(numero, resultado, ficha.x);
+					tabla.modificarFicha(posicion2, posicion1, ficha.x);
 					ganar = tabla.ganar(ficha.x);
 					timeOut();
 					if (!ganar) {
@@ -332,15 +414,15 @@ public class Partida {
 								+ " le toca \n---------------------------------------------\n\n");
 
 						do {
-							((ia) jugador2).jugada1(tabla.gettablero(), ficha.o);
+							((ia) jugador2).jugadas(tabla.getTablero(), ficha.o);
 
-							resultado = ((ia) jugador2).getPosoción1();
-							numero = ((ia) jugador2).getPosoción2();
-						} while (tabla.revision(numero, resultado));
+							posicion1 = ((ia) jugador2).getPosición1();
+							posicion2 = ((ia) jugador2).getPosición2();
+						} while (tabla.revision(posicion2, posicion1));
 
-						tabla.modificarTablero(numero, resultado, ficha.o);
+						tabla.modificarTablero(posicion2, posicion1, ficha.o);
 						tabla.mostrarTablero();
-						tabla.modificarficha(numero, resultado, ficha.o);
+						tabla.modificarFicha(posicion2, posicion1, ficha.o);
 						ganar = tabla.ganar(ficha.o);
 
 					}
@@ -350,7 +432,7 @@ public class Partida {
 			System.out.println(RED + " \n ¿Desea jugar otra partida? \n" + WHITE);
 			reinicio();
 
-		} while (comienzo);
+		} while (exit);
 		System.out.println(RED + " \n Espero que lo haya disfrutado \n" + WHITE);
 	}
 
