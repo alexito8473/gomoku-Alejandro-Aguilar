@@ -10,9 +10,10 @@ package GoMoku;
  * 
  */
 public class Main {
-	/**
-	 * Método main
-	 */
+/**
+ *  Metodo main
+ * @param args la partida
+ */
 	public static void main(String[] args) {
 		/**
 		 * Llamada de la clase partida

@@ -22,16 +22,6 @@ public class ia extends Jugador {
 	public ia(ficha ficha) {
 		super(ficha);
 	}
-
-	/**
-	 * Datos necesarios para la ia
-	 * 
-	 * @author Alejandro Aguilar Alba
-	 * @version 1.0
-	 * @since 1.0
-	 *
-	 */
-
 	/**
 	 * El color blanco, se utiliza para cambiar el color a las letras en la consola.
 	 */
@@ -129,7 +119,7 @@ public class ia extends Jugador {
 	 */
 	private static Random ran = new Random();
 	/**
-	 * Utilización de las clase Scanner de java.
+	 * Utilizacion de las clase Scanner de java.
 	 */
 	private Scanner src = new Scanner(System.in);
 	/**
@@ -141,7 +131,7 @@ public class ia extends Jugador {
 	 */
 	private static int number2 = ran.nextInt(9);
 	/**
-	 * la creacion de un array unidimencional, con dos espacios .
+	 * La creacion de un array unidimencional, con dos espacios .
 	 */
 	private static int[] numeros = new int[2];
 
@@ -152,7 +142,7 @@ public class ia extends Jugador {
 			"Copenage", "Mordekaiser", "ElNen" };
 
 	/**
-	 * Método para generar un nombre para la lia, distinta por cada ficha
+	 * Metodo para generar un nombre para la lia, distinta por cada ficha
 	 * 
 	 * @param ficha Tipo de ficha
 	 * @return si la ficha es 'x' te devuelve un nombre, y si la ficha es 'y' te
@@ -168,7 +158,7 @@ public class ia extends Jugador {
 	}
 
 	/**
-	 * Método para retornar todos los booleanos a falso
+	 * Metodo para retornar todos los booleanos a falso
 	 */
 	private void retornar() {
 		ganar = false;
@@ -186,13 +176,13 @@ public class ia extends Jugador {
 	}
 
 	/**
-	 * Método para detectar las jugadas horizontales defensivas.
+	 * Metodo para detectar las jugadas horizontales defensivas.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva horizontal.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void defensaHorizontal(String[][] array, GoMoku.ficha fichas) {
-		boolean continuar = true, continuar1 = true, exit = false;
+		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.ficha.x)) {
@@ -203,7 +193,7 @@ public class ia extends Jugador {
 		}
 
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length; j++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
 				if ((j < 16) && array[i][j].equals(eleccion)) {
 					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
 						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
@@ -214,9 +204,6 @@ public class ia extends Jugador {
 									exit = true;
 									y = i;
 									x = j + 2;
-									continuar = false;
-									continuar1 = false;
-
 								}
 							}
 						}
@@ -224,10 +211,42 @@ public class ia extends Jugador {
 				}
 			}
 		}
-
-		if (continuar) {
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(".")) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								defensaHorizontal = true;
+								defensa = true;
+								exit = true;
+								y = i;
+								x = j+1;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								defensaHorizontal = true;
+								defensa = true;
+								exit = true;
+								y = i;
+								x = j+2;
+							}
+						}
+					}
+				}
+			}
+		}
 			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
+				for (int j = 0; j < array.length&& !exit; j++) {
 					if ((j < 16) && array[i][j].equals(".")) {
 						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
 							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
@@ -237,17 +256,14 @@ public class ia extends Jugador {
 									exit = true;
 									y = i;
 									x = j;
-									continuar1 = false;
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-		if (continuar1) {
 			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
+				for (int j = 0; j < array.length&& !exit; j++) {
 					if ((j < 16) && array[i][j].equals(eleccion)) {
 						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
 							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
@@ -259,7 +275,6 @@ public class ia extends Jugador {
 									x = j + 3;
 								}
 							}
-						}
 					}
 				}
 			}
@@ -269,13 +284,13 @@ public class ia extends Jugador {
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para detectar las jugadas verticales defensivas.
+	 * Metodo para detectar las jugadas verticales defensivas.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva vertical.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void defensaVertical(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, exit = false;
+		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.ficha.x)) {
@@ -284,29 +299,78 @@ public class ia extends Jugador {
 		} else {
 			eleccion = BLUE + "x" + WHITE;
 		}
-
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length; j++) {
-				if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-					if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
-						if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-							if ((i + 4 < 16) && array[i + 4][j].equals(".")) {
-								defensa = true;
-								defensaVertical = true;
-								y = i + 4;
-								x = j;
-								exit = true;
-								continuar = false;
-								continuar1 = false;
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
+									defensa = true;
+									defensaVertical = true;
+									y = i + 2;
+									x = j;
+									exit = true;
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-		if (continuar) {
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								defensa = true;
+								defensaVertical = true;
+								y = i + 2;
+								x = j;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((i < 16) && array[i ][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(".")) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								defensa = true;
+								defensaVertical = true;
+								y = i + 1;
+								x = j;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((i < 16) && array[i ][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(".")) {
+								defensa = true;
+								defensaVertical = true;
+								y = i + 3;
+								x = j;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
 			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
+				for (int j = 0; j < array.length&& !exit; j++) {
 					if ((i < 16) && array[i][j].equals(".")) {
 						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
 							if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
@@ -316,47 +380,25 @@ public class ia extends Jugador {
 									y = i;
 									x = j;
 									exit = true;
-									continuar1 = false;
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-		if (continuar1) {
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16) && array[i][j].equals(eleccion)) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
-								if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
-										defensa = true;
-										defensaVertical = true;
-										y = i + 2;
-										x = j;
-										exit = true;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para detectar las jugadas inclinadas defensivas.
+	 * Metodo para detectar las jugadas inclinadas defensivas.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void defensaInclinado(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar3 = true, exit = false;
+		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.ficha.x)) {
@@ -365,9 +407,61 @@ public class ia extends Jugador {
 		} else {
 			eleccion = BLUE + "x" + WHITE;
 		}
-
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length; j++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									defensa = true;
+									defensaInclinada = true;
+									y = i + 2;
+									x = j + 2;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(".")) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								defensa = true;
+								defensaInclinada = true;
+								y = i + 1;
+								x = j + 1;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								defensa = true;
+								defensaInclinada = true;
+								y = i + 2;
+								x = j + 2;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
@@ -377,18 +471,14 @@ public class ia extends Jugador {
 								y = i + 3;
 								x = j + 3;
 								exit = true;
-								continuar = false;
-								continuar3 = false;
-
 							}
 						}
 					}
 				}
 			}
 		}
-		if (continuar) {
 			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
+				for (int j = 0; j < array.length&& !exit; j++) {
 					if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
 						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
@@ -398,48 +488,23 @@ public class ia extends Jugador {
 									y = i;
 									x = j;
 									exit = true;
-									continuar3 = false;
-
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-
-		if (continuar3) {
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
-								if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-									if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
-										defensa = true;
-										defensaInclinada = true;
-										y = i + 2;
-										x = j + 2;
-										exit = true;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
 
 	}
 
 	/**
-	 * Método para detectar las jugadas inclinadas defensivas.
+	 * Metodo para detectar las jugadas inclinadas defensivas.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void defensaInclinado1(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, exit = false;
+		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.ficha.x)) {
@@ -448,9 +513,61 @@ public class ia extends Jugador {
 		} else {
 			eleccion = BLUE + "x" + WHITE;
 		}
-
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length; j++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(".")) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									defensa = true;
+									defensaInclinada1 = true;
+									y = i + 2;
+									x = j - 2;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(".")) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								defensa = true;
+								defensaInclinada1 = true;
+								y = i + 1;
+								x = j - 1;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(".")) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								defensa = true;
+								defensaInclinada1 = true;
+								y = i + 2;
+								x = j - 2;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length&& !exit; j++) {
 				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
 						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
@@ -460,8 +577,6 @@ public class ia extends Jugador {
 								y = i + 3;
 								x = j - 3;
 								exit = true;
-								continuar = false;
-								continuar1 = false;
 							}
 						}
 					}
@@ -469,9 +584,8 @@ public class ia extends Jugador {
 			}
 		}
 
-		if (continuar) {
 			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
+				for (int j = 0; j < array.length&& !exit; j++) {
 					if ((i < 16 && j > 0) && array[i][j].equals(".")) {
 						if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
 							if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
@@ -481,7 +595,6 @@ public class ia extends Jugador {
 									y = i;
 									x = j;
 									exit = true;
-									continuar1 = false;
 								}
 							}
 						}
@@ -489,40 +602,18 @@ public class ia extends Jugador {
 				}
 			}
 
-			if (continuar1) {
-				for (int i = 0; i < array.length && !exit; i++) {
-					for (int j = 0; j < array.length; j++) {
-						if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
-							if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
-								if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(".")) {
-									if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-										if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
-											defensa = true;
-											defensaInclinada1 = true;
-											y = i + 2;
-											x = j - 2;
-											exit = true;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
+
 		}
-	}
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para detectar las jugadas horizontales ganadoras.
+	 * Metodo para detectar las jugadas horizontales ganadoras.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas ganadoras de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void ganarHorizontal(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true;
 		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.ficha.x)) {
@@ -531,7 +622,7 @@ public class ia extends Jugador {
 			eleccion = YELLOW + "o" + WHITE;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((j < 16) && array[i][j].equals(eleccion)) {
 					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
 						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
@@ -542,10 +633,6 @@ public class ia extends Jugador {
 									y = i;
 									x = j + 4;
 									exit = true;
-									continuar = false;
-									continuar1 = false;
-									continuar2 = false;
-									continuar3 = false;
 								}
 							}
 						}
@@ -553,23 +640,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar) {
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((j < 16) && array[i][j].equals(".")) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
-								if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
-									if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarHorizontal = true;
-										y = i;
-										x = j;
-										exit = true;
-										continuar1 = false;
-										continuar2 = false;
-										continuar3 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(".")) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarHorizontal = true;
+									y = i;
+									x = j;
+									exit = true;
 								}
 							}
 						}
@@ -577,22 +659,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar1) {
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((j < 16) && array[i][j].equals(eleccion)) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(".")) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
-								if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
-									if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarHorizontal = true;
-										y = i;
-										x = j + 1;
-										exit = true;
-										continuar2 = false;
-										continuar3 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(".")) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarHorizontal = true;
+									y = i;
+									x = j + 1;
+									exit = true;
 								}
 							}
 						}
@@ -600,21 +678,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar2) {
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((j < 16) && array[i][j].equals(eleccion)) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
-								if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
-									if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarHorizontal = true;
-										y = i;
-										x = j + 2;
-										exit = true;
-										continuar3 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarHorizontal = true;
+									y = i;
+									x = j + 2;
+									exit = true;
 								}
 							}
 						}
@@ -622,20 +697,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar3) {
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((j < 16) && array[i][j].equals(eleccion)) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
-								if ((j + 3 < 16) && array[i][j + 3].equals(".")) {
-									if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarHorizontal = true;
-										y = i;
-										x = j + 3;
-										exit = true;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(".")) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarHorizontal = true;
+									y = i;
+									x = j + 3;
+									exit = true;
 								}
 							}
 						}
@@ -648,13 +721,13 @@ public class ia extends Jugador {
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para detectar las jugadas verticales ganadoras.
+	 * Metodo para detectar las jugadas verticales ganadoras.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas ganadoras de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void ganarVertical(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true, exit = false;
+		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
@@ -662,7 +735,7 @@ public class ia extends Jugador {
 			eleccion = YELLOW + "o" + WHITE;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
 						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
@@ -673,10 +746,6 @@ public class ia extends Jugador {
 									y = i + 4;
 									x = j;
 									exit = true;
-									continuar = false;
-									continuar1 = false;
-									continuar2 = false;
-									continuar3 = false;
 								}
 							}
 						}
@@ -684,23 +753,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16) && array[i][j].equals(".")) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
-								if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
-										ganar = true;
-										ganarVertical = true;
-											y = i;
-											x = j;
-											exit=true;
-										continuar1 = false;
-										continuar2 = false;
-										continuar3 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(".")) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
+									ganar = true;
+									ganarVertical = true;
+									y = i;
+									x = j;
+									exit = true;
 								}
 							}
 						}
@@ -708,24 +772,19 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar1) {
 
-			for (int i = 0; i < array.length; i++) {
-
-				for (int j = 0; j < array.length&&!exit; j++) {
-					if ((i < 16) && array[i][j].equals(eleccion)) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(".")) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
-								if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
-										ganar = true;
-										ganarVertical = true;
-											y = i + 1;
-											x = j;
-											exit=true;
-										continuar2 = false;
-										continuar3 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(".")) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
+									ganar = true;
+									ganarVertical = true;
+									y = i + 1;
+									x = j;
+									exit = true;
 								}
 							}
 						}
@@ -733,21 +792,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar2) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16) && array[i][j].equals(eleccion)) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
-								if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
-										ganar = true;
-										ganarVertical = true;
-											y = i + 2;
-											x = j;
-											exit=true;
-										continuar3 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
+									ganar = true;
+									ganarVertical = true;
+									y = i + 2;
+									x = j;
+									exit = true;
 								}
 							}
 						}
@@ -755,20 +811,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar3) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16) && array[i][j].equals(eleccion)) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
-								if ((i + 3 < 16) && array[i + 3][j].equals(".")) {
-									if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
-										ganar = true;
-										ganarVertical = true;
-											y = i + 3;
-											x = j;
-										exit=true;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(".")) {
+								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
+									ganar = true;
+									ganarVertical = true;
+									y = i + 3;
+									x = j;
+									exit = true;
 								}
 							}
 						}
@@ -781,22 +835,21 @@ public class ia extends Jugador {
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para detectar las jugadas inclinadas ganadoras.
+	 * Metodo para detectar las jugadas inclinadas ganadoras.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas ganadoras de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void ganarInclinado(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, continuar2 = true, continuar3 = true, continuar4 = true,
-				continuar5 = true, continuar6 = true, continuar7 = true, continuar8 = true, exit=false;
+		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
 		}
-		for (int i = 0; i < array.length&&!exit; i++) {
-			for (int j = 0; j < array.length; j++) {
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
@@ -806,16 +859,7 @@ public class ia extends Jugador {
 									ganarInclinado = true;
 									y = i + 4;
 									x = j + 4;
-									exit=true;
-									continuar = false;
-									continuar1 = false;
-									continuar2 = false;
-									continuar3 = false;
-									continuar4 = false;
-									continuar5 = false;
-									continuar6 = false;
-									continuar7 = false;
-									continuar8 = false;
+									exit = true;
 								}
 							}
 						}
@@ -823,28 +867,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
-								if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(".")) {
-									if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarInclinado = true;
-										y = i + 3;
-										x = j + 3;
-										exit=true;
-										continuar1 = false;
-										continuar2 = false;
-										continuar3 = false;
-										continuar4 = false;
-										continuar5 = false;
-										continuar6 = false;
-										continuar7 = false;
-										continuar8 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(".")) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									y = i + 3;
+									x = j + 3;
+									exit = true;
 								}
 							}
 						}
@@ -852,27 +886,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar1) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
-								if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-									if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarInclinado = true;
-										y = i + 2;
-										x = j + 2;
-										exit=true;
-										continuar2 = false;
-										continuar3 = false;
-										continuar4 = false;
-										continuar5 = false;
-										continuar6 = false;
-										continuar7 = false;
-										continuar8 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									y = i + 2;
+									x = j + 2;
+									exit = true;
 								}
 							}
 						}
@@ -880,26 +905,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar2) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
-						if (((i + 1 < 16) && (j + 2 < 16)) && array[i + 1][j + 1].equals(".")) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
-								if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-									if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarInclinado = true;
-										y = i + 1;
-										x = j + 1;
-										exit=true;
-										continuar3 = false;
-										continuar4 = false;
-										continuar5 = false;
-										continuar6 = false;
-										continuar7 = false;
-										continuar8 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 2 < 16)) && array[i + 1][j + 1].equals(".")) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									y = i + 1;
+									x = j + 1;
+									exit = true;
 								}
 							}
 						}
@@ -907,25 +924,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar3) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
-								if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-									if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
-										ganar = true;
-										ganarInclinado = true;
-										y = i;
-										x = j;
-										exit=true;
-										continuar4 = false;
-										continuar5 = false;
-										continuar6 = false;
-										continuar7 = false;
-										continuar8 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									y = i;
+									x = j;
+									exit = true;
 								}
 							}
 						}
@@ -933,24 +943,18 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar4) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16 && j > 0) && array[i][j].equals(".")) {
-						if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
-							if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
-								if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-									if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
-										ganar = true;
-										ganarInclinado = true;
-										y = i;
-										x = j;
-										exit=true;
-										continuar5 = false;
-										continuar6 = false;
-										continuar7 = false;
-										continuar8 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(".")) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									y = i;
+									x = j;
+									exit = true;
 								}
 							}
 						}
@@ -958,89 +962,75 @@ public class ia extends Jugador {
 				}
 			}
 		}
-		if (continuar5) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
-						if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(".")) {
-							if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
-								if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-									if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
-										ganar = true;
-										ganarInclinado = true;
-										exit=true;
-										y = i + 1;
-										x = j - 1;
-										continuar6 = false;
-										continuar7 = false;
-										continuar8 = false;
-									}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(".")) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									exit = true;
+									y = i + 1;
+									x = j - 1;
 								}
 							}
 						}
 					}
 				}
 			}
-			if (continuar6) {
-				for (int i = 0; i < array.length&&!exit; i++) {
-					for (int j = 0; j < array.length; j++) {
-						if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
-							if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
-								if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(".")) {
-									if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-										if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
-											ganar = true;
-											ganarInclinado = true;
-											y = i + 2;
-											x = j - 2;
-											exit=true;
-											continuar7 = false;
-											continuar8 = false;
-										}
-									}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(".")) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									y = i + 2;
+									x = j - 2;
+									exit = true;
 								}
 							}
 						}
 					}
 				}
 			}
-			if (continuar7) {
-				for (int i = 0; i < array.length&&!exit; i++) {
-					for (int j = 0; j < array.length; j++) {
-						if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
-							if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
-								if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
-									if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(".")) {
-										if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
-											ganar = true;
-											ganarInclinado = true;
-											y = i + 3;
-											x = j - 3;
-											exit=true;
-											continuar8 = false;
-										}
-									}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(".")) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									ganar = true;
+									ganarInclinado = true;
+									y = i + 3;
+									x = j - 3;
+									exit = true;
 								}
 							}
 						}
 					}
 				}
 			}
-			if (continuar8) {
-				for (int i = 0; i < array.length&&!exit; i++) {
-					for (int j = 0; j < array.length; j++) {
-						if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
-							if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
-								if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
-									if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-										if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(".")) {
-											ganar = true;
-											ganarInclinado = true;
-											exit=true;
-											y = i + 4;
-											x = j - 4;
-										}
-									}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(".")) {
+									ganar = true;
+									ganarInclinado = true;
+									exit = true;
+									y = i + 4;
+									x = j - 4;
 								}
 							}
 						}
@@ -1051,13 +1041,13 @@ public class ia extends Jugador {
 	}
 
 	/**
-	 * Método para detectar las jugadas verticales atacantes.
+	 * Metodo para detectar las jugadas verticales atacantes.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void ataqueVertical(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, exit=false;
+		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
@@ -1065,54 +1055,48 @@ public class ia extends Jugador {
 			eleccion = YELLOW + "o" + WHITE;
 		}
 
-		for (int i = 0; i < array.length&&!exit; i++) {
-			for (int j = 0; j < array.length; j++) {
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16) && array[i + 1][j].equals(".")) {
 						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
 							ataqueVertical = true;
 							ataque = true;
-								y = i + 1;
-								x = j;
-							exit=true;
-							continuar1 = false;
-							continuar = false;
-						}
-					}
-				}
-			}
-		}
-		if (continuar) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16) && array[i][j].equals(".")) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
-								ataqueVertical = true;
-								ataque = true;
-									y = i;
-									x = j;
-									exit=true;
-								continuar1 = false;
+							y = i + 1;
+							x = j;
+							exit = true;
 
-							}
 						}
 					}
 				}
 			}
 		}
-		if (continuar1) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length; j++) {
-					if ((i < 16) && array[i][j].equals(eleccion)) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
-								ataqueVertical = true;
-								ataque = true;
-									y = i + 2;
-									x = j;
-									exit=true;
-							}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(".")) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							ataqueVertical = true;
+							ataque = true;
+							y = i;
+							x = j;
+							exit = true;
+
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
+							ataqueVertical = true;
+							ataque = true;
+							y = i + 2;
+							x = j;
+							exit = true;
 						}
 					}
 				}
@@ -1121,13 +1105,13 @@ public class ia extends Jugador {
 	}
 
 	/**
-	 * Método para detectar las jugadas inclindas atacantes.
+	 * Metodo para detectar las jugadas inclindas atacantes.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void ataqueInclinado(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, exit=false;
+		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.ficha.x)) {
@@ -1137,53 +1121,47 @@ public class ia extends Jugador {
 			eleccion = YELLOW + "o" + WHITE;
 		}
 
-		for (int i = 0; i < array.length&&!exit; i++) {
-			for (int j = 0; j < array.length&&!exit; j++) {
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(".")) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
 							ataque = true;
 							ataqueInclinado = true;
-								y = i + 1;
-								x = j + 1;
-								exit=true;
-							continuar = false;
-							continuar1 = false;
+							y = i + 1;
+							x = j + 1;
+							exit = true;
 						}
 					}
 				}
 			}
 		}
-		if (continuar) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length&&!exit; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
-								ataque = true;
-								ataqueInclinado = true;
-									y = i;
-									x = j;
-									exit=true;
-								continuar1 = false;
-							}
+
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							ataque = true;
+							ataqueInclinado = true;
+							y = i;
+							x = j;
+							exit = true;
 						}
 					}
 				}
 			}
 		}
-		if (continuar1) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length&&!exit; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
-								ataque = true;
-								ataqueInclinado = true;
-									y = i + 2;
-									x = j + 2;
-									exit=true;
-							}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
+							ataque = true;
+							ataqueInclinado = true;
+							y = i + 2;
+							x = j + 2;
+							exit = true;
 						}
 					}
 				}
@@ -1192,13 +1170,13 @@ public class ia extends Jugador {
 	}
 
 	/**
-	 * Método para detectar las jugadas inclindas atacantes.
+	 * Metodo para detectar las jugadas inclindas atacantes.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void ataqueInclinado1(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, exit=false;
+		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.ficha.x)) {
@@ -1207,53 +1185,46 @@ public class ia extends Jugador {
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
 		}
-		for (int i = 0; i < array.length&&!exit; i++) {
-			for (int j = 0; j < array.length&&!exit; j++) {
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j - 1].equals(".")) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j - 2].equals(eleccion)) {
 							ataque = true;
 							ataqueInclinado1 = true;
-								y = i + 1;
-								x = j - 1;
-								exit=true;
-							continuar = false;
-							continuar1 = false;
+							y = i + 1;
+							x = j - 1;
+							exit = true;
 						}
 					}
 				}
 			}
 		}
-		if (continuar) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length&&!exit; j++) {
-					if (((i < 16) && (j > 0)) && array[i][j].equals(".")) {
-						if (((i + 1 < 16) && (j - 1 > 0)) && array[i + 1][j - 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j - 2 > 0)) && array[i + 2][j - 2].equals(eleccion)) {
-								ataque = true;
-								ataqueInclinado1 = true;
-									y = i;
-									x = j;
-									exit=true;
-								continuar1 = false;
-							}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j > 0)) && array[i][j].equals(".")) {
+					if (((i + 1 < 16) && (j - 1 > 0)) && array[i + 1][j - 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j - 2 > 0)) && array[i + 2][j - 2].equals(eleccion)) {
+							ataque = true;
+							ataqueInclinado1 = true;
+							y = i;
+							x = j;
+							exit = true;
 						}
 					}
 				}
 			}
 		}
-		if (continuar1) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length&&!exit; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j - 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j - 2].equals(".")) {
-								ataque = true;
-								ataqueInclinado1 = true;
-									y = i + 2;
-									x = j - 2;
-									exit=true;
-							}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j - 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j - 2].equals(".")) {
+							ataque = true;
+							ataqueInclinado1 = true;
+							y = i + 2;
+							x = j - 2;
+							exit = true;
 						}
 					}
 				}
@@ -1262,13 +1233,13 @@ public class ia extends Jugador {
 	}
 
 	/**
-	 * Método para detectar las jugadas horizontales atacantes.
+	 * Metodo para detectar las jugadas horizontales atacantes.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
 	private static void ataqueHorizontal(String[][] array, ficha fichas) {
-		boolean continuar = true, continuar1 = true, exit=false;
+		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
@@ -1276,55 +1247,47 @@ public class ia extends Jugador {
 			eleccion = YELLOW + "o" + WHITE;
 		}
 
-		for (int i = 0; i < array.length&&!exit; i++) {
-			for (int j = 0; j < array.length&&!exit; j++) {
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((j < 16) && array[i][j].equals(eleccion)) {
 					if ((j + 1 < 16) && array[i][j + 1].equals(".")) {
 						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
 							ataqueHorizontal = true;
 							ataque = true;
-								y = i;
-								x = j + 1;
-								exit=true;
-							continuar = false;
-							continuar1 = false;
-
+							y = i;
+							x = j + 1;
+							exit = true;
 						}
 					}
 				}
 			}
 		}
-		if (continuar) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length&&!exit; j++) {
-					if ((j < 16) && array[i][j].equals(eleccion)) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
-								ataqueHorizontal = true;
-								ataque = true;
-									y = i;
-									x = j + 2;
-									exit=true;
-								continuar1 = false;
-							}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
+							ataqueHorizontal = true;
+							ataque = true;
+							y = i;
+							x = j + 2;
+							exit = true;
 						}
 					}
 				}
 			}
-
 		}
-		if (continuar1) {
-			for (int i = 0; i < array.length&&!exit; i++) {
-				for (int j = 0; j < array.length&&!exit; j++) {
-					if ((j < 16) && array[i][j].equals(".")) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
-								ataqueHorizontal = true;
-								ataque = true;
-									y = i;
-									x = j;
-									exit=true;
-							}
+
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(".")) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							ataqueHorizontal = true;
+							ataque = true;
+							y = i;
+							x = j;
+							exit = true;
 						}
 					}
 				}
@@ -1333,7 +1296,7 @@ public class ia extends Jugador {
 	}
 
 	/**
-	 * Método que llama a todos los metodos de ataque, defensa y ganar, ordenandolos
+	 * Metodo que llama a todos los metodos de ataque, defensa y ganar, ordenandolos
 	 * por prioridad y decidiendo cual sera el resultado de la ia.
 	 * 
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
@@ -1345,9 +1308,9 @@ public class ia extends Jugador {
 	 * @see #defensaHorizontal(String[][], ficha)
 	 * @see #defensaInclinado(String[][], ficha)
 	 * @see #defensaInclinado1(String[][], ficha)
-	 * @see #defensavertical(String[][], ficha)
+	 * @see #defensaVertical(String[][], ficha)
 	 * @see #ataqueVertical(String[][], ficha)
-	 * @see #taqueHorizontal(String[][], ficha)
+	 * @see #ataqueHorizontal(String[][], ficha)
 	 * @see #ataqueInclinado(String[][], ficha)
 	 * @see #ataqueInclinado1(String[][], ficha)
 	 * @see #retornar()
@@ -1379,7 +1342,11 @@ public class ia extends Jugador {
 			defensaHorizontal(array, fichas);
 			defensaVertical(array, fichas);
 			if (defensa) {
-				if (defensaHorizontal) {
+				if (defensaInclinada) {
+					numeros[0] = x;
+					numeros[1] = y;
+					retornar();
+				} else if (defensaInclinada1) {
 					numeros[0] = x;
 					numeros[1] = y;
 					retornar();
@@ -1387,11 +1354,7 @@ public class ia extends Jugador {
 					numeros[0] = x;
 					numeros[1] = y;
 					retornar();
-				} else if (defensaInclinada) {
-					numeros[0] = x;
-					numeros[1] = y;
-					retornar();
-				} else if (defensaInclinada1) {
+				} else if (defensaHorizontal) {
 					numeros[0] = x;
 					numeros[1] = y;
 					retornar();
@@ -1431,21 +1394,21 @@ public class ia extends Jugador {
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para sacar la posicion resultante.
+	 * Metodo para sacar la posicion resultante.
 	 * 
-	 * @return int Retornar posición
+	 * @return int Retornar posicion
 	 */
-	public int getPosición1() {
+	public int getPosicion1() {
 		return numeros[0];
 
 	}
 
 	/**
-	 * Método para sacar la posicion resultante.
+	 * Metodo para sacar la posicion resultante.
 	 * 
-	 * @return int Retornar posición
+	 * @return int Retornar posicion
 	 */
-	public int getPosición2() {
+	public int getPosicion2() {
 		return numeros[1];
 	}
 

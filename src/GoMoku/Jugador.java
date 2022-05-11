@@ -1,7 +1,7 @@
 package GoMoku;
 
 /**
- * Clase padre donde se crea al jugador de la partida, donde después tendra dos
+ * Clase padre donde se crea al jugador de la partida, donde despues tendra dos
  * hijos, uno siendo la ia y otro el real.
  * 
  * @author Alejandro Aguilar Alba

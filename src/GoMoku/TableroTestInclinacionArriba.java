@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class TableroTestInclinacionArriba {
 
 	@Test
-	void inclinaciónFichaX() {
+	void inclinacionFichaX() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -29,7 +29,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaO() {
+	void inclinacionFichaO() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -52,7 +52,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaX_1() {
+	void inclinacionFichaX_1() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -75,7 +75,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaO_1() {
+	void inclinacionFichaO_1() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -98,7 +98,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaX_2() {
+	void inclinacionFichaX_2() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -121,7 +121,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaO_2() {
+	void inclinacionFichaO_2() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -144,7 +144,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaX_3() {
+	void inclinacionFichaX_3() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -167,7 +167,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaO_3() {
+	void inclinacionFichaO_3() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -190,7 +190,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaX_4() {
+	void inclinacionFichaX_4() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", "." },
@@ -213,7 +213,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinaciónFichaO_4() {
+	void inclinacionFichaO_4() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", "." },
@@ -236,7 +236,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación1FichaX() {
+	void inclinacion1FichaX() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -259,7 +259,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación1FichaO() {
+	void inclinacion1FichaO() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -282,7 +282,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación2FichaX() {
+	void inclinacion2FichaX() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -305,7 +305,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación2FichaO() {
+	void inclinacion2FichaO() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -328,7 +328,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación3FichaX() {
+	void inclinacion3FichaX() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -351,7 +351,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación3FichaO() {
+	void inclinacion3FichaO() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -374,7 +374,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación4FichaX() {
+	void inclinacion4FichaX() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -397,7 +397,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación4FichaO() {
+	void inclinacion4FichaO() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -420,7 +420,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación5FichaX() {
+	void inclinacion5FichaX() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -443,7 +443,7 @@ class TableroTestInclinacionArriba {
 	}
 
 	@Test
-	void inclinación5FichaO() {
+	void inclinacion5FichaO() {
 		String[][] comprobar = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 				{ "01", ".", ".", ".", ".", "x", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 				{ "02", ".", ".", ".", "o", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },

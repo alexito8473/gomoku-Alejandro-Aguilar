@@ -28,7 +28,7 @@ public class real extends Jugador {
 	 private String nombre;
 
 	/**
-	 * Método get para saber que tipo de nombre posee el jugador
+	 * Metodo get para saber que tipo de nombre posee el jugador
 	 * 
 	 * @return String El nombre del jugador
 	 */

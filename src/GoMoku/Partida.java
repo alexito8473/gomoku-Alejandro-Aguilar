@@ -6,8 +6,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Clase donde se realiza la partida, usando parte de la clase Jugador y la
- * clase Tablero, donde se genera la partida, y se utiliza los métodos
- * pertinentes para la captación de datos.
+ * clase Tablero, donde se genera la partida, y se utiliza los metodos
+ * pertinentes para la captacion de datos.
  * 
  * @author Alejandro Aguilar Alba
  * @version 1.0
@@ -77,16 +77,16 @@ public class Partida {
 	private static String nombre2;
 	/**
 	 * variable String donde se capta el la posicion alfabetica determina, para
-	 * después retornarla a un int.
+	 * despues retornarla a un int.
 	 */
 	private static String transformare;
 
 	/**
-	 * variable int para captar una posición para el array.
+	 * variable int para captar una posicion para el array.
 	 */
 	private static int posicion1;
 	/**
-	 * variable int para captar una posición para el array.
+	 * variable int para captar una posicion para el array.
 	 */
 	private static int posicion2;
 	/**
@@ -128,7 +128,7 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para pausar la consola
+	 * Metodo para pausar la consola
 	 */
 	private static void timeOut() {
 		try {
@@ -140,7 +140,7 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para transformar para captar y transformas las posicines que se
+	 * Metodo para transformar para captar y transformas las posicines que se
 	 * optienen por letras, y forzar que solo se recibe un margen de letras
 	 * 
 	 * @see #transformar(String)
@@ -160,7 +160,7 @@ public class Partida {
 	}
 
 	/**
-	 * Método donde capta un String determinado y lo transforma en un número.
+	 * Metodo donde capta un String determinado y lo transforma en un numero.
 	 * 
 	 * @param posicion, las letras determinadas que entraran para se transdormada en
 	 *                  numero.
@@ -217,7 +217,7 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método para captar la posicion por numeros, donde solo se puede obtener una
+	 * Metodo para captar la posicion por numeros, donde solo se puede obtener una
 	 * margen de numeros del 1 al 15, y rechaza cualquier otro carapteres.
 	 *
 	 */
@@ -245,7 +245,7 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método por la cual dependiendo de lo que se haya decidido del tipo del juego,
+	 * Metodo por la cual dependiendo de lo que se haya decidido del tipo del juego,
 	 * se pediera que decidas un nombre para un jugador o dos jugadores.
 	 */
 	private static void nombres() {
@@ -263,7 +263,7 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método por la cual se decid el tipo de juego que se va ha escoger, ia vs ia,
+	 * Metodo por la cual se decid el tipo de juego que se va ha escoger, ia vs ia,
 	 * ia vs jugador, jugador vs jugador.
 	 */
 	private static void comienzos() {
@@ -291,8 +291,8 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Método por la cual se realiza el juego extrayendo las clases Tablero y
-	 * Jugador, y sus métodos.
+	 * Metodo por la cual se realiza el juego extrayendo las clases Tablero y
+	 * Jugador, y sus metodos.
 	 *
 	 * @see #comienzos()
 	 * @see #nombres()
@@ -359,8 +359,8 @@ public class Partida {
 					do {
 						((ia) jugador1).jugadas(tabla.getTablero(), ficha.x);
 
-						posicion1 = ((ia) jugador1).getPosición1();
-						posicion2 = ((ia) jugador1).getPosición2();
+						posicion1 = ((ia) jugador1).getPosicion1();
+						posicion2 = ((ia) jugador1).getPosicion2();
 					} while (tabla.revision(posicion2, posicion1));
 
 					tabla.modificarTablero(posicion2, posicion1, ficha.x);
@@ -376,8 +376,8 @@ public class Partida {
 						do {
 							((ia) jugador2).jugadas(tabla.getTablero(), ficha.o);
 
-							posicion1 = ((ia) jugador2).getPosición1();
-							posicion2 = ((ia) jugador2).getPosición2();
+							posicion1 = ((ia) jugador2).getPosicion1();
+							posicion2 = ((ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
 
 						tabla.modificarTablero(posicion2, posicion1, ficha.o);
@@ -416,8 +416,8 @@ public class Partida {
 						do {
 							((ia) jugador2).jugadas(tabla.getTablero(), ficha.o);
 
-							posicion1 = ((ia) jugador2).getPosición1();
-							posicion2 = ((ia) jugador2).getPosición2();
+							posicion1 = ((ia) jugador2).getPosicion1();
+							posicion2 = ((ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
 
 						tabla.modificarTablero(posicion2, posicion1, ficha.o);
