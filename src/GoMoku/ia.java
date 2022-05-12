@@ -853,8 +853,8 @@ public class ia extends Jugador {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
-							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(".")) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)){
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(".")){
 									ganar = true;
 									ganarInclinado = true;
 									y = i + 4;

@@ -288,7 +288,31 @@ public class Partida {
 
 		} while (!salida);
 	}
+	/**
+	 * Metodo donde se realiza todas las instrucciones necesarias del jugador
+	 * @param ficha Tipo de ficha
+	 */
+	private static void jugdorReal(ficha ficha) {
+		do {
+			letra();
+			numero();
+			if (tabla.revision(posicion2, posicion1)) {
+				System.out.println(RED + " \n Introducelo en otra ubicación \n" + WHITE);
+			}
+		} while (tabla.revision(posicion2, posicion1));
 
+
+	}
+	/**
+	 * Metodo donde se realiza todas las instrucciones necesarias del pintar el tablero 
+	 * @param ficha Tipo ficha
+	 */
+	private static void pintar(ficha ficha) {
+		tabla.modificarTablero(posicion2, posicion1, ficha);
+		tabla.mostrarTablero();
+		tabla.modificarFicha(posicion2, posicion1, ficha);
+		ganar = tabla.ganar(ficha);
+	}
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
 	 * Metodo por la cual se realiza el juego extrayendo las clases Tablero y
@@ -317,36 +341,15 @@ public class Partida {
 							+ ((real) jugador1).getNombre() + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
 
-					do {
-						letra();
-						numero();
-						if (tabla.revision(posicion2, posicion1)) {
-							System.out.println(RED + " \n Introducelo en otra ubicación \n" + WHITE);
-						}
-					} while (tabla.revision(posicion2, posicion1));
-
-					tabla.modificarTablero(posicion2, posicion1, ficha.x);
-					tabla.mostrarTablero();
-					tabla.modificarFicha(posicion2, posicion1, ficha.x);
-					ganar = tabla.ganar(ficha.x);
+					jugdorReal(ficha.x);
+					pintar(ficha.x);
 					if (!ganar) {
 						System.out.printf("\n---------------------------------------------\n   " + YELLOW
 								+ ((real) jugador2).getNombre() + WHITE
 								+ " le toca \n---------------------------------------------\n \n");
-						do {
-							letra();
-							numero();
-							if (tabla.revision(posicion2, posicion1)) {
-								System.out.println(RED + " \n Introducelo en otra ubicación \n" + WHITE);
-							}
-						} while (tabla.revision(posicion2, posicion1));
-
-						tabla.modificarTablero(posicion2, posicion1, ficha.o);
-						tabla.mostrarTablero();
-						tabla.modificarFicha(posicion2, posicion1, ficha.o);
-						ganar = tabla.ganar(ficha.o);
+					jugdorReal(ficha.o);
+					pintar(ficha.o);
 					}
-
 				} while (!ganar);
 			} else if (tipoNumerico == 1) {
 				jugador1 = new ia(ficha.x);
@@ -363,10 +366,7 @@ public class Partida {
 						posicion2 = ((ia) jugador1).getPosicion2();
 					} while (tabla.revision(posicion2, posicion1));
 
-					tabla.modificarTablero(posicion2, posicion1, ficha.x);
-					tabla.mostrarTablero();
-					tabla.modificarFicha(posicion2, posicion1, ficha.x);
-					ganar = tabla.ganar(ficha.x);
+					pintar(ficha.x);
 					timeOut();
 					if (!ganar) {
 						System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
@@ -380,10 +380,7 @@ public class Partida {
 							posicion2 = ((ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
 
-						tabla.modificarTablero(posicion2, posicion1, ficha.o);
-						tabla.mostrarTablero();
-						tabla.modificarFicha(posicion2, posicion1, ficha.o);
-						ganar = tabla.ganar(ficha.o);
+						pintar(ficha.o);
 						timeOut();
 					}
 				} while (!ganar);
@@ -395,18 +392,8 @@ public class Partida {
 
 					System.out.printf("\n---------------------------------------------\n   " + BLUE + nombre + WHITE
 							+ " le toca \n---------------------------------------------\n\n");
-					do {
-						letra();
-						numero();
-						if (tabla.revision(posicion2, posicion1)) {
-							System.out.println(RED + " \n Introducelo en otra ubicación \n" + WHITE);
-						}
-					} while (tabla.revision(posicion2, posicion1));
-
-					tabla.modificarTablero(posicion2, posicion1, ficha.x);
-					tabla.mostrarTablero();
-					tabla.modificarFicha(posicion2, posicion1, ficha.x);
-					ganar = tabla.ganar(ficha.x);
+					jugdorReal(ficha.x);
+					pintar(ficha.x);
 					timeOut();
 					if (!ganar) {
 						System.out.printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
@@ -419,11 +406,7 @@ public class Partida {
 							posicion1 = ((ia) jugador2).getPosicion1();
 							posicion2 = ((ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
-
-						tabla.modificarTablero(posicion2, posicion1, ficha.o);
-						tabla.mostrarTablero();
-						tabla.modificarFicha(posicion2, posicion1, ficha.o);
-						ganar = tabla.ganar(ficha.o);
+						pintar(ficha.x);
 
 					}
 				} while (!ganar);
