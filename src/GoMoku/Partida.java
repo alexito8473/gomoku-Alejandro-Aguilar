@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
  * 
  */
 public class Partida {
-
 	/**
 	 * El color rojo, se utiliza para cambiar el color a las letras en la consola.
 	 */
@@ -33,9 +32,26 @@ public class Partida {
 	 */
 	private static final String BLUE = "\u001B[34m";
 	/**
-	 * El color azul, se utiliza para cambiar el color a las letras en la consola.
+	 * El color amarillo, se utiliza para cambiar el color a las letras en la consola.
 	 */
 	private static final String YELLOW = "\u001B[33m";
+	/**
+	 * El color morado, se utiliza para cambiar el color a las letras en la consola
+	 */
+	public static final String PURPLE = "\u001B[35m";
+	/**
+	 * El color rojo, se utiliza para cambiar el color del fondo de la consola
+	 */
+	public static final String RED_BACKGROUND = "\u001B[41m";
+	/**
+	 * El color amarillo, se utiliza para cambiar el color del fondo de la consola
+	 */
+	public static final String YELLOW_BACKGROUND = "\u001B[43m";
+	/**
+	 * Resetear colores
+	 */
+	public static final String RESET = "\u001B[0m";
+
 	/**
 	 * La clase Tablero, pero sin declarar.
 	 */
@@ -165,6 +181,7 @@ public class Partida {
 	 * @param posicion, las letras determinadas que entraran para se transdormada en
 	 *                  numero.
 	 */
+
 	public static void transformar(String posicion) {
 		switch (posicion.toLowerCase()) {
 		case "a":
@@ -269,11 +286,10 @@ public class Partida {
 	private static void comienzos() {
 		boolean salida = false;
 		do {
-
 			try {
 				System.out.printf(
-						"Tipo de juego(Seleccione un numero): \n 1 %sia vs ia %s \n%s 2 %sia vs jugador \n%s 3 %sjugador vs jugador %s \n",
-						CYAN, WHITE, WHITE, CYAN, WHITE, CYAN, WHITE);
+						"Tipo de juego(Seleccione un numero): \n 1 %sia vs ia %s(Inteligencia artificial contra Inteligencia artificial)%s \n%s 2 %sia vs jugador %s(Inteligencia artificial contra Jugador real)\n%s 3 %sjugador vs jugador %s(Jugador real contra Jugador real)%s \n",
+						CYAN,PURPLE, WHITE, WHITE, CYAN, PURPLE,WHITE, CYAN,PURPLE, WHITE);
 				tipoNumerico = sc.nextInt();
 				if (tipoNumerico > 0 && tipoNumerico <= 3) {
 					salida = true;
@@ -312,6 +328,25 @@ public class Partida {
 		tabla.mostrarTablero();
 		tabla.modificarFicha(posicion2, posicion1, ficha);
 		ganar = tabla.ganar(ficha);
+	}	
+	/**
+	 * Metodo para pintar el final de una partida.
+	 */
+	private static void pintarBandera() {
+		timeOut();
+		System.out.print("\n"+RED_BACKGROUND);
+		timeOut();
+		System.out.print("  _____   _________   ___   __  \n");
+		timeOut();
+		System.out.print(" |   __| |___   ___| |   \\ |  | \n"+YELLOW_BACKGROUND);
+		timeOut();
+		System.out.print(" |  |__      | |     |    \\|  | \n");
+		timeOut();
+		System.out.print(" |   __|  ___| |___  |  |\\    | \n"+RED_BACKGROUND);
+		timeOut();
+		System.out.print(" |__|    |_________| |__| \\___| \n");
+		timeOut();
+		System.out.print("                                "+RESET);
 	}
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
@@ -326,7 +361,11 @@ public class Partida {
 	 * @see #reinicio()
 	 */
 	public static void Comenzar() {
-		System.out.println("Gomoku");
+		System.out.println("  ____     ______    ___    ___    ______    ___   ___   __     __  \n"
+                          +" |  __|   |  __  |  |   |  |   |  |  __  |  |   | /  /  |  |   |  | \n"
+				          +" | |  _   | |  | |  |   \\__/   |  | |  | |  |   |/  /   |  |   |  | \n"
+                          +" | |_| |  | |__| |  |          |  | |__| |  |       \\   |  \\___/  | \n"
+				          +" |_____|  |______|  |__|\\__/|__|  |______|  |___|\\___\\  |_________| \n");
 		do {
 			tabla = new Tablero();
 			comienzos();
@@ -411,7 +450,15 @@ public class Partida {
 					}
 				} while (!ganar);
 			}
-			System.out.println(RED + " \n BUENA PARTIDA <3 \n" + WHITE);
+			pintarBandera();
+			/*System.out.println("\n"+RED_BACKGROUND
+					+ " _____   _________   ___   __ \n"
+					+ "|   __| |___   ___| |   \\ |  |\n"+YELLOW_BACKGROUND
+					+ "|  |__      | |     |    \\|  |\n"
+					+ "|   __|  ___| |___  |  |\\    |\n"+RED_BACKGROUND
+					+ "|__|    |_________| |__| \\___|\n"
+					+"                              "+RESET);
+					*/
 			System.out.println(RED + " \n ¿Desea jugar otra partida? \n" + WHITE);
 			reinicio();
 
