@@ -445,7 +445,7 @@ public class Partida {
 							posicion1 = ((ia) jugador2).getPosicion1();
 							posicion2 = ((ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
-						pintar(ficha.x);
+						pintar(ficha.o);
 
 					}
 				} while (!ganar);
