@@ -9,7 +9,7 @@ package GoMoku;
  * @since 1.0
  *
  */
-public enum ficha {
+public enum Ficha {
 	/**
 	 * Ficha x
 	 *

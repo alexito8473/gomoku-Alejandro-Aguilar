@@ -8,24 +8,17 @@ package GoMoku;
  * @since 1.0
  * 
  */
-public class real extends Jugador {
+public class Real extends Jugador {
 	/**
-	 * Constructor de la clase
+	 * Constructor de la clase.
 	 * 
 	 * @param ficha  El tipo de ficha
 	 * @param nombre El nombre del jugador
 	 * 
 	 */
-	public real(String nombre, ficha ficha) {
+	public Real(String nombre, Ficha ficha) {
 		super(ficha);
-		this.nombre = nombre;
 	}
-
-	/**
-	 * Dato String, donde se almacena el nombre del jugador
-	 * 
-	 */
-	 private String nombre;
 
 	/**
 	 * Metodo get para saber que tipo de nombre posee el jugador
@@ -33,6 +26,6 @@ public class real extends Jugador {
 	 * @return String El nombre del jugador
 	 */
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 }

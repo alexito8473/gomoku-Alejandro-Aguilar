@@ -26,7 +26,7 @@ public class Main {
 		/**
 		 * Comenzamos la partida
 		 */
-		partida.Comenzar();
+		partida.comenzar();
 	}
 
 }

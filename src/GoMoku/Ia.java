@@ -1,7 +1,6 @@
 package GoMoku;
 
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * Clase hija del jugador, donde se enfatizaria en la inteligencia arificial, la
@@ -13,13 +12,13 @@ import java.util.Scanner;
  *
  */
 
-public class ia extends Jugador {
+public class Ia extends Jugador {
 	/**
 	 * El constructor de la clase ia.
 	 * 
 	 * @param ficha Tipo de ficha
 	 */
-	public ia(ficha ficha) {
+	public Ia(Ficha ficha) {
 		super(ficha);
 	}
 	/**
@@ -36,110 +35,98 @@ public class ia extends Jugador {
 	 */
 	private static final String YELLOW = "\u001B[33m";
 	/**
-	 * Dato de tipo String donde se almacena el nombre de la ia.
-	 */
-	protected static String nombre;
-	/**
 	 * Dato booleano que se utiliza para identificar cuando se ha ganado la partida.
 	 */
-	public static boolean ganar = false;
+	public boolean ganar = false;
 	/**
 	 * Dato booleano que se utiliza para identificar cuando se ha ganado la partida,
 	 * de forma horizontal.
 	 */
-	private static boolean ganarHorizontal = false;
+	private boolean ganarHorizontal = false;
 	/**
 	 * Dato booleano que se utiliza para identificar cuando se ha ganado la partida,
 	 * de forma vertical.
 	 */
-	private static boolean ganarVertical = false;
+	private boolean ganarVertical = false;
 	/**
 	 * Dato booleano que se utiliza para identificar cuando se ha ganado la partida,
 	 * de forma inclinada.
 	 */
-	private static boolean ganarInclinado = false;
+	private boolean ganarInclinado = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender.
 	 */
-	private static boolean defensa = false;
+	private boolean defensa = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
 	 * horizontal.
 	 */
-	private static boolean defensaHorizontal = false;
+	private boolean defensaHorizontal = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
 	 * vertical.
 	 */
-	private static boolean defensaVertical = false;
+	private boolean defensaVertical = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
 	 * inclinada.
 	 */
-	private static boolean defensaInclinada = false;
+	private boolean defensaInclinada = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
 	 * inclinada.
 	 */
-	private static boolean defensaInclinada1 = false;
+	private boolean defensaInclinada1 = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que atacar.
 	 */
-	private static boolean ataque = false;
+	private boolean ataque = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que atacar, de forma
 	 * horizontal.
 	 */
-	private static boolean ataqueHorizontal = false;
+	private boolean ataqueHorizontal = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que atacar, de forma
 	 * vertical.
 	 */
-	private static boolean ataqueVertical = false;
+	private boolean ataqueVertical = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que atacar, de forma
 	 * inclinado.
 	 */
-	private static boolean ataqueInclinado = false;
+	private boolean ataqueInclinado = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que atacar, de forma
 	 * inclinado.
 	 */
-	private static boolean ataqueInclinado1 = false;
+	private boolean ataqueInclinado1 = false;
 	/**
 	 * Dato int, para guardar la posicion para el array.
 	 */
-	private static int x = 0;
+	private int x = 0;
 	/**
 	 * Dato int, para guardar la posicion para el array.
 	 */
-	private static int y = 0;
+	private int y = 0;
 	/**
 	 * Llamada a la clase ramdon de java .
 	 */
-	private static Random ran = new Random();
-	/**
-	 * Utilizacion de las clase Scanner de java.
-	 */
-	private Scanner src = new Scanner(System.in);
+	private Random ran = new Random();
 	/**
 	 * Numero ramdon hasta el 9
 	 */
-	private static int number = ran.nextInt(9);
-	/**
-	 * Numero ramdon hasta el 9
-	 */
-	private static int number2 = ran.nextInt(9);
+	private int number = ran.nextInt(11);
 	/**
 	 * La creacion de un array unidimencional, con dos espacios .
 	 */
-	private static int[] numeros = new int[2];
+	private int[] numeros = new int[2];
 
 	/**
 	 * Array con nombres predeterminados para la ia
 	 */
-	private static String nombres[] = { "Pepe", "Jorge", "España", "Lisbania", "Me gustaria", "Francia caca",
-			"Copenage", "Mordekaiser", "ElNen" };
+	private String nombres[] = { "Pepe", "Jorge", "España", "Lisbania", "Me gustaria", "Francia caca",
+			"Copenage", "Mordekaiser", "ElNen", "Estatico","Dinamico" };
 
 	/**
 	 * Metodo para generar un nombre para la lia, distinta por cada ficha
@@ -148,13 +135,8 @@ public class ia extends Jugador {
 	 * @return si la ficha es 'x' te devuelve un nombre, y si la ficha es 'y' te
 	 *         devuelva otro nombre
 	 */
-	public String nombre(ficha ficha) {
-
-		if (ficha.equals(GoMoku.ficha.x)) {
+	public String nombre() {
 			return nombre = nombres[number];
-		} else {
-			return nombre = nombres[number2];
-		}
 	}
 
 	/**
@@ -181,11 +163,11 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide la jugada defensiva horizontal.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void defensaHorizontal(String[][] array, GoMoku.ficha fichas) {
+	private void defensaHorizontal(String[][] array, GoMoku.Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -289,11 +271,11 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide la jugada defensiva vertical.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void defensaVertical(String[][] array, ficha fichas) {
+	private void defensaVertical(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -397,11 +379,11 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void defensaInclinado(String[][] array, ficha fichas) {
+	private void defensaInclinado(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -503,11 +485,11 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void defensaInclinado1(String[][] array, ficha fichas) {
+	private void defensaInclinado1(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + WHITE;
 
 		} else {
@@ -613,10 +595,10 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas ganadoras de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void ganarHorizontal(String[][] array, ficha fichas) {
+	private void ganarHorizontal(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -726,10 +708,10 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas ganadoras de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void ganarVertical(String[][] array, ficha fichas) {
+	private void ganarVertical(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -840,10 +822,10 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas ganadoras de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void ganarInclinado(String[][] array, ficha fichas) {
+	private void ganarInclinado(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -1046,10 +1028,10 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void ataqueVertical(String[][] array, ficha fichas) {
+	private void ataqueVertical(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -1110,11 +1092,11 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void ataqueInclinado(String[][] array, ficha fichas) {
+	private void ataqueInclinado(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 
 		} else {
@@ -1175,11 +1157,11 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void ataqueInclinado1(String[][] array, ficha fichas) {
+	private void ataqueInclinado1(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 
 		} else {
@@ -1238,10 +1220,10 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private static void ataqueHorizontal(String[][] array, ficha fichas) {
+	private void ataqueHorizontal(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.ficha.x)) {
+		if (fichas.equals(GoMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + WHITE;
 		} else {
 			eleccion = YELLOW + "o" + WHITE;
@@ -1302,20 +1284,20 @@ public class ia extends Jugador {
 	 * @param array  El tablero donde se decide las jugadas atacantes de la partida.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 * 
-	 * @see #ganarHorizontal(String[][], ficha)
-	 * @see #ganarInclinado(String[][], ficha)
-	 * @see #ganarVertical(String[][], ficha)
-	 * @see #defensaHorizontal(String[][], ficha)
-	 * @see #defensaInclinado(String[][], ficha)
-	 * @see #defensaInclinado1(String[][], ficha)
-	 * @see #defensaVertical(String[][], ficha)
-	 * @see #ataqueVertical(String[][], ficha)
-	 * @see #ataqueHorizontal(String[][], ficha)
-	 * @see #ataqueInclinado(String[][], ficha)
-	 * @see #ataqueInclinado1(String[][], ficha)
+	 * @see #ganarHorizontal(String[][], Ficha)
+	 * @see #ganarInclinado(String[][], Ficha)
+	 * @see #ganarVertical(String[][], Ficha)
+	 * @see #defensaHorizontal(String[][], Ficha)
+	 * @see #defensaInclinado(String[][], Ficha)
+	 * @see #defensaInclinado1(String[][], Ficha)
+	 * @see #defensaVertical(String[][], Ficha)
+	 * @see #ataqueVertical(String[][], Ficha)
+	 * @see #ataqueHorizontal(String[][], Ficha)
+	 * @see #ataqueInclinado(String[][], Ficha)
+	 * @see #ataqueInclinado1(String[][], Ficha)
 	 * @see #retornar()
 	 */
-	public void jugadas(String[][] array, ficha fichas) {
+	public void jugadas(String[][] array, Ficha fichas) {
 		retornar();
 		ganarHorizontal(array, fichas);
 		ganarInclinado(array, fichas);

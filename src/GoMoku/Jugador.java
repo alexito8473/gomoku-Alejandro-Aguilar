@@ -19,7 +19,7 @@ public class Jugador {
 	 * Dato ficha
 	 * 
 	 */
-	protected static ficha ficha;
+	protected Ficha ficha;
 
 	/**
 	 * Constructor de la clase
@@ -27,17 +27,17 @@ public class Jugador {
 	 * @param ficha el tipo de ficha
 	 * 
 	 */
-	public Jugador(ficha ficha) {
-		Jugador.ficha = ficha;
+	public Jugador(Ficha ficha) {
+		this.ficha = ficha;
 	}
 
 	/**
-	 * Método para ver el tipo de ficha.
+	 * Metodo para ver el tipo de ficha.
 	 * 
 	 * @return ficha Devuelve un tipo de ficha
 	 * 
 	 */
-	public static ficha getFicha() {
+	public Ficha getFicha() {
 		return ficha;
 	}
 

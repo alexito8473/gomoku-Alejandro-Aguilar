@@ -1,5 +1,7 @@
 package GoMoku;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * Clase donde se extrae la tabla donde se jugara al gomoku, los metodos
  * pertinentes para la victoria del jugado, y además los métodos para modificar
@@ -41,13 +43,26 @@ public class Tablero {
 	 */
 	private static final String YELLOW = "\u001B[33m";
 	/**
+	 * El color rojo, se utiliza para cambiar el color del fondo de la consola
+	 */
+	public static final String RED_BACKGROUND = "\u001B[41m";
+	/**
+	 * El color amarillo, se utiliza para cambiar el color del fondo de la consola
+	 */
+	public static final String YELLOW_BACKGROUND = "\u001B[43m";
+	/**
+	 * Resetear colores
+	 */
+	public static final String RESET = "\u001B[0m";
+
+	/**
 	 * El resultado donde si es true has ganado, y si es false has perdido.
 	 */
-	private static boolean victoria;
+	private boolean victoria;
 	/**
 	 * El tablero en cuestio  	 n, donde se forma el tablero y se juega.
 	 */
-	private static String tabla[][] = {
+	private String tabla[][] = {
 			{ "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 			{ "01", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
 			{ "02", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -86,7 +101,7 @@ public class Tablero {
 			{ "15", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." } };
 
 	/**
-	 * Método para retornar el array principal.
+	 * Metodo para retornar el array principal.
 	 * @return String[][] Retorna el tablero
 	 */
 	public String[][] getTablero() {
@@ -97,6 +112,7 @@ public class Tablero {
 	 * Metodo para pintar el array en la consola.
 	 */
 	public void mostrarTablero() {
+		System.out.print(WHITE);
 		String a;
 		for (int i = 0; i < tabla.length; i++) {
 
@@ -118,9 +134,9 @@ public class Tablero {
 	 * @param ficha Tipo de ficha
 	 */
 
-	private static void inclinacion1(ficha ficha) {
+	private void inclinacion1(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = BLUE + "x" + WHITE;
 		} else {
 			letra = YELLOW + "o" + WHITE;
@@ -149,9 +165,9 @@ public class Tablero {
 	 * 
 	 * @param ficha Tipo de ficha
 	 */
-	private static void inclinacion2(ficha ficha) {
+	private void inclinacion2(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = BLUE + "x" + WHITE;
 		} else {
 			letra = YELLOW + "o" + WHITE;
@@ -181,9 +197,9 @@ public class Tablero {
 	 * 
 	 * @param ficha Tipo de ficha
 	 */
-	private static void derecha(ficha ficha) {
+	private void derecha(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = BLUE + "x" + WHITE;
 		} else {
 			letra = YELLOW + "o" + WHITE;
@@ -213,9 +229,9 @@ public class Tablero {
 	 * 
 	 * @param ficha Tipo de ficha
 	 */
-	private static void arriba(ficha ficha) {
+	private void arriba(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = BLUE + "x" + WHITE;
 		} else {
 			letra = YELLOW + "o" + WHITE;
@@ -267,10 +283,10 @@ public class Tablero {
 	 * @param numero2 Posicion del array
 	 * @param ficha   Tipo de ficha
 	 */
-	public void modificarTablero(int numero1, int numero2, ficha ficha) {
-		if (ficha.equals(GoMoku.ficha.x)) {
+	public void modificarTablero(int numero1, int numero2, Ficha ficha) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			tabla[numero1][numero2] = GREEN + "x" + WHITE;
-		} else if (ficha.equals(GoMoku.ficha.o)) {
+		} else if (ficha.equals(GoMoku.Ficha.o)) {
 			tabla[numero1][numero2] = GREEN + "o" + WHITE;
 		}
 	}
@@ -284,10 +300,10 @@ public class Tablero {
 	 * @param numero2 Posicion del array
 	 * @param ficha   Tipo de ficha
 	 */
-	public void modificarFicha(int numero1, int numero2, ficha ficha) {
-		if (ficha.equals(GoMoku.ficha.x)) {
+	public void modificarFicha(int numero1, int numero2, Ficha ficha) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			tabla[numero1][numero2] = BLUE + "x" + WHITE;
-		} else if (ficha.equals(GoMoku.ficha.o)) {
+		} else if (ficha.equals(GoMoku.Ficha.o)) {
 			tabla[numero1][numero2] = YELLOW + "o" + WHITE;
 		}
 	}
@@ -297,13 +313,13 @@ public class Tablero {
 	 * hay una fila que de resultado para que sacar la victoria en true.
 	 * 
 	 * @param ficha Tipo de ficha
-	 * @see #derecha(ficha)
-	 * @see #arriba(ficha)
-	 * @see #inclinacion1(ficha)
-	 * @see #inclinacion2(ficha)
+	 * @see #derecha(Ficha)
+	 * @see #arriba(Ficha)
+	 * @see #inclinacion1(Ficha)
+	 * @see #inclinacion2(Ficha)
 	 * @return true: has ganado. false: no has ganado.
 	 */
-	public boolean ganar(ficha ficha) {
+	public boolean ganar(Ficha ficha) {
 		derecha(ficha);
 		arriba(ficha);
 		inclinacion1(ficha);
@@ -320,7 +336,7 @@ public class Tablero {
 	 * secundario.
 	 * 
 	 */
-	private static void returnTablero() {
+	private void returnTablero() {
 
 		for (int i = 0; i < tabla.length; i++) {
 			for (int j = 0; j < tabla.length; j++) {
@@ -336,6 +352,36 @@ public class Tablero {
 	private void returnVictory() {
 		victoria = false;
 	}
+	
+	/**
+	 * Metodo para pausar la consola
+	 */
+	public void timeOut() {
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * Metodo para pintar el final de una partida.
+	 */
+	public void pintarBandera() {
+		timeOut();
+		System.out.print("\n" + RED_BACKGROUND);
+		timeOut();
+		System.out.print("  _____   _________   ___   __  \n");
+		timeOut();
+		System.out.print(" |   __| |___   ___| |   \\ |  | \n" + YELLOW_BACKGROUND);
+		timeOut();
+		System.out.print(" |  |__      | |     |    \\|  | \n");
+		timeOut();
+		System.out.print(" |   __|  ___| |___  |  |\\    | \n" + RED_BACKGROUND);
+		timeOut();
+		System.out.print(" |__|    |_________| |__| \\___| \n");
+		timeOut();
+		System.out.print("                                " + RESET);
+	}
 
 //------------------------------------------------------------------------------------------------------
 	/**
@@ -345,10 +391,10 @@ public class Tablero {
 	 * @return true: si se encuentra un patron
 	 * 			false:si no encontramos el patron
 	 */
-	static boolean derechaText(ficha ficha, String[][] array) {
+        boolean derechaText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
@@ -379,10 +425,10 @@ public class Tablero {
 	 * @return true: si se encuentra un patron
 	 * 			false:si no encontramos el patron
 	 */
-	static boolean arribaText(ficha ficha, String[][] array) {
+	 boolean arribaText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
@@ -416,10 +462,10 @@ public class Tablero {
 	 * @return true: si se encuentra un patron
 	 * 			false:si no encontramos el patron
 	 */
-	static boolean inclinacionAbajoText(ficha ficha, String[][] array) {
+	 boolean inclinacionAbajoText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
@@ -450,10 +496,10 @@ public class Tablero {
 	 * @return true: si se encuentra un patron
 	 * 			false:si no encontramos el patron
 	 */
-	static boolean inclinacionArribaText(ficha ficha, String[][] array) {
+	 boolean inclinacionArribaText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.ficha.x)) {
+		if (ficha.equals(GoMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
