@@ -21,10 +21,11 @@ public class Ia extends Jugador {
 	public Ia(Ficha ficha) {
 		super(ficha);
 	}
+
 	/**
-	 * El color blanco, se utiliza para cambiar el color a las letras en la consola.
+	 * Reset de colores
 	 */
-	private static final String WHITE = "\u001B[37m";
+	public static final String RESET = "\u001B[0m";
 	/**
 	 * El color azul, se utiliza para cambiar el color a las letras en la consola.
 	 */
@@ -54,29 +55,53 @@ public class Ia extends Jugador {
 	 */
 	private boolean ganarInclinado = false;
 	/**
-	 * Dato booleano que se utiliza para identificar si hay que defender.
+	 * Dato booleano que se utiliza para identificar si hay que defender y saber si es de gran prioridad.
 	 */
-	private boolean defensa = false;
+	private boolean defensaMayor = false;
+	/**
+	 * Dato booleano que se utiliza para identificar si hay que defender y saber si es de poca prioridad.
+	 */
+	private boolean defensaMenor = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
-	 * horizontal.
+	 * horizontal y de gran prioridad.
 	 */
-	private boolean defensaHorizontal = false;
+	private boolean defensaMayorHorizontal = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
-	 * vertical.
+	 * horizontal y de poca prioridad.
 	 */
-	private boolean defensaVertical = false;
+	private boolean defensaMenorHorizontal = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
-	 * inclinada.
+	 * vertical y de gran prioridad.
 	 */
-	private boolean defensaInclinada = false;
+	private boolean defensaMayorVertical = false;
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
-	 * inclinada.
+	 * vertical y de poca prioridad.
 	 */
-	private boolean defensaInclinada1 = false;
+	private boolean defensaMenorVertical = false;
+	/**
+	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
+	 * inclinada y de gran prioridad.
+	 */
+	private boolean defensaMayorInclinada = false;
+	/**
+	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
+	 * inclinada y de poca prioridad.
+	 */
+	private boolean defensaMenorInclinada = false;
+	/**
+	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
+	 * inclinada y de gran prioridad.
+	 */
+	private boolean defensaMayorInclinada_2 = false;
+	/**
+	 * Dato booleano que se utiliza para identificar si hay que defender, de forma
+	 * inclinada y de poca prioridad.
+	 */
+	private boolean defensaMenorInclinada_2 = false; 
 	/**
 	 * Dato booleano que se utiliza para identificar si hay que atacar.
 	 */
@@ -116,7 +141,7 @@ public class Ia extends Jugador {
 	/**
 	 * Numero ramdon hasta el 9
 	 */
-	private int number = ran.nextInt(11);
+	private int number = ran.nextInt(15);
 	/**
 	 * La creacion de un array unidimencional, con dos espacios .
 	 */
@@ -125,8 +150,9 @@ public class Ia extends Jugador {
 	/**
 	 * Array con nombres predeterminados para la ia
 	 */
-	private String nombres[] = { "Pepe", "Jorge", "España", "Lisbania", "Me gustaria", "Francia caca",
-			"Copenage", "Mordekaiser", "ElNen", "Estatico","Dinamico" };
+	
+	private String nombres[] = { "Pepe", "Jorge", "España", "Lisbania", "Me gustaria", "Francia caca", "Copenage",
+			"Mordekaiser", "ElNen", "Estatico", "Dinamico","¿Me apruebas?","Te adoro","Jose no sabe programar","Wallapop"};
 
 	/**
 	 * Metodo para generar un nombre para la lia, distinta por cada ficha
@@ -135,22 +161,35 @@ public class Ia extends Jugador {
 	 * @return si la ficha es 'x' te devuelve un nombre, y si la ficha es 'y' te
 	 *         devuelva otro nombre
 	 */
-	public String nombre() {
-			return nombre = nombres[number];
-	}
 
+	@Override
+	public String getNombre() {
+		return nombre = nombres[number];
+	}
 	/**
 	 * Metodo para retornar todos los booleanos a falso
 	 */
 	private void retornar() {
 		ganar = false;
 		ganarHorizontal = false;
-		defensa = false;
-		defensaHorizontal = false;
-		defensaVertical = false;
-		defensaInclinada = false;
-		defensaInclinada = false;
+
+		defensaMayor = false;
+		defensaMenor = false;
+
+		defensaMayorHorizontal = false;
+		defensaMenorHorizontal = false;
+
+		defensaMayorVertical = false;
+		defensaMenorVertical = false;
+
+		defensaMayorInclinada = false;
+		defensaMenorInclinada = false;
+
+		defensaMayorInclinada_2 = false;
+		defensaMenorInclinada_2 = false;
+
 		ataque = false;
+
 		ataqueHorizontal = false;
 		ataqueVertical = false;
 		ataqueInclinado = false;
@@ -158,31 +197,30 @@ public class Ia extends Jugador {
 	}
 
 	/**
-	 * Metodo para detectar las jugadas horizontales defensivas.
+	 * Metodo para detectar las jugadas horizontales defensivas de mayor prioridad.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva horizontal.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private void defensaHorizontal(String[][] array, GoMoku.Ficha fichas) {
+	private void defensaPrioridadHorizontal(String[][] array, GoMoku.Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 
 		} else {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		}
-
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((j < 16) && array[i][j].equals(eleccion)) {
 					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
 						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
 							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
 								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
-									defensaHorizontal = true;
-									defensa = true;
+									defensaMayorHorizontal = true;
+									defensaMayor = true;
 									exit = true;
 									y = i;
 									x = j + 2;
@@ -194,16 +232,18 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((j < 16) && array[i][j].equals(eleccion)) {
-					if ((j + 1 < 16) && array[i][j + 1].equals(".")) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
 						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
 							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
-								defensaHorizontal = true;
-								defensa = true;
-								exit = true;
-								y = i;
-								x = j+1;
+								if ((j + 4 < 16) && array[i][j + 4].equals(".")) {
+									defensaMayorHorizontal = true;
+									defensaMayor = true;
+									exit = true;
+									y = i;
+									x = j + 4;
+								}
 							}
 						}
 					}
@@ -211,30 +251,14 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
-				if ((j < 16) && array[i][j].equals(eleccion)) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(".")) {
 					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
 							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
-								defensaHorizontal = true;
-								defensa = true;
-								exit = true;
-								y = i;
-								x = j+2;
-							}
-						}
-					}
-				}
-			}
-		}
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length&& !exit; j++) {
-					if ((j < 16) && array[i][j].equals(".")) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
-								if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
-									defensaHorizontal = true;
-									defensa = true;
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									defensaMayorHorizontal = true;
+									defensaMayor = true;
 									exit = true;
 									y = i;
 									x = j;
@@ -244,19 +268,127 @@ public class Ia extends Jugador {
 					}
 				}
 			}
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length&& !exit; j++) {
-					if ((j < 16) && array[i][j].equals(eleccion)) {
-						if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
-							if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
-								if ((j + 3 < 16) && array[i][j + 3].equals(".")) {
-									defensaHorizontal = true;
-									defensa = true;
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(".")) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									defensaMayorHorizontal = true;
+									defensaMayor = true;
+									exit = true;
+									y = i;
+									x = j + 1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(".")) {
+								if ((j + 4 < 16) && array[i][j + 4].equals(eleccion)) {
+									defensaMayorHorizontal = true;
+									defensaMayor = true;
 									exit = true;
 									y = i;
 									x = j + 3;
 								}
 							}
+						}
+					}
+				}
+			}
+		}
+	}
+	/**
+	 * Metodo para detectar las jugadas horizontales defensivas de menor prioridad.
+	 * 
+	 * @param array  El tablero donde se decide la jugada defensiva horizontal.
+	 * @param fichas Tipo de ficha para usar en el tablero.
+	 */
+	private void defensaMenorHorizontal(String[][] array, GoMoku.Ficha fichas) {
+		boolean exit = false;
+		String eleccion;
+
+		if (fichas.equals(GoMoku.Ficha.x)) {
+			eleccion = YELLOW + "o" + RESET;
+
+		} else {
+			eleccion = BLUE + "x" + RESET;
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(".")) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								defensaMenorHorizontal = true;
+								defensaMenor = true;
+								exit = true;
+								y = i;
+								x = j + 2;
+
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(".")) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								defensaMenorHorizontal = true;
+								defensaMenor = true;
+								exit = true;
+								y = i;
+								x = j + 1;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(eleccion)) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(".")) {
+								defensaMenorHorizontal = true;
+								defensaMenor = true;
+								exit = true;
+								y = i;
+								x = j + 3;
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((j < 16) && array[i][j].equals(".")) {
+					if ((j + 1 < 16) && array[i][j + 1].equals(eleccion)) {
+						if ((j + 2 < 16) && array[i][j + 2].equals(eleccion)) {
+							if ((j + 3 < 16) && array[i][j + 3].equals(eleccion)) {
+								defensaMenorHorizontal = true;
+								defensaMenor = true;
+								exit = true;
+								y = i;
+								x = j;
+							}
+						}
 					}
 				}
 			}
@@ -266,30 +398,30 @@ public class Ia extends Jugador {
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo para detectar las jugadas verticales defensivas.
+	 * Metodo para detectar las jugadas verticales defensivas de mayor prioridad.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva vertical.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private void defensaVertical(String[][] array, Ficha fichas) {
+	private void defensaPrioridadVertical(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 
 		} else {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
 						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
 							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
 								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
-									defensa = true;
-									defensaVertical = true;
+									defensaMayor = true;
+									defensaMayorVertical = true;
 									y = i + 2;
 									x = j;
 									exit = true;
@@ -301,16 +433,18 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
 							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-								defensa = true;
-								defensaVertical = true;
-								y = i + 2;
-								x = j;
-								exit = true;
+								if ((i + 4 < 16) && array[i + 4][j].equals(".")) {
+									defensaMayor = true;
+									defensaMayorVertical = true;
+									y = i + 4;
+									x = j;
+									exit = true;
+								}
 							}
 						}
 					}
@@ -318,13 +452,69 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
-				if ((i < 16) && array[i ][j].equals(eleccion)) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(".")) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorVertical = true;
+									y = i;
+									x = j;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16) && array[i + 1][j].equals(".")) {
 						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
 							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-								defensa = true;
-								defensaVertical = true;
+								if ((i + 4 < 16) && array[i + 4][j].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorVertical = true;
+									y = i + 1;
+									x = j;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+	/**
+	 * Metodo para detectar las jugadas verticales defensivas de menor prioridad.
+	 * 
+	 * @param array  El tablero donde se decide la jugada defensiva vertical.
+	 * @param fichas Tipo de ficha para usar en el tablero.
+	 */
+	private void defensaMenorVertical(String[][] array, Ficha fichas) {
+		boolean exit = false;
+		String eleccion;
+
+		if (fichas.equals(GoMoku.Ficha.x)) {
+			eleccion = YELLOW + "o" + RESET;
+
+		} else {
+			eleccion = BLUE + "x" + RESET;
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(".")) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								defensaMenor = true;
+								defensaMenorVertical = true;
 								y = i + 1;
 								x = j;
 								exit = true;
@@ -334,14 +524,33 @@ public class Ia extends Jugador {
 				}
 			}
 		}
+
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
-				if ((i < 16) && array[i ][j].equals(eleccion)) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(".")) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								defensaMenor = true;
+								defensaMenorVertical = true;
+								y = i + 2;
+								x = j;
+								exit = true;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
 						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
 							if ((i + 3 < 16) && array[i + 3][j].equals(".")) {
-								defensa = true;
-								defensaVertical = true;
+								defensaMenor = true;
+								defensaMenorVertical = true;
 								y = i + 3;
 								x = j;
 								exit = true;
@@ -351,53 +560,53 @@ public class Ia extends Jugador {
 				}
 			}
 		}
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length&& !exit; j++) {
-					if ((i < 16) && array[i][j].equals(".")) {
-						if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
-							if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
-								if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
-									defensa = true;
-									defensaVertical = true;
-									y = i;
-									x = j;
-									exit = true;
-								}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16) && array[i][j].equals(".")) {
+					if ((i + 1 < 16) && array[i + 1][j].equals(eleccion)) {
+						if ((i + 2 < 16) && array[i + 2][j].equals(eleccion)) {
+							if ((i + 3 < 16) && array[i + 3][j].equals(eleccion)) {
+								defensaMenor = true;
+								defensaMenorVertical = true;
+								y = i;
+								x = j;
+								exit = true;
 							}
 						}
 					}
 				}
 			}
+		}
 
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo para detectar las jugadas inclinadas defensivas.
+	 * Metodo para detectar las jugadas inclinadas defensivas de mayor prioridad.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private void defensaInclinado(String[][] array, Ficha fichas) {
+	private void defensaMayorInclinado(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 
 		} else {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
 							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
 								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
-									defensa = true;
-									defensaInclinada = true;
+									defensaMayor = true;
+									defensaMayorInclinada = true;
 									y = i + 2;
 									x = j + 2;
 									exit = true;
@@ -409,13 +618,107 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(".")) {
+									defensaMayor = true;
+									defensaMayorInclinada = true;
+									y = i + 4;
+									x = j + 4;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorInclinada = true;
+									y = i;
+									x = j;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(".")) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
 							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-								defensa = true;
-								defensaInclinada = true;
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorInclinada = true;
+									y = i + 1;
+									x = j + 1;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(".")) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorInclinada = true;
+									y = i + 3;
+									x = j + 3;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+	/**
+	 * Metodo para detectar las jugadas inclinadas defensivas de menor prioridad.
+	 * 
+	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
+	 * @param fichas Tipo de ficha para usar en el tablero.
+	 */
+	private void defensaMenorInclinado(String[][] array, Ficha fichas) {
+		boolean exit = false;
+		String eleccion;
+
+		if (fichas.equals(GoMoku.Ficha.x)) {
+			eleccion = YELLOW + "o" + RESET;
+
+		} else {
+			eleccion = BLUE + "x" + RESET;
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(".")) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								defensaMenor = true;
+								defensaMenorInclinada = true;
 								y = i + 1;
 								x = j + 1;
 								exit = true;
@@ -426,13 +729,13 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(".")) {
 							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-								defensa = true;
-								defensaInclinada = true;
+								defensaMenor = true;
+								defensaMenorInclinada = true;
 								y = i + 2;
 								x = j + 2;
 								exit = true;
@@ -443,13 +746,13 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
 							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(".")) {
-								defensa = true;
-								defensaInclinada = true;
+								defensaMenor = true;
+								defensaMenorInclinada = true;
 								y = i + 3;
 								x = j + 3;
 								exit = true;
@@ -459,51 +762,51 @@ public class Ia extends Jugador {
 				}
 			}
 		}
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length&& !exit; j++) {
-					if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
-						if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
-							if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
-								if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
-									defensa = true;
-									defensaInclinada = true;
-									y = i;
-									x = j;
-									exit = true;
-								}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if (((i < 16) && (j < 16)) && array[i][j].equals(".")) {
+					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
+						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								defensaMenor = true;
+								defensaMenorInclinada = true;
+								y = i;
+								x = j;
+								exit = true;
 							}
 						}
 					}
 				}
 			}
+		}
 
 	}
 
 	/**
-	 * Metodo para detectar las jugadas inclinadas defensivas.
+	 * Metodo para detectar las jugadas inclinadas defensivas de mayor prioridad.
 	 * 
 	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private void defensaInclinado1(String[][] array, Ficha fichas) {
+	private void defensaMayorInclinado1(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 
 		} else {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
 						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(".")) {
 							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
 								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
-									defensa = true;
-									defensaInclinada1 = true;
+									defensaMayor = true;
+									defensaMayorInclinada_2 = true;
 									y = i + 2;
 									x = j - 2;
 									exit = true;
@@ -515,13 +818,107 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(".")) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorInclinada_2 = true;
+									y = i;
+									x = j;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(".")) {
+									defensaMayor = true;
+									defensaMayorInclinada_2 = true;
+									y = i + 4;
+									x = j - 4;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(".")) {
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorInclinada_2 = true;
+									y = i + 3;
+									x = j - 3;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(".")) {
 						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
 							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-								defensa = true;
-								defensaInclinada1 = true;
+								if ((i + 4 < 16 && j - 4 > 0) && array[i + 4][j - 4].equals(eleccion)) {
+									defensaMayor = true;
+									defensaMayorInclinada_2 = true;
+									y = i + 1;
+									x = j - 1;
+									exit = true;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+	}
+	/**
+	 * Metodo para detectar las jugadas inclinadas defensivas de menor prioridad.
+	 * 
+	 * @param array  El tablero donde se decide la jugada defensiva inclinada.
+	 * @param fichas Tipo de ficha para usar en el tablero.
+	 */
+	private void defensaMenorInclinado1(String[][] array, Ficha fichas) {
+		boolean exit = false;
+		String eleccion;
+
+		if (fichas.equals(GoMoku.Ficha.x)) {
+			eleccion = YELLOW + "o" + RESET;
+
+		} else {
+			eleccion = BLUE + "x" + RESET;
+		}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(".")) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								defensaMenor = true;
+								defensaMenorInclinada_2 = true;
 								y = i + 1;
 								x = j - 1;
 								exit = true;
@@ -532,13 +929,13 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
 						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(".")) {
 							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-								defensa = true;
-								defensaInclinada1 = true;
+								defensaMenor = true;
+								defensaMenorInclinada_2 = true;
 								y = i + 2;
 								x = j - 2;
 								exit = true;
@@ -549,13 +946,13 @@ public class Ia extends Jugador {
 			}
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
-			for (int j = 0; j < array.length&& !exit; j++) {
+			for (int j = 0; j < array.length && !exit; j++) {
 				if ((i < 16 && j > 0) && array[i][j].equals(eleccion)) {
 					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
 						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
 							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(".")) {
-								defensa = true;
-								defensaInclinada1 = true;
+								defensaMenor = true;
+								defensaMenorInclinada_2 = true;
 								y = i + 3;
 								x = j - 3;
 								exit = true;
@@ -566,26 +963,25 @@ public class Ia extends Jugador {
 			}
 		}
 
-			for (int i = 0; i < array.length && !exit; i++) {
-				for (int j = 0; j < array.length&& !exit; j++) {
-					if ((i < 16 && j > 0) && array[i][j].equals(".")) {
-						if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
-							if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
-								if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
-									defensa = true;
-									defensaInclinada1 = true;
-									y = i;
-									x = j;
-									exit = true;
-								}
+		for (int i = 0; i < array.length && !exit; i++) {
+			for (int j = 0; j < array.length && !exit; j++) {
+				if ((i < 16 && j > 0) && array[i][j].equals(".")) {
+					if ((i + 1 < 16 && j - 1 > 0) && array[i + 1][j - 1].equals(eleccion)) {
+						if ((i + 2 < 16 && j - 2 > 0) && array[i + 2][j - 2].equals(eleccion)) {
+							if ((i + 3 < 16 && j - 3 > 0) && array[i + 3][j - 3].equals(eleccion)) {
+								defensaMenor = true;
+								defensaMenorInclinada_2 = true;
+								y = i;
+								x = j;
+								exit = true;
 							}
 						}
 					}
 				}
 			}
-
-
 		}
+
+	}
 
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -599,9 +995,9 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		} else {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
 			for (int j = 0; j < array.length && !exit; j++) {
@@ -712,9 +1108,9 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		} else {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
 			for (int j = 0; j < array.length && !exit; j++) {
@@ -826,17 +1222,17 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		} else {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
 			for (int j = 0; j < array.length && !exit; j++) {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(eleccion)) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
-							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)){
-								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(".")){
+							if (((i + 3 < 16) && (j + 3 < 16)) && array[i + 3][j + 3].equals(eleccion)) {
+								if (((i + 4 < 16) && (j + 4 < 16)) && array[i + 4][j + 4].equals(".")) {
 									ganar = true;
 									ganarInclinado = true;
 									y = i + 4;
@@ -1032,9 +1428,9 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		} else {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 		}
 
 		for (int i = 0; i < array.length && !exit; i++) {
@@ -1097,10 +1493,9 @@ public class Ia extends Jugador {
 		String eleccion;
 
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = BLUE + "x" + WHITE;
-
+			eleccion = BLUE + "x" + RESET;
 		} else {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 		}
 
 		for (int i = 0; i < array.length && !exit; i++) {
@@ -1108,6 +1503,7 @@ public class Ia extends Jugador {
 				if (((i < 16) && (j < 16)) && array[i][j].equals(eleccion)) {
 					if (((i + 1 < 16) && (j + 1 < 16)) && array[i + 1][j + 1].equals(".")) {
 						if (((i + 2 < 16) && (j + 2 < 16)) && array[i + 2][j + 2].equals(eleccion)) {
+
 							ataque = true;
 							ataqueInclinado = true;
 							y = i + 1;
@@ -1162,10 +1558,10 @@ public class Ia extends Jugador {
 		String eleccion;
 
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 
 		} else {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 		}
 		for (int i = 0; i < array.length && !exit; i++) {
 			for (int j = 0; j < array.length && !exit; j++) {
@@ -1224,9 +1620,9 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 		if (fichas.equals(GoMoku.Ficha.x)) {
-			eleccion = BLUE + "x" + WHITE;
+			eleccion = BLUE + "x" + RESET;
 		} else {
-			eleccion = YELLOW + "o" + WHITE;
+			eleccion = YELLOW + "o" + RESET;
 		}
 
 		for (int i = 0; i < array.length && !exit; i++) {
@@ -1319,55 +1715,79 @@ public class Ia extends Jugador {
 			}
 		} else {
 			retornar();
-			defensaInclinado(array, fichas);
-			defensaInclinado1(array, fichas);
-			defensaHorizontal(array, fichas);
-			defensaVertical(array, fichas);
-			if (defensa) {
-				if (defensaInclinada) {
+			defensaMayorInclinado(array, fichas);
+			defensaMayorInclinado1(array, fichas);
+			defensaPrioridadHorizontal(array, fichas);
+			defensaPrioridadVertical(array, fichas);
+			if (defensaMayor) {
+				if (defensaMayorInclinada) {
 					numeros[0] = x;
 					numeros[1] = y;
 					retornar();
-				} else if (defensaInclinada1) {
+				} else if (defensaMayorInclinada_2) {
 					numeros[0] = x;
 					numeros[1] = y;
 					retornar();
-				} else if (defensaVertical) {
+				} else if (defensaMayorVertical) {
 					numeros[0] = x;
 					numeros[1] = y;
 					retornar();
-				} else if (defensaHorizontal) {
+				} else if (defensaMayorHorizontal) {
 					numeros[0] = x;
 					numeros[1] = y;
 					retornar();
 				}
 			} else {
-				retornar();
-				ataqueHorizontal(array, fichas);
-				ataqueVertical(array, fichas);
-				ataqueInclinado(array, fichas);
-				ataqueInclinado1(array, fichas);
-				if (ataque) {
-					if (ataqueHorizontal) {
+				defensaMenorInclinado(array, fichas);
+				defensaMenorInclinado1(array, fichas);
+				defensaMenorHorizontal(array, fichas);
+				defensaMenorVertical(array, fichas);
+				if (defensaMenor) {
+					if (defensaMenorInclinada) {
 						numeros[0] = x;
 						numeros[1] = y;
 						retornar();
-					} else if (ataqueVertical) {
+					} else if (defensaMenorInclinada_2) {
 						numeros[0] = x;
 						numeros[1] = y;
 						retornar();
-					} else if (ataqueInclinado) {
+					} else if (defensaMenorVertical) {
 						numeros[0] = x;
 						numeros[1] = y;
 						retornar();
-					} else if (ataqueInclinado1) {
+					} else if (defensaMenorHorizontal) {
 						numeros[0] = x;
 						numeros[1] = y;
 						retornar();
 					}
 				} else {
-					numeros[0] = ran.nextInt(15) + 1;
-					numeros[1] = ran.nextInt(15) + 1;
+					retornar();
+					ataqueHorizontal(array, fichas);
+					ataqueVertical(array, fichas);
+					ataqueInclinado(array, fichas);
+					ataqueInclinado1(array, fichas);
+					if (ataque) {
+						if (ataqueHorizontal) {
+							numeros[0] = x;
+							numeros[1] = y;
+							retornar();
+						} else if (ataqueVertical) {
+							numeros[0] = x;
+							numeros[1] = y;
+							retornar();
+						} else if (ataqueInclinado) {
+							numeros[0] = x;
+							numeros[1] = y;
+							retornar();
+						} else if (ataqueInclinado1) {
+							numeros[0] = x;
+							numeros[1] = y;
+							retornar();
+						}
+					} else {
+						numeros[0] = ran.nextInt(15) + 1;
+						numeros[1] = ran.nextInt(15) + 1;
+					}
 				}
 			}
 		}

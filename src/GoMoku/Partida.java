@@ -17,7 +17,6 @@ public class Partida {
 	 * El color rojo, se utiliza para cambiar el color a las letras en la consola.
 	 */
 	private static final String RED = "\u001B[31m";
-
 	/**
 	 * El color cian, se utiliza para cambiar el color a las letras en la consola.
 	 */
@@ -62,14 +61,35 @@ public class Partida {
 	private Jugador jugador2;
 
 	/**
-	 * variable booleana donde se sale del bucle do.while del juego.
+	 * Variable booleana donde se sale del bucle do.while del juego.
 	 */
 	private boolean exit = false;
 	/**
-	 * variable booleana para salir del bucle do.while de la partida.
+	 * Variable booleana para salir del bucle do.while de la partida.
 	 */
-	private boolean ganar = false;
+	private boolean ganarJugadorvsJugador1 = false;
+	/**
+	 * Variable booleana para salir del bucle do.while de la partida.
+	 */
+	private boolean ganarJugadorvsJugador2 = false;
+	/**
+	 * Variable booleana para salir del bucle do.while de la partida.
+	 */
+	private boolean ganarJugadorvsIa1 = false;
+	/**
+	 * Variable booleana para salir del bucle do.while de la partida.
+	 */
+	private boolean ganarJugadorvsIa2 = false;
+	/**
+	 * Variable booleana para salir del bucle do.while de la partida.
+	 */
+	private boolean ganarIarvsIa1 = false;
+	/**
+	 * Variable booleana para salir del bucle do.while de la partida.
+	 */
+	private boolean ganarIarvsIa2 = false;
 
+	private boolean empate = false;
 	/**
 	 * variable String donde se capta el nombre del jugador.
 	 */
@@ -90,6 +110,12 @@ public class Partida {
 	 * variable int para captar el tipo de juego que se desea jugar.
 	 */
 	private int tipoNumerico = 0;
+
+	private Ficha player1;
+
+	private Ficha player2;
+	private int playerNumber;
+
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
 	 * Metodo para pausar la partida, o continuarla.
@@ -124,19 +150,16 @@ public class Partida {
 		} while (!escape);
 	}
 
-
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo para................................
+	 * Metodo para ..........................
 	 * 
-	 * @see #transformar(String)
 	 */
 	@SuppressWarnings("resource")
 	private void letra() {
 		char transformar;
 		Scanner sc = new Scanner(System.in);
 		do {
-
 			System.out.println(
 					"Introduca la poscion del 'a' hasta la 'o', \nsolo detectara el primer caracter introducido");
 			transformar = sc.next().charAt(0);
@@ -185,18 +208,18 @@ public class Partida {
 		Scanner sc = new Scanner(System.in);
 		if (2 == tipoNumerico) {
 			do {
-			System.out.printf("\n Introduce un nombre \n");
-			nombre = sc.nextLine();
-			}while(nombre.length()==0);
+				System.out.printf("\n Introduce un nombre \n");
+				nombre = sc.nextLine();
+			} while (nombre.length() == 0);
 		} else if (3 == tipoNumerico) {
 			do {
-			System.out.printf("\n Nombre del jugador uno \n");
-			nombre = sc.nextLine();
-			}while(nombre.length()==0);
+				System.out.printf("\n Nombre del jugador uno \n");
+				nombre = sc.nextLine();
+			} while (nombre.length() == 0);
 			do {
-			System.out.printf("\n Nombre del jugador dos \n");
-			nombre2 = sc.nextLine();
-			}while(nombre2.length()==0);
+				System.out.printf("\n Nombre del jugador dos \n");
+				nombre2 = sc.nextLine();
+			} while (nombre2.length() == 0);
 		}
 	}
 
@@ -229,6 +252,59 @@ public class Partida {
 		} while (!salida);
 	}
 
+	@SuppressWarnings("resource")
+	private void tipoFicha() {
+		boolean salida = false;
+		Scanner sc = new Scanner(System.in);
+		System.out.printf(
+				"\nIdentifica el tipo de ficha para el jugador 1, se le dara al jugador la ficha opuesta a la escogida\n\n Selecione%s 1%s para escoger la %sficha x%s y el %s2 %spara la%s ficha o%s\n\n",RED,RESET,BLUE,RESET,RED,RESET,YELLOW,RESET);
+		do {
+			try {
+				playerNumber = sc.nextInt();
+				if (playerNumber > 0 && playerNumber <= 2) {
+					salida = true;
+				} else {
+					System.out.printf(RED + "Introduce un valor entre 1 al 2 \n" + RESET);
+					sc.nextLine();
+				}
+			} catch (Exception e) {
+				System.out.printf(RED + "Introduce un valor entre 1 al 2 \n" + RESET);
+				sc.nextLine();
+			}
+
+		} while (!salida);
+
+		if (playerNumber == 1) {
+			player1 = Ficha.x;
+			player2 = Ficha.o;
+		} else {
+			player1 = Ficha.o;
+			player2 = Ficha.x;
+		}
+	}
+
+	private void pintarNombreJugador_1() {
+		if (playerNumber == 1) {
+			System.out.printf(RESET + "\n\n---------------------------------------------\n   " + BLUE + "   "
+					+ jugador1.getNombre() + RESET + " le toca \n---------------------------------------------\n\n");
+		} else {
+			System.out.printf(RESET + "\n\n---------------------------------------------\n   " + YELLOW + "   "
+					+ jugador1.getNombre() + RESET + " le toca \n---------------------------------------------\n\n");
+
+		}
+	}
+
+	private void pintarNombreJugador_2() {
+		if (playerNumber == 1) {
+			System.out.printf(RESET + "\n\n---------------------------------------------\n   " + YELLOW + "   "
+					+ jugador2.getNombre() + RESET + " le toca \n---------------------------------------------\n\n");
+		} else {
+			System.out.printf(RESET + "\n\n---------------------------------------------\n   " + BLUE + "   "
+					+ jugador2.getNombre() + RESET + " le toca \n---------------------------------------------\n\n");
+
+		}
+	}
+
 	/**
 	 * Metodo donde se realiza todas las instrucciones necesarias del jugador
 	 * 
@@ -239,26 +315,105 @@ public class Partida {
 			letra();
 			numero();
 			if (tabla.revision(posicion2, posicion1)) {
-				System.out.println(RED + " \n Introducelo en otra ubicación \n" +  RESET);
+				System.out.println(RED + " \n Introducelo en otra ubicación \n" + RESET);
 			}
 		} while (tabla.revision(posicion2, posicion1));
 
 	}
 
-	/**
-	 * Metodo donde se realiza todas las instrucciones necesarias del pintar el
-	 * tablero
-	 * 
-	 * @param ficha Tipo ficha
-	 */
-	private void pintar(Ficha ficha) {
-		tabla.modificarTablero(posicion2, posicion1, ficha);
-		tabla.mostrarTablero();
-		tabla.modificarFicha(posicion2, posicion1, ficha);
-		ganar = tabla.ganar(ficha);
+	private void resultado() {
+		if (ganarIarvsIa1) {
+			
+			switch (playerNumber) {
+			case 1:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + BLUE + jugador1.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+
+			default:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + YELLOW + jugador1.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+			}
+			
+			
+		} else if (ganarIarvsIa2) {
+			switch (playerNumber) {
+			case 1:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + YELLOW + jugador2.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+
+			default:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + BLUE + jugador2.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+			}
+		} else if (ganarJugadorvsIa1) {
+			switch (playerNumber) {
+			case 1:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + BLUE + jugador1.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+
+			default:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + YELLOW + jugador1.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+			}
+		} else if (ganarJugadorvsIa2) {
+			switch (playerNumber) {
+			case 1:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + YELLOW + jugador2.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+
+			default:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + BLUE + jugador2.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+			}
+		} else if (ganarJugadorvsJugador1) {
+			switch (playerNumber) {
+			case 1:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + BLUE + jugador1.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+
+			default:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + YELLOW + jugador1.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+			}
+		} else if (ganarJugadorvsJugador2) {
+			switch (playerNumber) {
+			case 1:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + YELLOW + jugador2.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+
+			default:
+				System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
+						+ "   Ha ganado el jugador ->   " + BLUE + jugador2.getNombre() + RESET
+						+ "\n---------------------------------------------\n\n");
+				break;
+			}
+		} else if (empate) {
+			System.out.printf(RESET + "\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n" + RED
+					+ "   Empate ninguno gano" + RESET + "\n---------------------------------------------\n\n");
+		}
 	}
-
-
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
@@ -273,94 +428,97 @@ public class Partida {
 	 * @see #reinicio()
 	 */
 	public void comenzar() {
-		System.out.println("  ____     ______    ___    ___    ______    ___   ___   __     __  \n"
-				+ " |  __|   |  __  |  |   |  |   |  |  __  |  |   | /  /  |  |   |  | \n"
-				+ " | |  _   | |  | |  |   \\__/   |  | |  | |  |   |/  /   |  |   |  | \n"
-				+ " | |_| |  | |__| |  |          |  | |__| |  |       \\   |  \\___/  | \n"
-				+ " |_____|  |______|  |__|\\__/|__|  |______|  |___|\\___\\  |_________| \n");
+		System.out.println("  ____     ______    ___    ___    ______    ___   ___   __    __       ________              _______\n"
+				+ " |  __|   |  __  |  |   |  |   |  |  __  |  |   | /  /  |  |   |  |    /  ___   \\            |   _   |\n"
+				+ " | |  _   | |  | |  |   \\__/   |  | |  | |  |   |/  /   |  |   |  |    \\__|  /  /            |  | |  |\n"
+				+ " | |_| |  | |__| |  |          |  | |__| |  |       \\   |  \\___/  |      ___/  /___    __    |  |_|  |\n"
+				+ " |_____|  |______|  |__|\\__/|__|  |______|  |___|\\___\\  |_________|     |__________|  |__|   |_______|\n");
 		do {
 			tabla = new Tablero();
 			comienzos();
 			nombres();
+			tipoFicha();
 			// ---------------------------------------------------
 			if (tipoNumerico == 3) {
-				jugador1 = new Real(nombre, Ficha.x);
-				jugador2 = new Real(nombre2, Ficha.o);
+				jugador1 = new Real(nombre, player1);
+				jugador2 = new Real(nombre2, player2);
 				tabla.mostrarTablero();
 				do {
-					System.out.printf( RESET+"\n---------------------------------------------\n   " + BLUE
-							+ ((Real) jugador1).getNombre() + RESET
-							+ " le toca \n---------------------------------------------\n\n");
-
-					jugdorReal(Ficha.x);
-					pintar(Ficha.x);
-					if (!ganar) {
-						System.out.printf(RESET+"\n---------------------------------------------\n   " + YELLOW
-								+ ((Real) jugador2).getNombre() + RESET
-								+ " le toca \n---------------------------------------------\n \n");
-						jugdorReal(Ficha.o);
-						pintar(Ficha.o);
+					pintarNombreJugador_1();
+					jugdorReal(jugador1.getFicha());
+					ganarJugadorvsJugador1 = tabla.pintar(posicion2, posicion1, jugador1.getFicha());
+					empate = tabla.empate();
+					if (!ganarJugadorvsJugador1 && !empate) {
+						pintarNombreJugador_2();
+						jugdorReal(jugador2.getFicha());
+						ganarJugadorvsJugador2 = tabla.pintar(posicion2, posicion1, jugador2.getFicha());
+						empate = tabla.empate();
 					}
-				} while (!ganar);
+				} while (!ganarJugadorvsJugador2 && !ganarJugadorvsJugador1 & !empate);
 			} else if (tipoNumerico == 1) {
-				jugador1 = new Ia(Ficha.x);
-				jugador2 = new Ia(Ficha.o);
+				jugador1 = new Ia(player1);
+				jugador2 = new Ia(player2);
 				do {
-					System.out.printf(RESET+"\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n" + BLUE
-							+ ((Ia) jugador1).nombre() + RESET
-							+ " le toca \n---------------------------------------------\n\n");
+					pintarNombreJugador_1();
 
 					do {
-						((Ia) jugador1).jugadas(tabla.getTablero(), Ficha.x);
+						((Ia) jugador1).jugadas(tabla.getTablero(), jugador1.getFicha());
 						posicion1 = ((Ia) jugador1).getPosicion1();
 						posicion2 = ((Ia) jugador1).getPosicion2();
 					} while (tabla.revision(posicion2, posicion1));
-					
-					pintar(Ficha.x);
+
+					ganarIarvsIa1 = tabla.pintar(posicion2, posicion1, jugador1.getFicha());
+					empate = tabla.empate();
 					tabla.timeOut();
-					
-					if (!ganar) {
-						System.out.printf(RESET+"\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
-								+ YELLOW + ((Ia) jugador2).nombre() + RESET
-								+ " le toca \n---------------------------------------------\n\n");
+					if (!ganarIarvsIa1 && !empate) {
+						pintarNombreJugador_2();
 
 						do {
-							((Ia) jugador2).jugadas(tabla.getTablero(), Ficha.o);
+							((Ia) jugador2).jugadas(tabla.getTablero(), jugador2.getFicha());
 							posicion1 = ((Ia) jugador2).getPosicion1();
 							posicion2 = ((Ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
 
-						pintar(Ficha.o);
+						ganarIarvsIa2 = tabla.pintar(posicion2, posicion1, jugador2.getFicha());
+
+						empate = tabla.empate();
 						tabla.timeOut();
 					}
-				} while (!ganar);
+
+				} while (!ganarIarvsIa2 && !ganarIarvsIa1 && !empate);
+
 			} else if (tipoNumerico == 2) {
 				tabla.mostrarTablero();
-				jugador1 = new Real(nombre, Ficha.x);
-				jugador2 = new Ia(Ficha.o);
+				jugador1 = new Real(nombre, player1);
+				jugador2 = new Ia(player2);
 				do {
 
-					System.out.printf(RESET+"\n---------------------------------------------\n   " + BLUE + nombre + RESET
-							+ " le toca \n---------------------------------------------\n\n");
-					jugdorReal(Ficha.x);
-					pintar(Ficha.x);
+					pintarNombreJugador_1();
+
+					jugdorReal(jugador1.getFicha());
+					ganarJugadorvsIa1 = tabla.pintar(posicion2, posicion1, jugador1.getFicha());
+
+					empate = tabla.empate();
 					tabla.timeOut();
-					if (!ganar) {
-						System.out.printf(RESET+"\n\n\n\n\n\n\n\n\n\n\n\n\n\n---------------------------------------------\n"
-								+ YELLOW + ((Ia) jugador2).nombre() + RESET
-								+ " le toca \n---------------------------------------------\n\n");
+
+					if (!ganarJugadorvsIa1 && !empate) {
+						pintarNombreJugador_2();
 
 						do {
-							((Ia) jugador2).jugadas(tabla.getTablero(), Ficha.o);
+							((Ia) jugador2).jugadas(tabla.getTablero(), jugador2.getFicha());
 
 							posicion1 = ((Ia) jugador2).getPosicion1();
 							posicion2 = ((Ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
-						pintar(Ficha.o);
-
+						ganarJugadorvsIa2 = tabla.pintar(posicion2, posicion1, jugador2.getFicha());
+						empate = tabla.empate();
+						tabla.timeOut();
 					}
-				} while (!ganar);
+
+				} while (!ganarJugadorvsIa1 && !ganarJugadorvsIa2 && !empate);
+
 			}
+			resultado();
 			tabla.pintarBandera();
 			System.out.println(RED + " \n ¿Desea jugar otra partida? \n" + RESET);
 			reinicio();

@@ -10,21 +10,22 @@ package GoMoku;
  * 
  */
 public class Main {
-/**
- *  Metodo main
- * @param args la partida
- */
+	/**
+	 * Metodo main
+	 * 
+	 * @param args la partida
+	 */
 	public static void main(String[] args) {
 		/**
-		 * Llamada de la clase partida
+		 * Llamada de la clase partida.
 		 */
 		Partida partida;
 		/**
-		 * Construimos la partida
+		 * Construimos la partida.
 		 */
 		partida = new Partida();
 		/**
-		 * Comenzamos la partida
+		 * Comenzamos la partida.
 		 */
 		partida.comenzar();
 	}

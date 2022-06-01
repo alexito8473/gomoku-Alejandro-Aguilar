@@ -17,15 +17,7 @@ public class Real extends Jugador {
 	 * 
 	 */
 	public Real(String nombre, Ficha ficha) {
-		super(ficha);
+		super(ficha,nombre);
 	}
 
-	/**
-	 * Metodo get para saber que tipo de nombre posee el jugador
-	 * 
-	 * @return String El nombre del jugador
-	 */
-	public String getNombre() {
-		return this.nombre;
-	}
 }
