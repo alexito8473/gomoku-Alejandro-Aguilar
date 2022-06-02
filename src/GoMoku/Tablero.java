@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
  * 
  * 
  * @author Alejandro Aguilar Alba
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  *
  */
@@ -50,13 +50,12 @@ public class Tablero {
 	 * Resetear colores
 	 */
 	public static final String RESET = "\u001B[0m";
-
 	/**
 	 * El resultado donde si es true has ganado, y si es false has perdido.
 	 */
 	private boolean victoria;
 	/**
-	 * El tablero en cuestio n, donde se forma el tablero y se juega.
+	 * El tablero en cuestion, donde se forma el tablero y se juega.
 	 */
 	private String tabla[][] = { { "  ", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" },
 			{ "01", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", ".", "." },
@@ -108,7 +107,10 @@ public class Tablero {
 	 * Metodo donde se realiza todas las instrucciones necesarias del pintar el
 	 * tablero
 	 * 
-	 * @param ficha Tipo ficha
+	 * @param posicion2 Atributo int donde contiene una posicion del tablero
+	 * @param posicion1 Atributo int donde contiene una posicion del tablero
+	 * @param ficha Tipo de ficha
+	 * @return true: ha ganado false: aun no has ganado
 	 */
 	public boolean pintar(int posicion2,int posicion1,Ficha ficha) {
 		modificarTablero(posicion2, posicion1, ficha);

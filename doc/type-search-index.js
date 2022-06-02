@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"GoMoku","l":"Ficha"},{"p":"GoMoku","l":"Ia"},{"p":"GoMoku","l":"Jugador"},{"p":"GoMoku","l":"Main"},{"p":"GoMoku","l":"Partida"},{"p":"GoMoku","l":"Real"},{"p":"GoMoku","l":"Tablero"}];updateSearchResults();

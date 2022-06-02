@@ -3,12 +3,12 @@ package GoMoku;
 import java.util.Scanner;
 
 /**
- * Clase donde se realiza la partida, usando parte de la clase Jugador y la
- * clase Tablero, donde se genera la partida, y se utiliza los metodos
- * pertinentes para la captacion de datos.
+ * 
+ * Clase donde se realiza la partida usando la clase Jugador, la
+ * clase Tablero y metodos propios de la clase.
  * 
  * @author Alejandro Aguilar Alba
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  * 
  */
@@ -43,7 +43,7 @@ public class Partida {
 	 */
 	public static final String YELLOW_BACKGROUND = "\u001B[43m";
 	/**
-	 * Resetear colores
+	 * Reseteo de colores
 	 */
 	public static final String RESET = "\u001B[0m";
 
@@ -88,7 +88,9 @@ public class Partida {
 	 * Variable booleana para salir del bucle do.while de la partida.
 	 */
 	private boolean ganarIarvsIa2 = false;
-
+	/**
+	 * Variable booleana para salir del bucle do.while de la partida y decir que es por un empate.
+	 */
 	private boolean empate = false;
 	/**
 	 * variable String donde se capta el nombre del jugador.
@@ -110,15 +112,22 @@ public class Partida {
 	 * variable int para captar el tipo de juego que se desea jugar.
 	 */
 	private int tipoNumerico = 0;
-
+	/**
+	 * variable Ficha para captar el tipo de ficha que va ha tener el jugador1 en concreto.
+	 */
 	private Ficha player1;
-
+	/**
+	 * variable Ficha para captar el tipo de ficha que va ha tener el jugador2 en concreto.
+	 */
 	private Ficha player2;
+	/**
+	 * variable int para decidir el tipo de ficha que va tener el jugador.
+	 */
 	private int playerNumber;
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo para pausar la partida, o continuarla.
+	 * Metodo para parar la partida, o continuarla.
 	 */
 	@SuppressWarnings("resource")
 	private void reinicio() {
@@ -131,7 +140,7 @@ public class Partida {
 
 				do {
 					System.out.println("\n 1- Seguir \n 2- Parar\n ");
-					number = sc.nextInt();
+					 number = sc.nextInt();
 				} while (!(number < 0) && !(number <= 2));
 
 				if (number == 1) {
@@ -152,7 +161,7 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo para ..........................
+	 * Metodo para sacar una posicion del tablero.
 	 * 
 	 */
 	@SuppressWarnings("resource")
@@ -171,7 +180,7 @@ public class Partida {
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
 	 * Metodo para captar la posicion por numeros, donde solo se puede obtener una
-	 * margen de numeros del 1 al 15, y rechaza cualquier otro carapteres.
+	 * margen de numeros del 1 al 15, y rechaza cualquier otro caracter.
 	 *
 	 */
 	@SuppressWarnings("resource")
@@ -200,8 +209,8 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo por la cual dependiendo de lo que se haya decidido del tipo del juego,
-	 * se pediera que decidas un nombre para un jugador o dos jugadores.
+	 * Metodo que recoge el nombre del jugador Real, donde dependiendo del modo escogera pedira ningun nombre, un nombre o dos nombres.
+	 * 
 	 */
 	@SuppressWarnings("resource")
 	private void nombres() {
@@ -225,7 +234,7 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo por la cual se decid el tipo de juego que se va ha escoger, ia vs ia,
+	 * Metodo por la cual se decide el tipo de juego que se va ha escoger, ia vs ia,
 	 * ia vs jugador, jugador vs jugador.
 	 */
 	@SuppressWarnings("resource")
@@ -251,7 +260,9 @@ public class Partida {
 
 		} while (!salida);
 	}
-
+	/**
+	 * Metodo para captar el tipo de ficha que va ha tener cada jugador
+	 */
 	@SuppressWarnings("resource")
 	private void tipoFicha() {
 		boolean salida = false;
@@ -282,7 +293,9 @@ public class Partida {
 			player2 = Ficha.x;
 		}
 	}
-
+	/**
+ 	* Metodo para pintar en consola el nombre del jugador 1
+ 	*/
 	private void pintarNombreJugador_1() {
 		if (playerNumber == 1) {
 			System.out.printf(RESET + "\n\n---------------------------------------------\n   " + BLUE + "   "
@@ -293,7 +306,9 @@ public class Partida {
 
 		}
 	}
-
+	/**
+ 	* Metodo para pintar en consola el nombre del jugador 2
+ 	*/
 	private void pintarNombreJugador_2() {
 		if (playerNumber == 1) {
 			System.out.printf(RESET + "\n\n---------------------------------------------\n   " + YELLOW + "   "
@@ -306,11 +321,12 @@ public class Partida {
 	}
 
 	/**
-	 * Metodo donde se realiza todas las instrucciones necesarias del jugador
+	 * Metodo donde se realiza todas las instrucciones necesarias del jugador real.
 	 * 
 	 * @param ficha Tipo de ficha
 	 */
 	private void jugdorReal(Ficha ficha) {
+		
 		do {
 			letra();
 			numero();
@@ -320,7 +336,9 @@ public class Partida {
 		} while (tabla.revision(posicion2, posicion1));
 
 	}
-
+	/**
+	 * Metodo donde saca por pantalla el ganador de la partida, o si han quedado empate
+	 */
 	private void resultado() {
 		if (ganarIarvsIa1) {
 			
@@ -417,19 +435,20 @@ public class Partida {
 
 	// ---------------------------------------------------------------------------------------------------------------
 	/**
-	 * Metodo por la cual se realiza el juego extrayendo las clases Tablero y
+	 *  Metodo por la cual se realiza el juego extrayendo las clases Tablero y
 	 * Jugador, y sus metodos.
-	 *
+	 * 
 	 * @see #comienzos()
 	 * @see #nombres()
-	 * @see #timeOut()
-	 * @see #letra()
-	 * @see #numero()
+	 * @see #tipoFicha()
+	 * @see #pintarNombreJugador_1()
+	 * @see #pintarNombreJugador_2()
+	 * @see #resultado()
 	 * @see #reinicio()
 	 */
 	public void comenzar() {
 		System.out.println("  ____     ______    ___    ___    ______    ___   ___   __    __       ________              _______\n"
-				+ " |  __|   |  __  |  |   |  |   |  |  __  |  |   | /  /  |  |   |  |    /  ___   \\            |   _   |\n"
+				+ " |  __|   |  __  |  |   |  |   |  |  __  |  |   | /  /  |  |   |  |    /   __   \\            |   _   |\n"
 				+ " | |  _   | |  | |  |   \\__/   |  | |  | |  |   |/  /   |  |   |  |    \\__|  /  /            |  | |  |\n"
 				+ " | |_| |  | |__| |  |          |  | |__| |  |       \\   |  \\___/  |      ___/  /___    __    |  |_|  |\n"
 				+ " |_____|  |______|  |__|\\__/|__|  |______|  |___|\\___\\  |_________|     |__________|  |__|   |_______|\n");
@@ -440,8 +459,8 @@ public class Partida {
 			tipoFicha();
 			// ---------------------------------------------------
 			if (tipoNumerico == 3) {
-				jugador1 = new Real(nombre, player1);
-				jugador2 = new Real(nombre2, player2);
+				jugador1 = new Real(player1,nombre );
+				jugador2 = new Real(player2,nombre2 );
 				tabla.mostrarTablero();
 				do {
 					pintarNombreJugador_1();
@@ -489,7 +508,7 @@ public class Partida {
 
 			} else if (tipoNumerico == 2) {
 				tabla.mostrarTablero();
-				jugador1 = new Real(nombre, player1);
+				jugador1 = new Real(player1,nombre);
 				jugador2 = new Ia(player2);
 				do {
 
@@ -510,6 +529,7 @@ public class Partida {
 							posicion1 = ((Ia) jugador2).getPosicion1();
 							posicion2 = ((Ia) jugador2).getPosicion2();
 						} while (tabla.revision(posicion2, posicion1));
+						
 						ganarJugadorvsIa2 = tabla.pintar(posicion2, posicion1, jugador2.getFicha());
 						empate = tabla.empate();
 						tabla.timeOut();

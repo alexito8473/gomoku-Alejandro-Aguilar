@@ -5,10 +5,11 @@ package GoMoku;
  * 
  * 
  * @author Alejandro Aguilar Alba
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  *
  */
+
 public enum Ficha {
 	/**
 	 * Ficha x

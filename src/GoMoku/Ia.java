@@ -7,7 +7,7 @@ import java.util.Random;
  * ia.
  * 
  * @author Alejandro Aguilar Alba
- * @version 1.0
+ * @version 2.0
  * @since 1.0
  *
  */
@@ -141,7 +141,7 @@ public class Ia extends Jugador {
 	/**
 	 * Numero ramdon hasta el 9
 	 */
-	private int number = ran.nextInt(15);
+	private int number = ran.nextInt(16);
 	/**
 	 * La creacion de un array unidimencional, con dos espacios .
 	 */
@@ -152,14 +152,12 @@ public class Ia extends Jugador {
 	 */
 	
 	private String nombres[] = { "Pepe", "Jorge", "España", "Lisbania", "Me gustaria", "Francia caca", "Copenage",
-			"Mordekaiser", "ElNen", "Estatico", "Dinamico","¿Me apruebas?","Te adoro","Jose no sabe programar","Wallapop"};
+			"Mordekaiser", "ElNen", "Estatico", "Dinamico","¿Me apruebas?","Te adoro","Jose no sabe programar","Wallapop","Gerardo que ya sabe programar"};
 
 	/**
-	 * Metodo para generar un nombre para la lia, distinta por cada ficha
+	 * Metodo para generar un nombre para la lia, distinta por cada ficha.
 	 * 
-	 * @param ficha Tipo de ficha
-	 * @return si la ficha es 'x' te devuelve un nombre, y si la ficha es 'y' te
-	 *         devuelva otro nombre
+	 * @return Devuelve el nombre de la ia.
 	 */
 
 	@Override
@@ -1683,10 +1681,14 @@ public class Ia extends Jugador {
 	 * @see #ganarHorizontal(String[][], Ficha)
 	 * @see #ganarInclinado(String[][], Ficha)
 	 * @see #ganarVertical(String[][], Ficha)
-	 * @see #defensaHorizontal(String[][], Ficha)
-	 * @see #defensaInclinado(String[][], Ficha)
-	 * @see #defensaInclinado1(String[][], Ficha)
-	 * @see #defensaVertical(String[][], Ficha)
+	 * @see #defensaMayorInclinado(String[][], Ficha)
+	 * @see #defensaMayorInclinado1(String[][], Ficha)
+	 * @see #defensaPrioridadHorizontal(String[][], Ficha)
+	 * @see #defensaPrioridadVertical(String[][], Ficha)
+	 * @see	#defensaMenorInclinado(String[][], Ficha)
+	 * @see	#defensaMenorInclinado1(String[][], Ficha)
+	 * @see	#defensaMenorHorizontal(String[][], Ficha)
+	 * @see	#defensaMenorVertical(String[][], Ficha)
 	 * @see #ataqueVertical(String[][], Ficha)
 	 * @see #ataqueHorizontal(String[][], Ficha)
 	 * @see #ataqueInclinado(String[][], Ficha)
