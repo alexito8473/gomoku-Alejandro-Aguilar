@@ -1,4 +1,4 @@
-package GoMoku;
+package goMoku;
 
 import java.util.Random;
 
@@ -200,11 +200,11 @@ public class Ia extends Jugador {
 	 * @param array  El tablero donde se decide la jugada defensiva horizontal.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private void defensaPrioridadHorizontal(String[][] array, GoMoku.Ficha fichas) {
+	private void defensaPrioridadHorizontal(String[][] array, goMoku.Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -312,11 +312,11 @@ public class Ia extends Jugador {
 	 * @param array  El tablero donde se decide la jugada defensiva horizontal.
 	 * @param fichas Tipo de ficha para usar en el tablero.
 	 */
-	private void defensaMenorHorizontal(String[][] array, GoMoku.Ficha fichas) {
+	private void defensaMenorHorizontal(String[][] array, goMoku.Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -405,7 +405,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -499,7 +499,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -590,7 +590,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -703,7 +703,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -790,7 +790,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -903,7 +903,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = YELLOW + "o" + RESET;
 
 		} else {
@@ -992,7 +992,7 @@ public class Ia extends Jugador {
 	private void ganarHorizontal(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + RESET;
 		} else {
 			eleccion = YELLOW + "o" + RESET;
@@ -1105,7 +1105,7 @@ public class Ia extends Jugador {
 	private void ganarVertical(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + RESET;
 		} else {
 			eleccion = YELLOW + "o" + RESET;
@@ -1219,7 +1219,7 @@ public class Ia extends Jugador {
 	private void ganarInclinado(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + RESET;
 		} else {
 			eleccion = YELLOW + "o" + RESET;
@@ -1425,7 +1425,7 @@ public class Ia extends Jugador {
 	private void ataqueVertical(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + RESET;
 		} else {
 			eleccion = YELLOW + "o" + RESET;
@@ -1490,7 +1490,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + RESET;
 		} else {
 			eleccion = YELLOW + "o" + RESET;
@@ -1555,7 +1555,7 @@ public class Ia extends Jugador {
 		boolean exit = false;
 		String eleccion;
 
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + RESET;
 
 		} else {
@@ -1617,7 +1617,7 @@ public class Ia extends Jugador {
 	private void ataqueHorizontal(String[][] array, Ficha fichas) {
 		boolean exit = false;
 		String eleccion;
-		if (fichas.equals(GoMoku.Ficha.x)) {
+		if (fichas.equals(goMoku.Ficha.x)) {
 			eleccion = BLUE + "x" + RESET;
 		} else {
 			eleccion = YELLOW + "o" + RESET;

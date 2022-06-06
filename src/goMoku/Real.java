@@ -1,4 +1,4 @@
-package GoMoku;
+package goMoku;
 
 /**
  * Clase hija, de la clase Jugador.

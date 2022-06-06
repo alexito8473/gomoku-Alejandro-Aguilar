@@ -1,4 +1,4 @@
-package GoMoku;
+package goMoku;
 
 /**
  * Clase main, donde se le llama a la clase Partida para comenzar tantas

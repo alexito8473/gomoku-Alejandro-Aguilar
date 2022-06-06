@@ -1,4 +1,4 @@
-package GoMoku;
+package goMoku;
 
 /**
  * Clase padre donde se crea al jugador de la partida, donde despues tendra dos

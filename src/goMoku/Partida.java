@@ -1,4 +1,4 @@
-package GoMoku;
+	package goMoku;
 
 import java.util.Scanner;
 
@@ -253,7 +253,7 @@ public class Partida {
 					System.out.printf("Introduce un valor entre 1 al 3 \n");
 					sc.nextLine();
 				}
-			} catch (Exception e) {
+			} catch (Exception InputMismatchException) {
 				System.out.printf("Introduce un valor entre 1 al 3 \n");
 				sc.nextLine();
 			}
@@ -278,7 +278,7 @@ public class Partida {
 					System.out.printf(RED + "Introduce un valor entre 1 al 2 \n" + RESET);
 					sc.nextLine();
 				}
-			} catch (Exception e) {
+			} catch (Exception InputMismatchException) {
 				System.out.printf(RED + "Introduce un valor entre 1 al 2 \n" + RESET);
 				sc.nextLine();
 			}

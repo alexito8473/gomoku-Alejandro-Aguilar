@@ -1,4 +1,4 @@
-package GoMoku;
+package goMoku;
 
 /**
  * Enum de las fichas del juego.

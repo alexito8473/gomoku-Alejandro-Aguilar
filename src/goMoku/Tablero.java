@@ -1,4 +1,4 @@
-package GoMoku;
+package goMoku;
 
 import java.util.concurrent.TimeUnit;
 
@@ -102,33 +102,34 @@ public class Tablero {
 	public String[][] getTablero() {
 		return tabla;
 	}
-	
+
 	/**
 	 * Metodo donde se realiza todas las instrucciones necesarias del pintar el
 	 * tablero
 	 * 
 	 * @param posicion2 Atributo int donde contiene una posicion del tablero
 	 * @param posicion1 Atributo int donde contiene una posicion del tablero
-	 * @param ficha Tipo de ficha
+	 * @param ficha     Tipo de ficha
 	 * @return true: ha ganado false: aun no has ganado
 	 */
-	public boolean pintar(int posicion2,int posicion1,Ficha ficha) {
+	public boolean pintar(int posicion2, int posicion1, Ficha ficha) {
 		modificarTablero(posicion2, posicion1, ficha);
 		mostrarTablero();
 		modificarFicha(posicion2, posicion1, ficha);
 		return ganar(ficha);
 	}
+
 	/**
-	 * Metodo utilizado para saber si hay o no un empate en la partida 
+	 * Metodo utilizado para saber si hay o no un empate en la partida
 	 * 
 	 * @return false: no hay empate true: hay empate
 	 */
 	public boolean empate() {
 		for (int i = 0; i < tabla.length; i++) {
 			for (int j = 0; j < tabla.length; j++) {
-				if(tabla[i][j].equals(".")) {
+				if (tabla[i][j].equals(".")) {
 					return false;
-				}		
+				}
 			}
 		}
 		return true;
@@ -139,7 +140,7 @@ public class Tablero {
 	 * 
 	 */
 	public void mostrarTablero() {
-	//	System.out.print(RESET);
+		// System.out.print(RESET);
 		String a;
 		for (int i = 0; i < tabla.length; i++) {
 
@@ -154,7 +155,7 @@ public class Tablero {
 	}
 
 	/**
-	 * Metodo para dectecta en el tablero si se ha ganado, en el caso que haya una
+	 * Metodo para detectar en el tablero si se ha ganado, en el caso que haya una
 	 * fila inclinada hacia abajo, donde la fila sea igual o mayor a 5 fichas del
 	 * mismo tipo y continua.
 	 * 
@@ -162,7 +163,7 @@ public class Tablero {
 	 */
 	private void inclinacion1(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = BLUE + "x" + RESET;
 		} else {
 			letra = YELLOW + "o" + RESET;
@@ -185,7 +186,7 @@ public class Tablero {
 	}
 
 	/**
-	 * Metodo para dectectar en el tablero si se ha ganado, en el caso que haya una
+	 * Metodo para detectar en el tablero si se ha ganado, en el caso que haya una
 	 * fila inclinada hacia arriba, donde la fila sea igual o mayor a 5 fichas del
 	 * mismo tipo y continua.
 	 * 
@@ -193,7 +194,7 @@ public class Tablero {
 	 */
 	private void inclinacion2(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = BLUE + "x" + RESET;
 		} else {
 			letra = YELLOW + "o" + RESET;
@@ -217,15 +218,15 @@ public class Tablero {
 	}
 
 	/**
-	 * Metodo para dectectar en el tablero si se ha ganado, en el caso que haya una
-	 * fila horzontal, donde la fila sea igual o mayor a 5 fichas del mismo tipo y
+	 * Metodo para detectar en el tablero si se ha ganado, en el caso que haya una
+	 * fila horizontal, donde la fila sea igual o mayor a 5 fichas del mismo tipo y
 	 * continua.
 	 * 
 	 * @param ficha Tipo de ficha
 	 */
 	private void derecha(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = BLUE + "x" + RESET;
 		} else {
 			letra = YELLOW + "o" + RESET;
@@ -249,7 +250,7 @@ public class Tablero {
 	}
 
 	/**
-	 * Metodo para dectectar en el tablero si se ha ganado, en el caso que haya una
+	 * Metodo para detectar en el tablero si se ha ganado, en el caso que haya una
 	 * fila vertical, donde la fila sea igual o mayor a 5 fichas del mismo tipo y
 	 * continua.
 	 * 
@@ -257,7 +258,7 @@ public class Tablero {
 	 */
 	private void arriba(Ficha ficha) {
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = BLUE + "x" + RESET;
 		} else {
 			letra = YELLOW + "o" + RESET;
@@ -282,8 +283,7 @@ public class Tablero {
 	}
 
 	/**
-	 * Metodo para dectectar el no sobreescribir un ficha ya puesto con
-	 * anteriodidad.
+	 * Metodo para detectar el no sobreescribir una ficha ya puesto con anterioridad.
 	 * 
 	 * @param numero1 Posicion del array
 	 * @param numero2 Posicion del array
@@ -311,9 +311,9 @@ public class Tablero {
 	 * @param ficha   Tipo de ficha
 	 */
 	public void modificarTablero(int numero1, int numero2, Ficha ficha) {
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			tabla[numero1][numero2] = GREEN + "x" + RESET;
-		} else if (ficha.equals(GoMoku.Ficha.o)) {
+		} else if (ficha.equals(goMoku.Ficha.o)) {
 			tabla[numero1][numero2] = GREEN + "o" + RESET;
 		}
 	}
@@ -328,9 +328,9 @@ public class Tablero {
 	 * @param ficha   Tipo de ficha
 	 */
 	public void modificarFicha(int numero1, int numero2, Ficha ficha) {
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			tabla[numero1][numero2] = BLUE + "x" + RESET;
-		} else if (ficha.equals(GoMoku.Ficha.o)) {
+		} else if (ficha.equals(goMoku.Ficha.o)) {
 			tabla[numero1][numero2] = YELLOW + "o" + RESET;
 		}
 	}
@@ -422,7 +422,7 @@ public class Tablero {
 	boolean derechaText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
@@ -456,7 +456,7 @@ public class Tablero {
 	boolean arribaText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
@@ -493,7 +493,7 @@ public class Tablero {
 	boolean inclinacionAbajoText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
@@ -527,7 +527,7 @@ public class Tablero {
 	boolean inclinacionArribaText(Ficha ficha, String[][] array) {
 		boolean victory = false;
 		String letra;
-		if (ficha.equals(GoMoku.Ficha.x)) {
+		if (ficha.equals(goMoku.Ficha.x)) {
 			letra = "x";
 		} else {
 			letra = "o";
